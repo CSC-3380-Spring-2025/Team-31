@@ -1,20 +1,21 @@
-# [Name of the Project] : [Team Number]
+# Flashcard App : Team 31
 # Members
-Project Manager: [Name] ([GitHub Name])\
-Communications Lead: [Name] ([GitHub Name])\
-Git Master: [Name] ([GitHub Name])\
-Design Lead: [Name] ([GitHub Name])\
-Quality Assurance Tester: [Name] ([GitHub Name])
+Project Manager: Nathan Wandera (pebblion)\
+Communications Lead: Temi Odukoya ([GitHub Name])\
+Git Master: Aaron Meche (aaron-meche)\
+Design Lead: David Vennen ([GitHub Name])\
+Quality Assurance Tester: Ziron Veal ([GitHub Name])
 
 # About Our Software
 
-Describe a little about what the project is about here.
+Inspired by Quizlet, this multiplatform flashcard app lets you create and customize study cards, collaborate with others, test yourself, personalize your learning experience, and track your progress, making it an ideal tool for effective studying across various subjects.
+
 ## Platforms Tested on
 - MacOS
-- Android
 - iOS
-- Linux
+- Android
 - Windows
+- Linux
 # Important Links
 Kanban Board: [link]\
 Designs: [link]\
