@@ -1,5 +1,5 @@
-name: flutter_app
-description: "A new Flutter project."
+name: flashcard_app
+description: "A flashcard app for education"
 publish_to: 'none'
 version: 0.1.0
 
