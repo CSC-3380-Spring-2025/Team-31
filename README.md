@@ -3,7 +3,7 @@
 Project Manager: Nathan Wandera (pebblion)\
 Communications Lead: Temi Odukoya ([GitHub Name])\
 Git Master: Aaron Meche (aaron-meche)\
-Design Lead: David Vennen ([GitHub Name])\
+Design Lead: David Vennen (WanderingWizard4)\
 Quality Assurance Tester: Ziron Veal ([GitHub Name])
 
 # About Our Software
