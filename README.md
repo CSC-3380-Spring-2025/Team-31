@@ -1,78 +1,29 @@
-# Flashcard App : Team 31
-# Members
+# Team 31: Members
 Project Manager: Nathan Wandera (pebblion)\
 Communications Lead: Temi Odukoya ([GitHub Name])\
 Git Master: Aaron Meche (aaron-meche)\
 Design Lead: David Vennen (WanderingWizard4)\
 Quality Assurance Tester: Ziron Veal ([GitHub Name])
 
-# About Our Software
+## About Our Software
 
-Inspired by Quizlet, this multiplatform flashcard app lets you create and customize study cards, collaborate with others, test yourself, personalize your learning experience, and track your progress, making it an ideal tool for effective studying across various subjects.
+Inspired by Quizlet, this multi-platform flashcard app lets you create and customize study cards, collaborate with others, test yourself, personalize your learning experience, and track your progress, making it an ideal tool for effective studying across various subjects.
 
-# Flutter Project Structure Breakdown
+## Project File Structure
 
-- **.dart_tool/**: Contains tooling and cache files for Dart.
-- **.idea/**: Stores IntelliJ IDEA project settings.
-- **.vscode/**: Contains VS Code settings for the project.
-- **android/**: Android-specific code and configurations.
+- **android/, ios/, macos/, windows/, linux/, web/**: Platform-specific code and configurations.
 - **build/**: Contains build outputs (usually hidden or ignored).
-- **ios/**: iOS-specific code and configurations.
-- **lib/**: Core Dart/Flutter code, where `main.dart` typically resides.
-- **linux/**: Linux-specific code for desktop applications.
-- **macos/**: macOS-specific code for desktop applications.
-- **web/**: Web-specific code for Flutter web applications.
-- **windows/**: Windows-specific code for desktop applications.
-- **.gitignore**: Specifies files to be ignored by Git.
-- **.metadata**: Contains project metadata.
-- **analysis_options.yaml**: Customizes Dart analysis options.
-- **flutter_app.iml**: IntelliJ IDEA module file for the Flutter project.
-- **pubspec.lock**: Locks dependency versions.
-- **pubspec.yaml**: Project configuration file, including dependencies and assets.
-- **README.md**: Project documentation file.
+- **lib/**: Core Dart/Flutter source code.
+- - **main.dart**: Main entry point file for application.
+- - **src/**
+- - - **screens/**: Screen layouts for different pages
+- - - **widgets/**: Custom widgets to be imported
 
 ## Platforms Tested on
-- MacOS
-- iOS
-- Android
-- Windows
-- Linux
+- iOS, Android
+- macOS, Windows, Linux
 
-# Important Links
-Kanban Board: [link]\
+## Important Links
+Kanban Board: [https://github.com/orgs/CSC-3380-Spring-2025/projects/25]\
 Designs: [link]\
-Styles Guide(s): [link]
-
-# How to Run Dev and Test Environment
-
-## Dependencies
-- List all dependencies here
-- Don't forget to include versions
-### Downloading Dependencies
-Describe where to download the dependencies here. Some will likely require a web download. Provide links here. For IDE extensions, make sure your project works with the free version of them, and detail which IDE(s) these are available in. 
-
-## Commands
-Describe how the commands and process to launch the project on the main branch in such a way that anyone working on the project knows how to check the affects of any code they add.
-
-```sh
-Example terminal command syntax
-```
-
-It is very common in these sections to see code in peculiar boxes to help them stand out. Check the markdown section of the Project Specifications to see how to add more / customize these.
-
-```python
-def code_highlight_example(m: int, m: float, s: str) -> str:
-	return s + str(n*m)
-```
-
-```java
-public static void main(String[] args){
-	System.out.println("Hello, World!");
-}
-```
-
-```c#
-static void Main(){
-	Console.WriteLine("Hello, World!");
-}
-```
+Styles Guide(s): [https://github.com/orgs/CSC-3380-Spring-2025/projects/25]
