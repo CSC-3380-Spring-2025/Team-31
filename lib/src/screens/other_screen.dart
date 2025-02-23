@@ -7,21 +7,21 @@
 
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
-  	const HomeScreen({super.key});
+class OtherScreen extends StatelessWidget {
+  	const OtherScreen({super.key});
 
 	@override
 	Widget build(BuildContext context) {
 		return Scaffold(
 			body: Center( 
-				child: HomeCard(),
+				child: OtherCard(),
 			)
 		);
 	}
 }
 
-class HomeCard extends StatelessWidget {
-	const HomeCard({super.key});
+class OtherCard extends StatelessWidget {
+	const OtherCard({super.key});
 
 	@override
 	Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class HomeCard extends StatelessWidget {
 			child: Column(
 				mainAxisSize: MainAxisSize.min,
 				children: [
-					Text("Home Page"),
+					Text("Other Page"),
 				],
 			)
 		);

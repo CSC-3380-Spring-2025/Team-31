@@ -7,21 +7,21 @@
 
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
-  	const HomeScreen({super.key});
+class CreateSetScreen extends StatelessWidget {
+  	const CreateSetScreen({super.key});
 
 	@override
 	Widget build(BuildContext context) {
 		return Scaffold(
 			body: Center( 
-				child: HomeCard(),
+				child: CreateSetCard(),
 			)
 		);
 	}
 }
 
-class HomeCard extends StatelessWidget {
-	const HomeCard({super.key});
+class CreateSetCard extends StatelessWidget {
+	const CreateSetCard({super.key});
 
 	@override
 	Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class HomeCard extends StatelessWidget {
 			child: Column(
 				mainAxisSize: MainAxisSize.min,
 				children: [
-					Text("Home Page"),
+					Text("Create Set Page"),
 				],
 			)
 		);
