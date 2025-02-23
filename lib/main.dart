@@ -23,14 +23,13 @@ class MyApp extends StatelessWidget {
 	Widget build(BuildContext context) {
 		return MaterialApp(
 			title: "Flashcard App",
-			// initialRoute: '/',
-			// routes: <String, WidgetBuilder>{
-			// 	'/': (BuildContext context) => WelcomeScreen(),
-			// 	'/home': (BuildContext context) => HomeScreen(),
-			// 	'/create_set': (BuildContext context) => CreateSetScreen(),
-			// 	'/other': (BuildContext context) => OtherScreen(),
-			// },
-			home: const MainScreen(),
+			initialRoute: '/',
+			routes: <String, WidgetBuilder>{
+				'/': (BuildContext context) => MainScreen(screenIndex: 0),
+				'/home': (BuildContext context) => MainScreen(screenIndex: 1),
+				'/create_set': (BuildContext context) => MainScreen(screenIndex: 2),
+				'/other': (BuildContext context) => MainScreen(screenIndex: 3),
+			},
 			theme: ThemeData(
 				brightness: Brightness.dark,
 				primaryColor: Colors.blueGrey,
@@ -40,14 +39,16 @@ class MyApp extends StatelessWidget {
 }
 
 class MainScreen extends StatefulWidget {
-	const MainScreen({super.key});
+	final int screenIndex;
+
+	const MainScreen({super.key, required this.screenIndex});
 
 	@override
 	State<MainScreen> createState() => _MainStateScreen();
 }
 
 class _MainStateScreen extends State<MainScreen> {
-	int _selectedIndex = 0;
+	late int _selectedIndex = 0;
 
 	static const List<Widget> _screens = [
 		WelcomeScreen(),
@@ -55,6 +56,12 @@ class _MainStateScreen extends State<MainScreen> {
 		CreateSetScreen(),
 		OtherScreen(),
 	];
+
+	@override
+	void initState() {
+		super.initState();
+		_selectedIndex = widget.screenIndex;
+	}
 
 	void _onItemTapped(int index) {
 		setState(() {

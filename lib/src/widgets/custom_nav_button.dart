@@ -23,7 +23,7 @@ class CustomNavigatorButton extends StatelessWidget {
 			onPressed: () {
 				Navigator.pushNamed(context, openRoute);
 			},
-			child: Text(text),
+			child: Text(text + openRoute),
 		);
 	}
 }

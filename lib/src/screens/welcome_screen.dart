@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import '../widgets/custom_nav_button.dart';
 
 class WelcomeScreen extends StatelessWidget {
-  	const WelcomeScreen({super.key});
+  const WelcomeScreen({super.key});
 
 	@override
 	Widget build(BuildContext context) {
