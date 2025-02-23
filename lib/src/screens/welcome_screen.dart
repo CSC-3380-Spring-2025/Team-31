@@ -6,6 +6,7 @@
 // 
 
 import 'package:flutter/material.dart';
+import '../widgets/custom_nav_button.dart';
 
 class WelcomeScreen extends StatelessWidget {
   	const WelcomeScreen({super.key});
@@ -48,27 +49,6 @@ class WelcomeCard extends StatelessWidget {
 					),
 				],
 			)
-		);
-	}
-}
-
-class CustomNavigatorButton extends StatelessWidget {
-	final String text;
-	final String openRoute;
-
-	const CustomNavigatorButton({
-		super.key,
-		required this.text,
-		required this.openRoute,
-	});
-
-	@override
-	Widget build(BuildContext context) {
-		return TextButton(
-			onPressed: () {
-				Navigator.pushNamed(context, openRoute);
-			},
-			child: Text(text),
 		);
 	}
 }
