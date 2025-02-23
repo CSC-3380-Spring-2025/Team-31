@@ -1,33 +1,21 @@
+//
+// main.dart
+// 
+// App Entry Point
+//
+
 import 'package:flutter/material.dart';
+import './src/screens/home_screen.dart';
 
 void main() {
-  	runApp(const MainApp());
+	runApp(MyApp());
 }
 
-class MainApp extends StatelessWidget {
-  	const MainApp({super.key});
-
-  	@override
-  	Widget build(BuildContext context) {
-		return const MaterialApp(
-		home: Scaffold(
-			body: Padding(
-				padding: EdgeInsets.all(16.0),
-				child: Column(
-					crossAxisAlignment: CrossAxisAlignment.start,
-					children: [
-						Text(
-							'Hello World!',
-							style: TextStyle(
-								fontSize: 18,
-								fontWeight: FontWeight.bold,
-							),
-						),
-						Text('This is our brand new flashcard app!'),
-					],
-				),
-			),
-		),
-	);
-  }
+class MyApp extends StatelessWidget {
+	@override
+	Widget build(BuildContext context) {
+		return MaterialApp(
+			home: HomeScreen(),
+		);
+	}
 }
