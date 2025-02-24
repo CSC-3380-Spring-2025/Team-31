@@ -34,7 +34,6 @@ class _SectionLabel extends StatelessWidget {
   final String label;
 
   const _SectionLabel({
-    super.key,
     required this.label,
   });
 
@@ -56,7 +55,7 @@ class _SectionLabel extends StatelessWidget {
 
 // Grid Container for Buttons
 class _GridContainer extends StatelessWidget {
-  const _GridContainer({super.key});
+  const _GridContainer();
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +76,7 @@ class _GridContainer extends StatelessWidget {
 
 // Custom Button for Grid
 class _GridButton extends StatelessWidget {
-  const _GridButton({super.key});
+  const _GridButton();
 
   void handleButtonClick() {
     return;

@@ -45,7 +45,7 @@ See [Screen Files](#screen-files) for more information.
 Holds reference template files for consistent file structure and design practices, used solely during development.
 See [Template Files](#template-files) for more information.
 
-**lib/src/widgets/**
+**lib/src/widgets/**`
 This subfolder holds all reusable, importable widgets. While most widgets start in screen-specific files, refactor them here (e.g., `widgets/custom_nav_button.dart`) if they can be reused across screens. Aim for modularity and DRY (Don’t Repeat Yourself) code. 
 See [Widget Files](#widget-files) for more information.
 
