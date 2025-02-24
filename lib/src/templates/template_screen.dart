@@ -44,7 +44,6 @@ class _PageHeader extends StatelessWidget {
   final String text;
 
   const _PageHeader({
-    super.key,
     required this.text,
   });
 
