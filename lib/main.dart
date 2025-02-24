@@ -1,23 +1,20 @@
 // 
-// welcome_screen.dart
+// main.dart
 // 
-// This is the landing page for all users
-// when starting the app.
+// This is the main entry point
+// for the application.
 // 
 
-import 'package:flutter/material.dart';
-// Screen Imports
+import 'src/widgets/essential.dart';
 import 'src/screens/home_screen.dart';
-import 'src/screens/welcome_screen.dart';
 import 'src/screens/create_set_screen.dart';
-import 'src/screens/other_screen.dart';
-// Widget Imports
-import 'src/widgets/bottom_nav_bar.dart';
+import 'src/screens/settings_screen.dart';
 
 void main() {
 	runApp(const MyApp());
 }
 
+// Material App Framework
 class MyApp extends StatelessWidget {
 	const MyApp({super.key});
 	
@@ -28,9 +25,9 @@ class MyApp extends StatelessWidget {
 			initialRoute: '/',
 			routes: <String, WidgetBuilder>{
 				'/': (BuildContext context) => MainScreen(screenIndex: 0),
-				'/home': (BuildContext context) => MainScreen(screenIndex: 1),
-				'/create_set': (BuildContext context) => MainScreen(screenIndex: 2),
-				'/other': (BuildContext context) => MainScreen(screenIndex: 3),
+				'/home': (BuildContext context) => MainScreen(screenIndex: 0),
+				'/create_set': (BuildContext context) => MainScreen(screenIndex: 1),
+				'/settings': (BuildContext context) => MainScreen(screenIndex: 2),
 			},
 			theme: ThemeData(
 				brightness: Brightness.dark,
@@ -40,30 +37,39 @@ class MyApp extends StatelessWidget {
 	}
 }
 
+// Stateful widget for the app's main navigation container
 class MainScreen extends StatefulWidget {
 	final int screenIndex;
 
-	const MainScreen({super.key, required this.screenIndex});
+	const MainScreen({
+    super.key, 
+    required this.screenIndex
+  });
 
 	@override
 	State<MainScreen> createState() => _MainStateScreen();
 }
 
+// State manager for MainScreen, handling screen selection
 class _MainStateScreen extends State<MainScreen> {
+  // Active Page Index
 	late int _selectedIndex = 0;
 
+  // List of Screen Views (Bottom Nav Bar, in order)
 	static const List<Widget> _screens = [
 		HomeScreen(),
-		CreateSetScreen(),
-		OtherScreen(),
+    CreateSetScreen(),
+    SettingsScreen(),
 	];
 
+  // Fetches screenIndex from MainScreen
 	@override
 	void initState() {
 		super.initState();
 		_selectedIndex = widget.screenIndex;
 	}
 
+  // Updates _selectedIndex onTap
 	void _onItemTapped(int index) {
 		setState(() {
 			_selectedIndex = index;
@@ -72,6 +78,7 @@ class _MainStateScreen extends State<MainScreen> {
 
 	@override
 	Widget build(BuildContext context) {
+    // Main Application Scaffold
 		return Scaffold(
 			body: _screens[_selectedIndex],
 			bottomNavigationBar: BottomNavigationBar(
@@ -85,8 +92,8 @@ class _MainStateScreen extends State<MainScreen> {
 						label: "Create Set"
 					),
 					BottomNavigationBarItem(
-						icon: Icon(Icons.person),
-						label: "Profile"
+						icon: Icon(Icons.settings),
+						label: "Settings"
 					),
 				],
 				currentIndex: _selectedIndex,
