@@ -1,23 +1,22 @@
 // 
-// create_set_screen.dart
+// settings_screen.dart
 // 
-// This is the page where users
-// will create new sets.
+// This is the settings page. (Placeholder)
 // 
 
 import '../widgets/essential.dart';
 import '../widgets/custom_page_header.dart';
 
 // Primary Screen Layout
-class CreateSetScreen extends StatelessWidget {
-  const CreateSetScreen({super.key});
+class SettingsScreen extends StatelessWidget {
+  const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return CustomPageStack(
       children: [
         CustomPageHeader(
-          text: "Create Set Page"
+          text: "Settings Page"
         ),
       ]
     );
