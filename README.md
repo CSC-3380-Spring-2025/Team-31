@@ -9,6 +9,7 @@ Quality Assurance Tester: Ziron Veal ([GitHub Name])
 Inspired by Quizlet, this multi-platform flashcard app lets you create and customize study cards, collaborate with others, test yourself, personalize your learning experience, and track your progress, making it an ideal tool for effective studying across various subjects.
 
 ## Important Links
+Project Website: [https://flashcard-app-54723.web.app/]
 Kanban Board: [https://github.com/orgs/CSC-3380-Spring-2025/projects/25]\
 Designs: [link]\
 Styles Guide(s): [https://github.com/orgs/CSC-3380-Spring-2025/projects/25]
