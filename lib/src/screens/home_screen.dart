@@ -1,5 +1,5 @@
 // 
-// welcome_screen.dart
+// home_screen.dart
 // 
 // This is the landing page for all users
 // when starting the app.
@@ -7,35 +7,127 @@
 
 import 'package:flutter/material.dart';
 
+// Main Page Structure
 class HomeScreen extends StatelessWidget {
-  	const HomeScreen({super.key});
+  const HomeScreen({super.key});
 
 	@override
 	Widget build(BuildContext context) {
 		return Scaffold(
-			body: Center( 
-				child: HomeCard(),
+			body: SafeArea( 
+				child: SingleChildScrollView(
+          child: HomeScreenStack(),
+        ),
 			)
 		);
 	}
 }
 
-class HomeCard extends StatelessWidget {
-	const HomeCard({super.key});
+// Page Content Stack
+class HomeScreenStack extends StatelessWidget {
+  const HomeScreenStack({super.key});
 
-	@override
-	Widget build(BuildContext context) {
-		return Container(
-			padding: const EdgeInsets.all(16.0),
-			decoration: BoxDecoration(
-				color: Colors.black,
-			),
-			child: Column(
-				mainAxisSize: MainAxisSize.min,
-				children: [
-					Text("Home Page"),
-				],
-			)
-		);
-	}
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        HomePageHeader(),
+        ButtonGridSection(label: "Popular Sets"),
+        ButtonGridSection(label: "Recommended Sets"),
+        ButtonGridSection(label: "Placeholder"),
+      ]
+    );
+  }
+}
+
+// Section: Page Header
+class HomePageHeader extends StatelessWidget {
+  const HomePageHeader({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(24.0, 48.0, 24.0, 0.0),
+      child: const Text(
+        "Flashcard App",
+        style: TextStyle(
+          fontSize: 30,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
+  }
+}
+
+// Section: Button Grid (Label + Grid)
+class ButtonGridSection extends StatelessWidget {
+  final String label;
+
+  const ButtonGridSection({
+    super.key,
+    required this.label,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(24.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Container(
+            padding: EdgeInsets.fromLTRB(12.0, 0, 0, 6.0),
+            child: Text(
+              label,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: Colors.grey,
+              ),
+            ),
+          ),
+          ButtonGrid(),
+        ],
+      ),
+    );
+  } 
+}
+
+// Widget: Button Grid
+class ButtonGrid extends StatelessWidget {
+  const ButtonGrid({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.count(
+      crossAxisCount: 3,      // Column Count
+      mainAxisSpacing: 12.0,  // Row Spacing (Height)
+      crossAxisSpacing: 12.0, // Column Spacing (Width)
+      shrinkWrap: true,       // Makes the grid take only the space it needs
+      physics: const NeverScrollableScrollPhysics(), // Disables GridView scrolling
+      children: [
+        ButtonGridButton(),
+        ButtonGridButton(),
+        ButtonGridButton(),
+      ],
+    );
+  }
+}
+
+// Widget: Custom Button for ButtonGrid
+class ButtonGridButton extends StatelessWidget {
+  const ButtonGridButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.black,
+        borderRadius: BorderRadius.circular(12.0)
+      ),
+      padding: EdgeInsets.all(12.0),
+      child: Text("Content"),
+    );
+  }
 }

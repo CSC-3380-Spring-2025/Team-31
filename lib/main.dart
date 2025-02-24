@@ -6,11 +6,13 @@
 // 
 
 import 'package:flutter/material.dart';
-
+// Screen Imports
 import 'src/screens/home_screen.dart';
 import 'src/screens/welcome_screen.dart';
 import 'src/screens/create_set_screen.dart';
 import 'src/screens/other_screen.dart';
+// Widget Imports
+import 'src/widgets/bottom_nav_bar.dart';
 
 void main() {
 	runApp(const MyApp());
@@ -51,7 +53,6 @@ class _MainStateScreen extends State<MainScreen> {
 	late int _selectedIndex = 0;
 
 	static const List<Widget> _screens = [
-		WelcomeScreen(),
 		HomeScreen(),
 		CreateSetScreen(),
 		OtherScreen(),
@@ -76,10 +77,6 @@ class _MainStateScreen extends State<MainScreen> {
 			bottomNavigationBar: BottomNavigationBar(
 				items: const [
 					BottomNavigationBarItem(
-						icon: Icon(Icons.waving_hand_rounded),
-						label: "Welcome"
-					),
-					BottomNavigationBarItem(
 						icon: Icon(Icons.home),
 						label: "Home"
 					),
@@ -88,13 +85,13 @@ class _MainStateScreen extends State<MainScreen> {
 						label: "Create Set"
 					),
 					BottomNavigationBarItem(
-						icon: Icon(Icons.circle),
-						label: "Other"
+						icon: Icon(Icons.person),
+						label: "Profile"
 					),
 				],
 				currentIndex: _selectedIndex,
 				onTap: _onItemTapped,
-				selectedItemColor: Theme.of(context).primaryColor, // Adaptive color
+				selectedItemColor: Theme.of(context).primaryColor,
 				unselectedItemColor: Colors.grey,
 			),
 		);
