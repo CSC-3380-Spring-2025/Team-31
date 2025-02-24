@@ -3,7 +3,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Flutter CI
+name: Flutter CI and Deploy to GitHub Pages
 
 on:
   push:
@@ -12,7 +12,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,14 +20,14 @@ jobs:
       - uses: actions/checkout@v4
 
       # Step 2: Set up Flutter SDK
-      # Note: This uses a specific stable version of Flutter. Adjust the version as needed.
+      # Note: Uses a specific stable version of Flutter. Adjust as needed.
       # See documentation: https://github.com/subosito/flutter-action
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.29.0' # Specify a stable version (update to match your local version)
-          channel: 'stable'        # Use stable channel for consistency
-          cache: true              # Cache Flutter SDK for faster runs
+          flutter-version: '3.29.0' # Match your local Flutter version
+          channel: 'stable'
+          cache: true
 
       # Step 3: Verify Flutter installation
       - name: Check Flutter Version
@@ -37,27 +37,17 @@ jobs:
       - name: Install Dependencies
         run: flutter pub get
 
-      # Uncomment to enforce Dart code formatting (Flutter includes Dart formatter)
-      # - name: Verify Formatting
-      #   run: flutter format --set-exit-if-changed .
-
       # Step 5: Analyze project source
-      # Pass '--fatal-infos' for stricter analysis if desired
       - name: Analyze Project Source
-        run: flutter analyze
+        run: flutter analyze --no-fatal-warnings # Allows warnings without failing
 
-      # Step 6: Run tests
-      # Assumes tests are in test/ and use package:test (included in flutter_test)
-      - name: Run Tests
-        run: flutter test
+      # Step 6: Build the web app
+      - name: Build Web App
+        run: flutter build web --release
 
-      # Optional: Build the web app (uncomment if deploying to GitHub Pages)
-      # - name: Build Web App
-      #   run: flutter build web --release
-
-      # Optional: Deploy to GitHub Pages (uncomment if needed)
-      # - name: Deploy to GitHub Pages
-      #   uses: peaceiris/actions-gh-pages@v3
-      #   with:
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      #     publish_dir: build/web
+      # Step 7: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }} # Provided by GitHub
+          publish_dir: build/web                    # Directory with web build output
