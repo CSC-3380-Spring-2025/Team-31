@@ -9,6 +9,7 @@ import 'src/widgets/essential.dart';
 import 'src/screens/home_screen.dart';
 import 'src/screens/create_set_screen.dart';
 import 'src/screens/settings_screen.dart';
+import 'src/screens/card_screen.dart';
 
 void main() {
 	runApp(const MyApp());
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
 				'/home': (BuildContext context) => MainScreen(screenIndex: 0),
 				'/create_set': (BuildContext context) => MainScreen(screenIndex: 1),
 				'/settings': (BuildContext context) => MainScreen(screenIndex: 2),
+        '/card_screen': (BuildContext context) => MainScreen(screenIndex: 3,),
 			},
 			theme: ThemeData(
 				brightness: Brightness.dark,
@@ -60,6 +62,7 @@ class _MainStateScreen extends State<MainScreen> {
 		HomeScreen(),
     CreateSetScreen(),
     SettingsScreen(),
+    CardScreen()
 	];
 
   // Fetches screenIndex from MainScreen
@@ -95,6 +98,9 @@ class _MainStateScreen extends State<MainScreen> {
 						icon: Icon(Icons.settings),
 						label: "Settings"
 					),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: "Cards")
 				],
 				currentIndex: _selectedIndex,
 				onTap: _onItemTapped,
