@@ -1,4 +1,8 @@
-
+// 
+// card_screen.dart
+// 
+// This is a simple framework card screen.
+//
 
 import '../widgets/essential.dart';
 import '../widgets/card.dart';
