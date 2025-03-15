@@ -1,7 +1,5 @@
 
 
-import 'package:flashcard_app/src/widgets/custom_page_header.dart';
-
 import '../widgets/essential.dart';
 import '../widgets/card.dart';
 
@@ -24,8 +22,10 @@ class CardScreen extends StatelessWidget {
       return Scaffold(
         body: Center(
           child: GestureDetector(
-            onTap: (){ print("clicked"); },
-              child: FlashCard(text: 'Placeholder')
+            onTap: (){ 
+              print("clicked"); 
+            },
+            child: FlashCard(text: 'Placeholder')
         ))
       );
   }

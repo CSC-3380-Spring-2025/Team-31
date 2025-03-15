@@ -1,3 +1,7 @@
+
+
+
+
 import './essential.dart';
 
 
@@ -23,3 +27,5 @@ class FlashCard extends StatelessWidget{
   }
 
 }
+
+
