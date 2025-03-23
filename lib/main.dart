@@ -81,34 +81,79 @@ class _MainStateScreen extends State<MainScreen> {
 		});
 	}
 
-	@override
-	Widget build(BuildContext context) {
-    // Main Application Scaffold
-		return Scaffold(
-			body: _screens[_selectedIndex],
-			bottomNavigationBar: BottomNavigationBar(
-				items: const [
-					BottomNavigationBarItem(
-						icon: Icon(Icons.home),
-						label: "Home"
-					),
-					BottomNavigationBarItem(
-						icon: Icon(Icons.add),
-						label: "Create Set"
-					),
-					BottomNavigationBarItem(
-						icon: Icon(Icons.settings),
-						label: "Settings"
-					),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: "Cards")
-				],
-				currentIndex: _selectedIndex,
-				onTap: _onItemTapped,
-				selectedItemColor: Theme.of(context).primaryColor,
-				unselectedItemColor: Colors.grey,
-			),
-		);
-	}
+  // OLD NAVIGATION SYSTEM
+	// @override
+	// Widget build(BuildContext context) {
+  //   // Main Application Scaffold
+	// 	return Scaffold(
+	// 		body: _screens[_selectedIndex],
+	// 		bottomNavigationBar: BottomNavigationBar(
+	// 			items: const [
+	// 				BottomNavigationBarItem(
+	// 					icon: Icon(Icons.home),
+	// 					label: "Home"
+	// 				),
+	// 				BottomNavigationBarItem(
+	// 					icon: Icon(Icons.add),
+	// 					label: "Create Set"
+	// 				),
+	// 				BottomNavigationBarItem(
+	// 					icon: Icon(Icons.settings),
+	// 					label: "Settings"
+	// 				),
+  //         BottomNavigationBarItem(
+  //           icon: Icon(Icons.settings),
+  //           label: "Cards")
+	// 			],
+	// 			currentIndex: _selectedIndex,
+	// 			onTap: _onItemTapped,
+	// 			selectedItemColor: Theme.of(context).primaryColor,
+	// 			unselectedItemColor: Colors.grey,
+	// 		),
+	// 	);
+	// }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: _screens[_selectedIndex],
+      appBar: AppBar(title: const Text('Study Hall')),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            const SizedBox(
+              height: 128,
+              child: DrawerHeader(
+              decoration: BoxDecoration(color: Colors.green),
+              child: Text('Navigation')
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.home),
+              title: const Text('Home'),
+              onTap: () {
+                _onItemTapped(0);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.add),
+              title: const Text('Create Set'),
+              onTap: () {
+                _onItemTapped(1);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.settings),
+              title: const Text('Settings'),
+              onTap: () {
+                _onItemTapped(2);
+              },
+            )
+          ],
+        )
+      ),
+    );
+    
+  }
 }

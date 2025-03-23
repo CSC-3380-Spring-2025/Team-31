@@ -1,3 +1,7 @@
+
+
+
+
 import './essential.dart';
 
 
@@ -23,6 +27,7 @@ class FlashCard extends StatelessWidget{
   }
 
 }
+ camera-screen
 class CardPreview extends StatelessWidget{
   final String title;
   const CardPreview({required this.title});
@@ -73,3 +78,7 @@ class RecentMadeButton extends StatelessWidget{
    );
    }
 }
+
+
+
+ main
