@@ -66,9 +66,24 @@ class _GridContainer extends StatelessWidget {
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       children: [
-        _GridButton(),
-        _GridButton(),
-        _GridButton(),
+        _GridButton(
+          label: 'Create Set',
+          onTap: (){
+            Navigator.pushNamed(context, '/create_set');
+          },
+        ),
+        _GridButton(
+          label: 'Camera Input',
+          onTap: (){
+            Navigator.pushNamed(context, '/camera_input');
+          },
+        ),
+        _GridButton(
+          label: 'Voice Input',
+          onTap: (){
+            Navigator.pushNamed(context, '/voice_input');
+          },
+        ),
       ],
     );
   }
@@ -76,7 +91,12 @@ class _GridContainer extends StatelessWidget {
 
 // Custom Button for Grid
 class _GridButton extends StatelessWidget {
-  const _GridButton();
+  final String label;
+  final VoidCallback onTap;
+  const _GridButton({
+    required this.label,
+    required this.onTap,
+  });
 
   void handleButtonClick() {
     return;
@@ -93,8 +113,13 @@ class _GridButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(12.0)
         ),
         padding: EdgeInsets.all(12.0),
-        child: Text("Placeholder"),
-      )
+        child: Center(
+          child: Text(
+            label,
+            style: const TextStyle(color: Colors.white),
+          ),
+      ),
+      ),
     );
   }
 }
