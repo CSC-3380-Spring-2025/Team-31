@@ -1,14 +1,8 @@
-camera-screen
-
-
-
 // 
 // card_screen.dart
 // 
 // This is a simple framework card screen.
 //
-main
-
 
 import '../widgets/essential.dart';
 import '../widgets/card.dart';

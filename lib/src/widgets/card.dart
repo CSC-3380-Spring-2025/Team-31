@@ -1,9 +1,10 @@
-
-
-
+// 
+// card.dart
+// 
+// This is a card
+//
 
 import './essential.dart';
-
 
 class FlashCard extends StatelessWidget{ 
   final String text; // front of card
@@ -27,7 +28,7 @@ class FlashCard extends StatelessWidget{
   }
 
 }
- camera-screen
+
 class CardPreview extends StatelessWidget{
   final String title;
   const CardPreview({required this.title});
@@ -43,19 +44,21 @@ class CardPreview extends StatelessWidget{
     );
   }
 }
-  class CardFormatPreset extends StatelessWidget{
-    const CardFormatPreset();
 
-    @override
+class CardFormatPreset extends StatelessWidget{
+  const CardFormatPreset();
+
+  @override
   Widget build(BuildContext context) {
     return Container(
-     width: 70,
-     height:70,
-     color: Colors.grey[400],
-     margin: const EdgeInsets.all(4),
-     );
-     }// TODO: implement build 
-  }
+      width: 70,
+      height:70,
+      color: Colors.grey[400],
+      margin: const EdgeInsets.all(4),
+    );
+  }// TODO: implement build 
+}
+
 class RecentMadeButton extends StatelessWidget{
   const RecentMadeButton();
   @override
@@ -68,17 +71,16 @@ class RecentMadeButton extends StatelessWidget{
     );
   }
 }
-   class CourseButton extends StatelessWidget{
-    const CourseButton();
-    @override
+
+class CourseButton extends StatelessWidget{
+  const CourseButton();
+  @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed:(){},
+      onPressed: () {
+
+      },
       child: const Text("Course"),
    );
    }
 }
-
-
-
- main
