@@ -1,9 +1,9 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
-export "FLUTTER_ROOT=C:\Users\Nathan\dev\flutter"
-export "FLUTTER_APPLICATION_PATH=C:\Users\Nathan\programs\flutter\Team-31-main"
+export "FLUTTER_ROOT=/Users/aaronmeche/.flutter-sdk/flutter"
+export "FLUTTER_APPLICATION_PATH=/Users/aaronmeche/Documents/School/25 Spring/03 Object Oriented Design/Project/Team-31/Team-31"
 export "COCOAPODS_PARALLEL_CODE_SIGN=true"
-export "FLUTTER_TARGET=lib\main.dart"
+export "FLUTTER_TARGET=lib/main.dart"
 export "FLUTTER_BUILD_DIR=build"
 export "FLUTTER_BUILD_NAME=0.1.0"
 export "FLUTTER_BUILD_NUMBER=0.1.0"
