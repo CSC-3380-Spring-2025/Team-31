@@ -40,7 +40,16 @@ app.*.symbols
 # Obfuscation related
 app.*.map.json
 
+# Firebase
+.firebase/
+
+# iOS
+ios/Flutter/App.framework
+ios/Flutter/Flutter.framework
+ios/Flutter/Generated.xcconfig
+
 # Android Studio will place build artifacts here
 /android/app/debug
 /android/app/profile
 /android/app/release
+/android/local.properties
