@@ -9,6 +9,7 @@ import 'src/widgets/essential.dart';
 import 'src/screens/home_screen.dart';
 import 'src/screens/create_set_screen.dart';
 import 'src/screens/settings_screen.dart';
+import 'src/screens/dev_test_screen.dart';
 import 'package:flutter/material.dart';
 import 'src/screens/camera_screen.dart';
 import 'src/screens/voice_screen.dart';
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
 				'/create_set': (BuildContext context) => MainScreen(screenIndex: 1),
 				'/settings': (BuildContext context) => MainScreen(screenIndex: 2),
         '/card_screen': (BuildContext context) => MainScreen(screenIndex: 3,),
+        '/dev': (BuildContext context) => MainScreen(screenIndex: 4,),
 			},
 			theme: ThemeData(
 				brightness: Brightness.dark,
@@ -64,7 +66,8 @@ class _MainStateScreen extends State<MainScreen> {
 		HomeScreen(),
     CreateSetScreen(),
     SettingsScreen(),
-    
+    HomeScreen(),
+    DevTestScreen()
 	];
 
   // Fetches screenIndex from MainScreen
