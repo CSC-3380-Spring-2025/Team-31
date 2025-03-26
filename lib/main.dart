@@ -5,7 +5,7 @@
 // for the application.
 // 
 
-import 'src/widgets/essential.dart';
+import 'src/assets/essential.dart';
 import 'src/screens/home_screen.dart';
 import 'src/screens/create_set_screen.dart';
 import 'src/screens/settings_screen.dart';

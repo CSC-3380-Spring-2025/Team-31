@@ -1,5 +1,5 @@
 import 'package:flashcard_app/src/widgets/card.dart';
-import 'package:flashcard_app/src/widgets/essential.dart';
+import 'package:flashcard_app/src/assets/essential.dart';
 class CameraScreen extends StatelessWidget{
   const CameraScreen({super.key});
 

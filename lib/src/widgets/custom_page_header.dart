@@ -5,7 +5,7 @@
 // Large text intended for top of page.
 //
 
-import './essential.dart';
+import '../assets/essential.dart';
 
 class CustomPageHeader extends StatelessWidget {
   final String text;

@@ -4,7 +4,7 @@
 // This is the empty widget file template.
 //
 
-import '../widgets/essential.dart';
+import '../assets/essential.dart';
 
 class TemplateEmptyWidget extends StatelessWidget {
   const TemplateEmptyWidget({super.key});

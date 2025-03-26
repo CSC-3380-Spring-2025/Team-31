@@ -5,7 +5,7 @@
 // when starting the app.
 // 
 
-import '../widgets/essential.dart';
+import '../assets/essential.dart';
 import '../widgets/custom_page_header.dart';
 import '../widgets/custom_button_shelf.dart';
 

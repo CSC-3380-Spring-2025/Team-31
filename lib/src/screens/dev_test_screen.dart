@@ -4,9 +4,7 @@
 // Development testing page
 // 
 
-import '../widgets/essential.dart';
-import '../widgets/custom_page_header.dart';
-import '../widgets/custom_button_shelf.dart';
+import '../assets/essential.dart';
 
 // Primary Screen Layout
 class DevTestScreen extends StatelessWidget {
