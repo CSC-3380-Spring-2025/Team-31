@@ -14,3 +14,4 @@
 
 export 'package:flutter/material.dart';
 export '../widgets/custom_page_stacks.dart';
+export '../widgets/custom_page_header.dart';

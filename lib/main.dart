@@ -5,14 +5,9 @@
 // for the application.
 // 
 
-import 'src/assets/essential.dart';
-import 'src/screens/home_screen.dart';
-import 'src/screens/create_set_screen.dart';
-import 'src/screens/settings_screen.dart';
-import 'src/screens/dev_test_screen.dart';
 import 'package:flutter/material.dart';
-import 'src/screens/camera_screen.dart';
-import 'src/screens/voice_screen.dart';
+import 'src/assets/essential.dart';
+import 'src/assets/screens.dart';
 
 void main() {
 	runApp(const MyApp());
@@ -25,7 +20,7 @@ class MyApp extends StatelessWidget {
 	@override
 	Widget build(BuildContext context) {
 		return MaterialApp(
-			title: "Flashcard App",
+			title: "Study Hall",
 			initialRoute: '/',
 			routes: <String, WidgetBuilder>{
 				'/': (BuildContext context) => MainScreen(screenIndex: 0),
