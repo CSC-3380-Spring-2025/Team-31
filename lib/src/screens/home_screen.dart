@@ -5,6 +5,8 @@
 // when starting the app.
 // 
 
+import 'package:flashcard_app/src/widgets/horizontal_scroll.dart';
+
 import '../widgets/essential.dart';
 import '../widgets/custom_page_header.dart';
 import '../widgets/custom_button_shelf.dart';
@@ -15,15 +17,21 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomPageStack(
-      children: [
-        CustomPageHeader(
-          text: "Home Page"
-        ),
-        CustomButtonShelf(
-          label: "Quick Actions",
-        ),
-      ]
+    // return CustomPageStack(
+    //   children: [
+    //     CustomPageHeader(
+    //       text: "Select a Set"
+    //     ),
+    //     CustomButtonShelf(
+    //       label: "Quick Actions",
+    //     ),
+    //   ]
+    // );
+
+    return Scaffold(
+      appBar: AppBar(title: const Text('Select a set')),
+      body: HorizontalScroll()
+      
     );
   }
 }

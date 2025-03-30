@@ -19,9 +19,10 @@ class FlashCard extends StatelessWidget{
   Widget build(BuildContext context) {
     
     return Container(
-      width: 400,
+      width: 350,
       height: 200,
       alignment: Alignment.center,
+      margin: EdgeInsets.symmetric(horizontal: 10),
       color: Colors.green,
       child: Text(text)
     );
@@ -31,7 +32,7 @@ class FlashCard extends StatelessWidget{
 
 class CardPreview extends StatelessWidget{
   final String title;
-  const CardPreview({required this.title});
+  const CardPreview({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +47,7 @@ class CardPreview extends StatelessWidget{
 }
 
 class CardFormatPreset extends StatelessWidget{
-  const CardFormatPreset();
+  const CardFormatPreset({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -56,11 +57,11 @@ class CardFormatPreset extends StatelessWidget{
       color: Colors.grey[400],
       margin: const EdgeInsets.all(4),
     );
-  }// TODO: implement build 
+  }
 }
 
 class RecentMadeButton extends StatelessWidget{
-  const RecentMadeButton();
+  const RecentMadeButton({super.key});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -73,7 +74,7 @@ class RecentMadeButton extends StatelessWidget{
 }
 
 class CourseButton extends StatelessWidget{
-  const CourseButton();
+  const CourseButton({super.key});
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
