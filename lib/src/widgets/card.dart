@@ -4,7 +4,7 @@
 // This is a card
 //
 
-import './essential.dart';
+import '../assets/essential.dart';
 
 class FlashCard extends StatelessWidget{ 
   final String text; // front of card
