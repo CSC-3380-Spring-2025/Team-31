@@ -1,4 +1,4 @@
-camera-screen
+//camera-screen
 
 
 
@@ -7,7 +7,7 @@ camera-screen
 // 
 // This is a simple framework card screen.
 //
-main
+//main
 
 
 import '../widgets/essential.dart';

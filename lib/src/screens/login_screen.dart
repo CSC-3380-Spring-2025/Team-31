@@ -158,3 +158,9 @@ class _PageHeader extends StatelessWidget {
  );
  }
  }
+
+typedef HeaderBuilder = Widget Function(
+    BuildContext context,
+    BoxConstraints constraints,
+    double shrinkOffset,
+    );
