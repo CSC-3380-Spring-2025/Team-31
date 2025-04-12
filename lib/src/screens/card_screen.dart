@@ -63,7 +63,7 @@ with TickerProviderStateMixin
   Widget build(BuildContext context) {
     return Scaffold(
         body: Center(
-          child:GestureDetector(
+          child: GestureDetector(
           onTap: () => setState(() {} ),
           child: GestureDetector(
           onTap: () => setState(() {
@@ -79,9 +79,9 @@ with TickerProviderStateMixin
             return Matrix4.identity()
             ..setEntry(3, 2, 0.004)
             ..rotateY(pi * 2.0 * value);
-        }
-        else 
-        {return Matrix4.identity();}}
+            }
+            else 
+            {return Matrix4.identity();}}
         )
         ),
       )

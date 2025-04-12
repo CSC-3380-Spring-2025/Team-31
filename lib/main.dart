@@ -5,6 +5,8 @@
 // for the application.
 // 
 
+import 'package:flashcard_app/src/screens/card_screen.dart';
+
 import 'src/widgets/essential.dart';
 import 'src/screens/home_screen.dart';
 import 'src/screens/create_set_screen.dart';
@@ -12,6 +14,7 @@ import 'src/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'src/screens/camera_screen.dart';
 import 'src/screens/voice_screen.dart';
+
 
 void main() {
 	runApp(const MyApp());
@@ -31,7 +34,7 @@ class MyApp extends StatelessWidget {
 				'/home': (BuildContext context) => MainScreen(screenIndex: 0),
 				'/create_set': (BuildContext context) => MainScreen(screenIndex: 1),
 				'/settings': (BuildContext context) => MainScreen(screenIndex: 2),
-        '/card_screen': (BuildContext context) => MainScreen(screenIndex: 3,),
+        		'/card_screen': (BuildContext context) => MainScreen(screenIndex: 3,),
 			},
 			theme: ThemeData(
 				brightness: Brightness.dark,
@@ -62,8 +65,9 @@ class _MainStateScreen extends State<MainScreen> {
   // List of Screen Views (Bottom Nav Bar, in order)
 	static const List<Widget> _screens = [
 		HomeScreen(),
-    CreateSetScreen(),
-    SettingsScreen(),
+    	CreateSetScreen(),
+    	SettingsScreen(),
+		CardScreen()
     
 	];
 
@@ -148,6 +152,13 @@ class _MainStateScreen extends State<MainScreen> {
               title: const Text('Settings'),
               onTap: () {
                 _onItemTapped(2);
+              },
+            ),
+			ListTile(
+              leading: const Icon(Icons.settings),
+              title: const Text('Card Screen'),
+              onTap: () {
+                _onItemTapped(3);
               },
             )
           ],

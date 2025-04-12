@@ -31,7 +31,6 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Select a set')),
       body: HorizontalScroll()
-      
     );
   }
 }
