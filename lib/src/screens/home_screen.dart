@@ -15,6 +15,7 @@ import '../widgets/custom_button_shelf.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
+  // Add list of 
   @override
   Widget build(BuildContext context) {
     // return CustomPageStack(
@@ -30,7 +31,9 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: const Text('Select a set')),
-      body: HorizontalScroll()
+      body: Column(
+        children: [HorizontalScroll()],
+      ) 
     );
   }
 }

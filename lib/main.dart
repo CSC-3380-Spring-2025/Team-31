@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
 				'/home': (BuildContext context) => MainScreen(screenIndex: 0),
 				'/create_set': (BuildContext context) => MainScreen(screenIndex: 1),
 				'/settings': (BuildContext context) => MainScreen(screenIndex: 2),
-        		'/card_screen': (BuildContext context) => MainScreen(screenIndex: 3,),
+        '/card_screen': (BuildContext context) => MainScreen(screenIndex: 3,),
 			},
 			theme: ThemeData(
 				brightness: Brightness.dark,
@@ -64,10 +64,10 @@ class _MainStateScreen extends State<MainScreen> {
 
   // List of Screen Views (Bottom Nav Bar, in order)
 	static const List<Widget> _screens = [
-		HomeScreen(),
+		  HomeScreen(),
     	CreateSetScreen(),
     	SettingsScreen(),
-		CardScreen()
+		  CardScreen()
     
 	];
 

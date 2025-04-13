@@ -4,6 +4,7 @@
 // This is a simple framework card screen.
 //
 
+
 import '../widgets/essential.dart';
 import '../widgets/card.dart';
 import 'dart:math';
@@ -62,30 +63,33 @@ with TickerProviderStateMixin
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Center(
-          child: GestureDetector(
-          onTap: () => setState(() {} ),
-          child: GestureDetector(
+        appBar: AppBar(title: Text("Set Name")),
+        body: Column(
+          children: [GestureDetector(
           onTap: () => setState(() {
             isflipped = !isflipped;
+            print("clicked flip function");
           }),
           child: MatrixTransition(animation: _animation,
           child: const Padding(
             padding: EdgeInsets.all(8.0),
-            child: FlashCard(text: "placeholder"),
+            child: FlashCard(),
           ),
           onTransform: (double value) {
             if (isflipped) {
             return Matrix4.identity()
             ..setEntry(3, 2, 0.004)
             ..rotateY(pi * 2.0 * value);
-            }
-            else 
-            {return Matrix4.identity();}}
+          }
+          else 
+          {return Matrix4.identity();}
+          }
+
         )
         ),
+        TextButton(onPressed: null, child: const Text('Next'))],
+
       )
-    )
     );
   }
 

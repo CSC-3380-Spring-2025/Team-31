@@ -6,29 +6,66 @@
 
 import './essential.dart';
 
-class FlashCard extends StatelessWidget{ 
-  final String text; // front of card
+class FlashCard extends StatefulWidget{ 
+  // final String text; // front of card
 
   const FlashCard({
     super.key,
-    required this.text
+    //required this.text
   });
   
+  @override
+  State<FlashCard> createState() => _FlashCardState();
+    
+  // @override
+  // Widget build(BuildContext context) {
+    
+  //   return Container(
+  //     width: 350,
+  //     height: 200,
+  //     alignment: Alignment.center,
+  //     // margin: EdgeInsets.symmetric(horizontal: 10),
+  //     color: Colors.green,
+  //     child: Text(text)
+  //   );
+  // }
+
+}
+
+class _FlashCardState extends State<FlashCard>
+{
+  var contents = [["Set Name", "N/A"],["front placeholder", "back placeholder"],
+                  ["front placeholder 2", "back placeholder 2"]]; // 2d array each element contains front a back text of a card
+
+  bool selected = false; // if on home screen show Set Name
+  int x = 0, y = 0;
+  void changeText()
+  {
+    setState(() { 
+      if(!selected) {x = 0; y = 0; selected = true;}
+      else {x = 1; y = 0;}});
+  }
+
+  void changeCard()
+  {
+    setState(() {});
+  }
+
   
   @override
-  Widget build(BuildContext context) {
-    
+  Widget build(BuildContext context)
+  {
     return Container(
       width: 350,
       height: 200,
       alignment: Alignment.center,
       margin: EdgeInsets.symmetric(horizontal: 10),
       color: Colors.green,
-      child: Text(text)
+      child: Text(contents[x][y])
     );
   }
-
 }
+
 
 class CardPreview extends StatelessWidget{
   final String title;
