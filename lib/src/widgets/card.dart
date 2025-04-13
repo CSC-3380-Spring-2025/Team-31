@@ -28,7 +28,6 @@ class FlashCard extends StatelessWidget{
   }
 
 }
-
 class CardPreview extends StatelessWidget{
   final String title;
   const CardPreview({required this.title});

@@ -5,7 +5,15 @@
 // for the application.
 // 
 
+// System
 import 'package:flutter/material.dart';
+import 'firebase_options.dart';
+// Screens
+import 'src/screens/camera_screen.dart';
+import 'src/screens/voice_screen.dart';
+import 'src/screens/login_screen.dart';
+// Widgets / Libraries
+import 'src/widgets/auth_gate.dart';
 import 'src/assets/essential.dart';
 import 'src/assets/screens.dart';
 
@@ -23,15 +31,15 @@ class MyApp extends StatelessWidget {
 	@override
 	Widget build(BuildContext context) {
 		return MaterialApp(
-			title: "Study Hall",
-			initialRoute: '/',
+      // home: const AuthGate(),
+			title: "Flashcard App",
+			initialRoute: '/home',
 			routes: <String, WidgetBuilder>{
-				'/': (BuildContext context) => MainScreen(screenCode: "home"),
-				'/home': (BuildContext context) => MainScreen(screenCode: "home"),
-				'/create_set': (BuildContext context) => MainScreen(screenCode: "create_set"),
-				'/settings': (BuildContext context) => MainScreen(screenCode: "settings"),
-        '/card_screen': (BuildContext context) => MainScreen(screenCode: "card_screen",),
-        '/dev': (BuildContext context) => MainScreen(screenCode: "dev",),
+				'/home': (BuildContext context) => MainScreen(screenIndex: 0),
+				'/create_set': (BuildContext context) => MainScreen(screenIndex: 1),
+				'/settings': (BuildContext context) => MainScreen(screenIndex: 2),
+        '/card_screen': (BuildContext context) => MainScreen(screenIndex: 0),
+        '/login': (BuildContext context) => MainScreen(screenIndex: 3),
 			},
 			theme: ThemeData(
 				brightness: Brightness.dark,
@@ -43,11 +51,11 @@ class MyApp extends StatelessWidget {
 
 // Stateful widget for the app's main navigation container
 class MainScreen extends StatefulWidget {
-	final String screenCode;
+	final int screenIndex;
 
 	const MainScreen({
     super.key, 
-    required this.screenCode
+    required this.screenIndex
   });
 
 	@override
@@ -57,35 +65,27 @@ class MainScreen extends StatefulWidget {
 // State manager for MainScreen, handling screen selection
 class _MainStateScreen extends State<MainScreen> {
   // Active Page Index
-	late String _selectedIndex = "";
+	late int _selectedIndex = 0;
 
-  // Map of Screen Views
-	static const Map<String, Widget> _screens = {
-		"home": HomeScreen(),
-    "create_set": CreateSetScreen(),
-    "settings": SettingsScreen(),
-    "card_screen": HomeScreen(),
-    "dev": DevTestScreen()
-	};
+  // List of Screen Views (Bottom Nav Bar, in order)
+	static const List<Widget> _screens = [
+		HomeScreen(),
+    CreateSetScreen(),
+    SettingsScreen(),
+    LoginScreen(),
+	];
 
   // Fetches screenIndex from MainScreen
 	@override
 	void initState() {
 		super.initState();
-		_selectedIndex = widget.screenCode;
-	}
-
-  // Updates _selectedIndex onTap
-	void _onItemTapped(String screenCode) {
-		setState(() {
-			_selectedIndex = screenCode;
-		});
+		_selectedIndex = widget.screenIndex;
 	}
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _screens[_selectedIndex] ?? const Center(child: Text("Screen not found")),
+      body: _screens[_selectedIndex],
       appBar: AppBar(title: const Text('Study Hall')),
       drawer: Drawer(
         child: ListView(
@@ -94,36 +94,36 @@ class _MainStateScreen extends State<MainScreen> {
             const SizedBox(
               height: 128,
               child: DrawerHeader(
-              decoration: BoxDecoration(color: Colors.green),
-              child: Text('Navigation')
+                decoration: BoxDecoration(color: Colors.green),
+                child: Text('Navigation')
               ),
             ),
             ListTile(
               leading: const Icon(Icons.home),
               title: const Text('Home'),
               onTap: () {
-                _onItemTapped("home");
+                Navigator.pushNamed(context, '/home');
               },
             ),
             ListTile(
               leading: const Icon(Icons.add),
               title: const Text('Create Set'),
               onTap: () {
-                _onItemTapped("create_set");
+                Navigator.pushNamed(context, '/create-set');
               },
             ),
             ListTile(
               leading: const Icon(Icons.settings),
               title: const Text('Settings'),
               onTap: () {
-                _onItemTapped("settings");
+                Navigator.pushNamed(context, '/settings');
               },
             ),
             ListTile(
-              leading: const Icon(Icons.security_rounded),
-              title: const Text('Development'),
+              leading: const Icon(Icons.person),
+              title: const Text('Account'),
               onTap: () {
-                _onItemTapped("dev");
+                Navigator.pushNamed(context, '/login');
               },
             )
           ],
