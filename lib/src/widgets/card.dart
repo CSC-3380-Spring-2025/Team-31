@@ -30,7 +30,7 @@ class FlashCard extends StatelessWidget{
 }
 class CardPreview extends StatelessWidget{
   final String title;
-  const CardPreview({required this.title});
+  const CardPreview({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +43,11 @@ class CardPreview extends StatelessWidget{
     );
   }
 }
+ create-screens
+  class CardFormatPreset extends StatelessWidget{
+    const CardFormatPreset({super.key});
+
+ main
 
 class CardFormatPreset extends StatelessWidget{
   const CardFormatPreset();
@@ -59,7 +64,7 @@ class CardFormatPreset extends StatelessWidget{
 }
 
 class RecentMadeButton extends StatelessWidget{
-  const RecentMadeButton();
+  const RecentMadeButton({super.key});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -70,10 +75,16 @@ class RecentMadeButton extends StatelessWidget{
     );
   }
 }
+ create-screens
+   class CourseButton extends StatelessWidget{
+    const CourseButton({super.key});
+    @override
+
 
 class CourseButton extends StatelessWidget{
   const CourseButton();
   @override
+ main
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
