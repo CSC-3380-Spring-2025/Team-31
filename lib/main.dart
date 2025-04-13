@@ -10,8 +10,6 @@ import 'src/screens/home_screen.dart';
 import 'src/screens/create_set_screen.dart';
 import 'src/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
-import 'src/screens/camera_screen.dart';
-import 'src/screens/voice_screen.dart';
 
 void main() {
 	runApp(const MyApp());
