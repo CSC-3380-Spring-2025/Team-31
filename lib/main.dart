@@ -5,21 +5,22 @@
 // for the application.
 // 
 
-import 'src/widgets/essential.dart';
-import 'src/screens/home_screen.dart';
-import 'src/screens/create_set_screen.dart';
-import 'src/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'src/screens/camera_screen.dart';
 import 'src/screens/voice_screen.dart';
 import 'src/screens/login_screen.dart';
 import 'src/widgets/auth_gate.dart';
+import 'src/assets/essential.dart';
+import 'src/assets/screens.dart';
 
 void main() {
 	runApp(const MyApp());
 }
 
-// Material App Framework
+// Main App Object
+//
+// Material Config
+// Routing + Theme
 class MyApp extends StatelessWidget {
 	const MyApp({super.key});
 	
@@ -69,7 +70,6 @@ class _MainStateScreen extends State<MainScreen> {
     CreateSetScreen(),
     SettingsScreen(),
     LoginScreen(),
-    
 	];
 
   // Fetches screenIndex from MainScreen
@@ -80,48 +80,16 @@ class _MainStateScreen extends State<MainScreen> {
 	}
 
   // Updates _selectedIndex onTap
-	void _onItemTapped(int index) {
+	void _onItemTapped(int screenIndex) {
 		setState(() {
-			_selectedIndex = index;
+			_selectedIndex = screenIndex;
 		});
 	}
-
-  // OLD NAVIGATION SYSTEM
-	// @override
-	// Widget build(BuildContext context) {
-  //   // Main Application Scaffold
-	// 	return Scaffold(
-	// 		body: _screens[_selectedIndex],
-	// 		bottomNavigationBar: BottomNavigationBar(
-	// 			items: const [
-	// 				BottomNavigationBarItem(
-	// 					icon: Icon(Icons.home),
-	// 					label: "Home"
-	// 				),
-	// 				BottomNavigationBarItem(
-	// 					icon: Icon(Icons.add),
-	// 					label: "Create Set"
-	// 				),
-	// 				BottomNavigationBarItem(
-	// 					icon: Icon(Icons.settings),
-	// 					label: "Settings"
-	// 				),
-  //         BottomNavigationBarItem(
-  //           icon: Icon(Icons.settings),
-  //           label: "Cards")
-	// 			],
-	// 			currentIndex: _selectedIndex,
-	// 			onTap: _onItemTapped,
-	// 			selectedItemColor: Theme.of(context).primaryColor,
-	// 			unselectedItemColor: Colors.grey,
-	// 		),
-	// 	);
-	// }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _screens[_selectedIndex],
+      body: _screens[_selectedIndex] ?? const Center(child: Text("Screen not found")),
       appBar: AppBar(title: const Text('Study Hall')),
       drawer: Drawer(
         child: ListView(
@@ -153,6 +121,13 @@ class _MainStateScreen extends State<MainScreen> {
               title: const Text('Settings'),
               onTap: () {
                 _onItemTapped(2);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.person),
+              title: const Text('Account'),
+              onTap: () {
+                _onItemTapped(3);
               },
             )
           ],

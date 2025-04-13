@@ -1,11 +1,10 @@
 //
-// template_screen.dart
+// login_screen.dart
 //
-// This is the commented template for screen files.
+// The login screen
 //
 
-// Always import this essential file
-import '../widgets/essential.dart'; // adjust path accordingly
+import '../assets/essential.dart';
 
 //
 // Example 1: Sample Screen Stack

@@ -4,7 +4,7 @@
 // This is a custom button shelf.
 //
 
-import './essential.dart';
+import '../assets/essential.dart';
 
 // Widget: Container for Label & Button Grid
 class CustomButtonShelf extends StatelessWidget {
