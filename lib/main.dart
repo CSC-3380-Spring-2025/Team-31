@@ -5,31 +5,44 @@
 // for the application.
 // 
 
-import 'src/widgets/essential.dart';
-import 'src/screens/home_screen.dart';
-import 'src/screens/create_set_screen.dart';
-import 'src/screens/settings_screen.dart';
+// System
 import 'package:flutter/material.dart';
+create-screens
+
+import 'firebase_options.dart';
+// Screens
+import 'src/screens/camera_screen.dart';
+import 'src/screens/voice_screen.dart';
+import 'src/screens/login_screen.dart';
+// Widgets / Libraries
+import 'src/widgets/auth_gate.dart';
+import 'src/assets/essential.dart';
+import 'src/assets/screens.dart';
+ main
 
 void main() {
 	runApp(const MyApp());
 }
 
-// Material App Framework
+// Main App Object
+//
+// Material Config
+// Routing + Theme
 class MyApp extends StatelessWidget {
 	const MyApp({super.key});
 	
 	@override
 	Widget build(BuildContext context) {
 		return MaterialApp(
+      // home: const AuthGate(),
 			title: "Flashcard App",
-			initialRoute: '/',
+			initialRoute: '/home',
 			routes: <String, WidgetBuilder>{
-				'/': (BuildContext context) => MainScreen(screenIndex: 0),
 				'/home': (BuildContext context) => MainScreen(screenIndex: 0),
 				'/create_set': (BuildContext context) => MainScreen(screenIndex: 1),
 				'/settings': (BuildContext context) => MainScreen(screenIndex: 2),
-        '/card_screen': (BuildContext context) => MainScreen(screenIndex: 3,),
+        '/card_screen': (BuildContext context) => MainScreen(screenIndex: 0),
+        '/login': (BuildContext context) => MainScreen(screenIndex: 3),
 			},
 			theme: ThemeData(
 				brightness: Brightness.dark,
@@ -62,7 +75,7 @@ class _MainStateScreen extends State<MainScreen> {
 		HomeScreen(),
     CreateSetScreen(),
     SettingsScreen(),
-    
+    LoginScreen(),
 	];
 
   // Fetches screenIndex from MainScreen
@@ -72,41 +85,54 @@ class _MainStateScreen extends State<MainScreen> {
 		_selectedIndex = widget.screenIndex;
 	}
 
-  // Updates _selectedIndex onTap
-	void _onItemTapped(int index) {
-		setState(() {
-			_selectedIndex = index;
-		});
-	}
-
-	@override
-	Widget build(BuildContext context) {
-    // Main Application Scaffold
-		return Scaffold(
-			body: _screens[_selectedIndex],
-			bottomNavigationBar: BottomNavigationBar(
-				items: const [
-					BottomNavigationBarItem(
-						icon: Icon(Icons.home),
-						label: "Home"
-					),
-					BottomNavigationBarItem(
-						icon: Icon(Icons.add),
-						label: "Create Set"
-					),
-					BottomNavigationBarItem(
-						icon: Icon(Icons.settings),
-						label: "Settings"
-					),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: "Cards")
-				],
-				currentIndex: _selectedIndex,
-				onTap: _onItemTapped,
-				selectedItemColor: Theme.of(context).primaryColor,
-				unselectedItemColor: Colors.grey,
-			),
-		);
-	}
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: _screens[_selectedIndex],
+      appBar: AppBar(title: const Text('Study Hall')),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            const SizedBox(
+              height: 128,
+              child: DrawerHeader(
+                decoration: BoxDecoration(color: Colors.green),
+                child: Text('Navigation')
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.home),
+              title: const Text('Home'),
+              onTap: () {
+                Navigator.pushNamed(context, '/home');
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.add),
+              title: const Text('Create Set'),
+              onTap: () {
+                Navigator.pushNamed(context, '/create-set');
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.settings),
+              title: const Text('Settings'),
+              onTap: () {
+                Navigator.pushNamed(context, '/settings');
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.person),
+              title: const Text('Account'),
+              onTap: () {
+                Navigator.pushNamed(context, '/login');
+              },
+            )
+          ],
+        )
+      ),
+    );
+    
+  }
 }
