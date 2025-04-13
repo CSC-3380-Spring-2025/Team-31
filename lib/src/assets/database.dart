@@ -4,39 +4,47 @@
 // Database access functions
 //
 
-
 import 'package:cloud_firestore/cloud_firestore.dart';
+export 'package:cloud_firestore/cloud_firestore.dart';
 
 class DatabaseService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   
-  // Existing functions remain here...
-  
-  // New function to get user data by username
+  // Get User Data Object
   Future<DocumentSnapshot> getUserData(String username) async {
     try {
-      // Query the users collection where the username field matches the provided username
       QuerySnapshot querySnapshot = await _firestore
           .collection('users')
           .where('username', isEqualTo: username)
-          .limit(1) // We only want one result since usernames should be unique
+          .limit(1)
           .get();
       
-      // Check if we got any results
       if (querySnapshot.docs.isNotEmpty) {
-        // Return the first (and should be only) document
         return querySnapshot.docs.first;
       } else {
-        // Throw an exception if no user is found
         throw Exception('User with username "$username" not found');
       }
+    } on FirebaseException catch (e) {
+      // Specifically catch FirebaseException
+      throw Exception('Firestore error: ${e.message} (Code: ${e.code})');
     } catch (e) {
-      // Re-throw the exception with more context
+      // Catch any other errors
       throw Exception('Error fetching user data: $e');
     }
   }
 
-  // Rest of the existing functions...
+  Future<void> storeUserData(String username, String email, String password) async {
+    try {
+      await _firestore.collection('users').add({
+        'username': username,
+        'email': email,
+        'password': password,
+        'createdAt': FieldValue.serverTimestamp(),
+      });
+    } catch (e) {
+      throw Exception('Error storing user data: $e');
+    }
+  }
 }
 
 // Singleton instance

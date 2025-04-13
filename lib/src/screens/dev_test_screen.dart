@@ -7,9 +7,29 @@
 import '../assets/essential.dart';
 import '../assets/database.dart';
 
-// Primary Screen Layout
-class DevTestScreen extends StatelessWidget {
+Future<String> _fetchPassword(String username) async {
+  try {
+    DocumentSnapshot userDoc = await dbService.getUserData(username);
+    if (userDoc.exists) {
+      return (userDoc.data() as Map<String, dynamic>)['password'] ?? 'No password found';
+    }
+    return 'User not found';
+  } catch (e) {
+    return 'Error: $e';
+  }
+}
+
+class DevTestScreen extends StatefulWidget {
   const DevTestScreen({super.key});
+
+  @override
+  _DevTestScreenState createState() => _DevTestScreenState();
+}
+
+// Primary Screen Layout
+class _DevTestScreenState extends State<DevTestScreen> {
+  final TextEditingController _usernameController = TextEditingController();
+  String _password = '';
 
   @override
   Widget build(BuildContext context) {
@@ -23,17 +43,30 @@ class DevTestScreen extends StatelessWidget {
           ),
           child: Column(
             children: [
+              // Text Field
               TextField(
+                controller: _usernameController,
                 decoration: const InputDecoration(
                   labelText: 'Username',
                   border: OutlineInputBorder(),
                 ),
               ),
+              const SizedBox(height: 16.0),
+              // Submit Button
               ElevatedButton(
-                onPressed: () {
-                  // Add logic for "Get Password" button here
+                onPressed: () async {
+                  String result = await _fetchPassword(_usernameController.text);
+                  setState(() {
+                    _password = result;
+                  });
                 },
                 child: const Text('Get Password'),
+              ),
+              const SizedBox(height: 16.0),
+              // Password Display
+              Text(
+                _password.isEmpty ? '' : 'Password: $_password',
+                style: const TextStyle(color: Colors.white),
               ),
             ]
           )
