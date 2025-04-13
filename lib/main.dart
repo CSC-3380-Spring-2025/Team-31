@@ -6,6 +6,10 @@
 // 
 
 import 'package:flutter/material.dart';
+import 'src/screens/camera_screen.dart';
+import 'src/screens/voice_screen.dart';
+import 'src/screens/login_screen.dart';
+import 'src/widgets/auth_gate.dart';
 import 'src/assets/essential.dart';
 import 'src/assets/screens.dart';
 
@@ -23,15 +27,16 @@ class MyApp extends StatelessWidget {
 	@override
 	Widget build(BuildContext context) {
 		return MaterialApp(
-			title: "Study Hall",
+      home: const AuthGate(),
+			title: "Flashcard App",
 			initialRoute: '/',
 			routes: <String, WidgetBuilder>{
-				'/': (BuildContext context) => MainScreen(screenCode: "home"),
-				'/home': (BuildContext context) => MainScreen(screenCode: "home"),
-				'/create_set': (BuildContext context) => MainScreen(screenCode: "create_set"),
-				'/settings': (BuildContext context) => MainScreen(screenCode: "settings"),
-        '/card_screen': (BuildContext context) => MainScreen(screenCode: "card_screen",),
-        '/dev': (BuildContext context) => MainScreen(screenCode: "dev",),
+				'/': (BuildContext context) => MainScreen(screenIndex: 0),
+				'/home': (BuildContext context) => MainScreen(screenIndex: 0),
+				'/create_set': (BuildContext context) => MainScreen(screenIndex: 2),
+				'/settings': (BuildContext context) => MainScreen(screenIndex: 3),
+        '/card_screen': (BuildContext context) => MainScreen(screenIndex: 4,),
+        '/login_screen': (BuildContext context) => MainScreen(screenIndex: 1),
 			},
 			theme: ThemeData(
 				brightness: Brightness.dark,
@@ -43,11 +48,11 @@ class MyApp extends StatelessWidget {
 
 // Stateful widget for the app's main navigation container
 class MainScreen extends StatefulWidget {
-	final String screenCode;
+	final int screenIndex;
 
 	const MainScreen({
     super.key, 
-    required this.screenCode
+    required this.screenIndex
   });
 
 	@override
@@ -57,28 +62,27 @@ class MainScreen extends StatefulWidget {
 // State manager for MainScreen, handling screen selection
 class _MainStateScreen extends State<MainScreen> {
   // Active Page Index
-	late String _selectedIndex = "";
+	late int _selectedIndex = 0;
 
-  // Map of Screen Views
-	static const Map<String, Widget> _screens = {
-		"home": HomeScreen(),
-    "create_set": CreateSetScreen(),
-    "settings": SettingsScreen(),
-    "card_screen": HomeScreen(),
-    "dev": DevTestScreen()
-	};
+  // List of Screen Views (Bottom Nav Bar, in order)
+	static const List<Widget> _screens = [
+		HomeScreen(),
+    CreateSetScreen(),
+    SettingsScreen(),
+    LoginScreen(),
+	];
 
   // Fetches screenIndex from MainScreen
 	@override
 	void initState() {
 		super.initState();
-		_selectedIndex = widget.screenCode;
+		_selectedIndex = widget.screenIndex;
 	}
 
   // Updates _selectedIndex onTap
-	void _onItemTapped(String screenCode) {
+	void _onItemTapped(int screenIndex) {
 		setState(() {
-			_selectedIndex = screenCode;
+			_selectedIndex = screenIndex;
 		});
 	}
 
@@ -102,28 +106,28 @@ class _MainStateScreen extends State<MainScreen> {
               leading: const Icon(Icons.home),
               title: const Text('Home'),
               onTap: () {
-                _onItemTapped("home");
+                _onItemTapped(0);
               },
             ),
             ListTile(
               leading: const Icon(Icons.add),
               title: const Text('Create Set'),
               onTap: () {
-                _onItemTapped("create_set");
+                _onItemTapped(1);
               },
             ),
             ListTile(
               leading: const Icon(Icons.settings),
               title: const Text('Settings'),
               onTap: () {
-                _onItemTapped("settings");
+                _onItemTapped(2);
               },
             ),
             ListTile(
-              leading: const Icon(Icons.security_rounded),
-              title: const Text('Development'),
+              leading: const Icon(Icons.person),
+              title: const Text('Account'),
               onTap: () {
-                _onItemTapped("dev");
+                _onItemTapped(3);
               },
             )
           ],
