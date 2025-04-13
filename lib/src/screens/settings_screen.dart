@@ -4,7 +4,7 @@
 // This is the settings page. (Placeholder)
 // 
 
-import '../widgets/essential.dart';
+import '../assets/essential.dart';
 import '../widgets/custom_page_header.dart';
 
 // Primary Screen Layout
