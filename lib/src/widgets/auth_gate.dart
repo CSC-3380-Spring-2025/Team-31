@@ -58,7 +58,7 @@ class AuthGate extends StatelessWidget {
         }
         //otherwise a user is returned and directs to the home screen
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          Navigator.pushReplacementNamed(context, '/home');
+          Navigator.pushReplacementNamed(context, '/login_screen');
         });
         // Return a temporary widget while navigation occurs
         return const Scaffold(
