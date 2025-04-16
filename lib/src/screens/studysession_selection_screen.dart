@@ -1,7 +1,14 @@
-import '../widgets/essential.dart';
+//
+// login_screen.dart
+//
+// The login screen
+//
+
+import '..assets/essential.dart';
 import '../widgets/card.dart';
 
-class StudysessionSelectionScreen extends StatelessWidget{
+class StudySessionSelectionScreen extends StatelessWidget{
+  const StudySessionSelectionScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
