@@ -14,6 +14,7 @@ import 'src/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'src/screens/camera_screen.dart';
 import 'src/screens/voice_screen.dart';
+import 'src/widgets/card.dart';
 
 
 void main() {
@@ -54,19 +55,19 @@ class MainScreen extends StatefulWidget {
   });
 
 	@override
-	State<MainScreen> createState() => _MainStateScreen();
+	State<MainScreen> createState() => MainStateScreen();
 }
 
 // State manager for MainScreen, handling screen selection
-class _MainStateScreen extends State<MainScreen> {
+class MainStateScreen extends State<MainScreen> {
   // Active Page Index
-	late int _selectedIndex = 0;
+	static int selectedIndex = 0;
 
   // List of Screen Views (Bottom Nav Bar, in order)
 	static const List<Widget> _screens = [
 		  HomeScreen(),
-    	CreateSetScreen(),
-    	SettingsScreen(),
+    	  CreateSetScreen(),
+    	  SettingsScreen(),
 		  CardScreen()
     
 	];
@@ -75,13 +76,13 @@ class _MainStateScreen extends State<MainScreen> {
 	@override
 	void initState() {
 		super.initState();
-		_selectedIndex = widget.screenIndex;
+		selectedIndex = widget.screenIndex;
 	}
 
   // Updates _selectedIndex onTap
-	void _onItemTapped(int index) {
+	void onItemTapped(int index) {
 		setState(() {
-			_selectedIndex = index;
+			selectedIndex = index;
 		});
 	}
 
@@ -120,7 +121,7 @@ class _MainStateScreen extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _screens[_selectedIndex],
+      body: _screens[selectedIndex],
       appBar: AppBar(title: const Text('Study Hall')),
       drawer: Drawer(
         child: ListView(
@@ -137,28 +138,28 @@ class _MainStateScreen extends State<MainScreen> {
               leading: const Icon(Icons.home),
               title: const Text('Home'),
               onTap: () {
-                _onItemTapped(0);
+                onItemTapped(0);
               },
             ),
             ListTile(
               leading: const Icon(Icons.add),
               title: const Text('Create Set'),
               onTap: () {
-                _onItemTapped(1);
+                onItemTapped(1);
               },
             ),
             ListTile(
               leading: const Icon(Icons.settings),
               title: const Text('Settings'),
               onTap: () {
-                _onItemTapped(2);
+                onItemTapped(2);
               },
             ),
 			ListTile(
               leading: const Icon(Icons.settings),
               title: const Text('Card Screen'),
               onTap: () {
-                _onItemTapped(3);
+                onItemTapped(3);
               },
             )
           ],

@@ -4,15 +4,15 @@
 // This is a card
 //
 
+import 'package:flashcard_app/main.dart';
+
 import './essential.dart';
+import '../../main.dart';
 
 class FlashCard extends StatefulWidget{ 
   // final String text; // front of card
 
-  const FlashCard({
-    super.key,
-    //required this.text
-  });
+  const FlashCard({super.key });
   
   @override
   State<FlashCard> createState() => _FlashCardState();
@@ -34,34 +34,52 @@ class FlashCard extends StatefulWidget{
 
 class _FlashCardState extends State<FlashCard>
 {
+  final GlobalKey<MainStateScreen> MainKey = GlobalKey<MainStateScreen>();
+  // Placeholder set data
   var contents = [["Set Name", "N/A"],["front placeholder", "back placeholder"],
-                  ["front placeholder 2", "back placeholder 2"]]; // 2d array each element contains front a back text of a card
+                  ["front placeholder 2", "back placeholder 2"]]; 
 
   bool selected = false; // if on home screen show Set Name
-  int x = 0, y = 0;
+  int card = 1, side = 0;
   void changeText()
   {
     setState(() { 
-      if(!selected) {x = 0; y = 0; selected = true;}
-      else {x = 1; y = 0;}});
+      if(side == 0) { side+= 1;}
+      else {side-=1;}
+      });
   }
 
-  void changeCard()
-  {
-    setState(() {});
-  }
+  // idk fix it later
+  // void changeScreen()
+  // {
+  //   setState(() {
+  //     MainKey.currentState?.onItemTapped(3);
+  //   });
+  // }
+
+  // void changeCard()
+  // {
+  //   setState(() {
+  //     card+=1;
+  //   });
+  // }
 
   
   @override
   Widget build(BuildContext context)
   {
-    return Container(
+    return GestureDetector(
+      onTap: () { 
+        changeText();
+        },
+      child: Container(
       width: 350,
       height: 200,
       alignment: Alignment.center,
       margin: EdgeInsets.symmetric(horizontal: 10),
       color: Colors.green,
-      child: Text(contents[x][y])
+      child: Text(contents[card][side])
+      )
     );
   }
 }

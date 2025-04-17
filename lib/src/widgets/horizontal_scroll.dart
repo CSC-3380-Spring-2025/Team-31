@@ -36,8 +36,7 @@ class HorizontalScroll extends StatefulWidget{
 
 class _HorizontalScrollState extends State<HorizontalScroll>
 {
-  List<Widget> sets = <Widget>[ FlashCard(),
-  FlashCard()];
+  List<Widget> sets = <Widget>[FlashCard(), FlashCard(), FlashCard()];
 
   @override
   Widget build(BuildContext context) {
