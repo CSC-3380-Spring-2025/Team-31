@@ -7,8 +7,6 @@
 
 // System
 import 'package:flutter/material.dart';
-create-screens
-
 import 'firebase_options.dart';
 // Screens
 import 'src/screens/camera_screen.dart';
@@ -18,7 +16,6 @@ import 'src/screens/login_screen.dart';
 import 'src/widgets/auth_gate.dart';
 import 'src/assets/essential.dart';
 import 'src/assets/screens.dart';
- main
 
 void main() {
 	runApp(const MyApp());

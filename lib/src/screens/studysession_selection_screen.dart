@@ -1,10 +1,10 @@
 //
-// login_screen.dart
+// studysession_selection_screen.dart
 //
-// The login screen
+// Study Session Selection Screen
 //
 
-import '..assets/essential.dart';
+import '../assets/essential.dart';
 import '../widgets/card.dart';
 
 class StudySessionSelectionScreen extends StatelessWidget{
@@ -12,8 +12,9 @@ class StudySessionSelectionScreen extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text()),
-    )// TODO: implement build
+      appBar: AppBar(title: Text("App Bar Title")),
+    );
+    // TODO: implement build
     throw UnimplementedError();
   }
 }
