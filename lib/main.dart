@@ -10,8 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'firebase_options.dart';
-// Screens
-import 'src/screens/login_screen.dart';
 // Widgets / Libraries
 import 'src/assets/essential.dart';
 import 'src/assets/screens.dart';
