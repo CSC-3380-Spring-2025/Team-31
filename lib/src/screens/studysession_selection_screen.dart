@@ -1,8 +1,15 @@
-import 'flashcard_studysession_screen.dart';
-import '../widgets/essential.dart';
+//
+// studysession_selection_screen.dart
+//
+// Study Session Selection Screen
+//
+
+import './flashcard_studysession_screen.dart';
+import '../assets/essential.dart';
 import '../widgets/card.dart';
 
-class StudysessionSelectionScreen extends StatelessWidget{
+class StudySessionSelectionScreen extends StatelessWidget{
+  const StudySessionSelectionScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

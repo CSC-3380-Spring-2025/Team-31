@@ -1,8 +1,16 @@
-import '../widgets/essential.dart';
+//
+// create_card_template_screen.dart
+//
+// Create Card Template Screen
+//
+
+import '../assets/essential.dart';
 
 // Primary Screen Layout
 class CreateCardTemplateScreen extends StatelessWidget {
-  const CreateCardTemplateScreen({super.key});
+  const CreateCardTemplateScreen(
+    {super.key}
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +33,7 @@ class CreateCardTemplateScreen extends StatelessWidget {
                  child: ListTile(
                 title: const Text('Back'),
                 subtitle: const TextField(
-                  decoration: InputDecoration.collapsed(hintText: 'Cliock to edit back'),
+                  decoration: InputDecoration.collapsed(hintText: 'Click to edit back'),
                   maxLines: null,
                 ),
               ),
