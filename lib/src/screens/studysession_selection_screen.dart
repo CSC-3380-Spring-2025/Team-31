@@ -41,8 +41,9 @@ class StudySessionSelectionScreen extends StatelessWidget{
     floatingActionButton: FloatingActionButton(
       child: Icon(Icons.play_arrow),
       onPressed: (){
-        Navigator.push(context,
-          MaterialPageRoute(builder: (context) => FlashcardStudyScreen()),
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => FlashcardStudySessionScreen()),
         );
       },
     ),

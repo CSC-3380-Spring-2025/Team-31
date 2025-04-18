@@ -1,7 +1,8 @@
+
 import '../assets/essential.dart';
 import 'package:flutter/cupertino.dart';
 
-class FlashcardStudysessionScreen extends StatelessWidget{
+class FlashcardStudySessionScreen extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
