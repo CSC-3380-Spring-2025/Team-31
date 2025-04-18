@@ -8,6 +8,7 @@
 import '../assets/essential.dart';
 import '../widgets/custom_page_header.dart';
 import '../widgets/custom_button_shelf.dart';
+import '../widgets/course_shelf.dart';
 
 // Primary Screen Layout
 class HomeScreen extends StatelessWidget {
@@ -23,6 +24,7 @@ class HomeScreen extends StatelessWidget {
         CustomButtonShelf(
           label: "Quick Actions",
         ),
+        CourseShelf()
       ]
     );
   }
