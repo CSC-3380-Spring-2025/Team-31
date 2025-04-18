@@ -1,4 +1,5 @@
-import '/src/assets/essential.dart';
+
+import '../assets/essential.dart';
 import 'package:flutter/cupertino.dart';
 
 class FlashcardStudySessionScreen extends StatelessWidget{
