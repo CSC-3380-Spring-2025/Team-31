@@ -14,6 +14,7 @@ import 'package:firebase_ui_oauth_google/Firebase_ui_oauth_google.dart';
 import 'firebase_options.dart';
 // Widgets / Libraries
 import 'src/assets/essential.dart';
+import 'src/assets/database.dart';
 import 'src/assets/screens.dart';
 import 'src/widgets/route_handler.dart';
 
@@ -69,6 +70,12 @@ class AuthGate extends StatelessWidget {
         }
         // IF Logged In
         if (snapshot.hasData) {
+          // Get User Object & Create Document
+          final user = snapshot.data!;
+          dbService.createUserDocument(user).catchError((e) {
+            print('Error creating user document: $e');
+          });
+          // Send to Home Screen
           return MainScreen(screenWidget: RouteHandler(route: "/home").getScreen());
         }
         // IF Logged Out
@@ -92,7 +99,7 @@ class AuthGate extends StatelessWidget {
               return const Padding(
                 padding: EdgeInsets.only(top:16),
                 child: Text(
-                  'By signing in, you agree to our terms and conditions.',//would love to add some sarcasm here
+                  'By signing in, you agree to our terms and conditions.', //would love to add some sarcasm here
                   style: TextStyle(color: Colors.grey),
                 ),
               );
@@ -108,7 +115,6 @@ class AuthGate extends StatelessWidget {
             },
           );
         }
-        // return MainScreen(screenWidget: RouteHandler(route: "/login").getScreen());
       },
     );
   }
