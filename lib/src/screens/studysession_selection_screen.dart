@@ -4,7 +4,6 @@
 // Study Session Selection Screen
 //
 
-import './flashcard_studysession_screen.dart';
 import '../assets/essential.dart';
 import '../widgets/card.dart';
 
@@ -42,9 +41,8 @@ class StudySessionSelectionScreen extends StatelessWidget{
     floatingActionButton: FloatingActionButton(
       child: Icon(Icons.play_arrow),
       onPressed: (){
-        Navigator.push(
-          context,
-           MaterialPageRoute(builder: (context) => FlashcardStudyScreen()),
+        Navigator.push(context,
+          MaterialPageRoute(builder: (context) => FlashcardStudyScreen()),
         );
       },
     ),
@@ -58,6 +56,18 @@ class StudySessionSelectionScreen extends StatelessWidget{
         ],
       ),
     ),
+    );
+  }
+}
+
+class FlashcardStudyScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Flashcard Study')),
+      body: Center(
+        child: Text('Flashcard Study Screen'),
+      ),
     );
   }
 }
