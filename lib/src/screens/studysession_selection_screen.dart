@@ -61,7 +61,7 @@ class StudySessionSelectionScreen extends StatelessWidget{
   }
 }
 
-class FlashcardStudyScreen extends StatelessWidget {
+class FlashcardStudySessionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
