@@ -8,7 +8,9 @@
 // System Imports
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' hide EmailAuthProvider;
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
+import 'package:firebase_ui_oauth_google/Firebase_ui_oauth_google.dart';
 import 'firebase_options.dart';
 // Widgets / Libraries
 import 'src/assets/essential.dart';
@@ -70,7 +72,43 @@ class AuthGate extends StatelessWidget {
           return MainScreen(screenWidget: RouteHandler(route: "/home").getScreen());
         }
         // IF Logged Out
-        return MainScreen(screenWidget: RouteHandler(route: "/login").getScreen());
+        else {
+          return SignInScreen(
+            //avenues for authentication set up through firebase for out program
+            providers: [
+              EmailAuthProvider(),
+              GoogleProvider(clientId: '34811750205-4rmsh2v96o4qisaakn6mi1c531f6qn3m.apps.googleusercontent.com'),
+            ],
+            headerBuilder: (context, constraints, shrinkOffset){
+              return Padding(
+                padding: const EdgeInsets.all(20),
+                child: AspectRatio(
+                  aspectRatio: 1,
+                  //child: Image.asset(/*add our logo asset here once addeded to assets*/)
+                )
+              );
+            },
+            footerBuilder: (context, action) {
+              return const Padding(
+                padding: EdgeInsets.only(top:16),
+                child: Text(
+                  'By signing in, you agree to our terms and conditions.',//would love to add some sarcasm here
+                  style: TextStyle(color: Colors.grey),
+                ),
+              );
+            },
+            sideBuilder:(context, shrinkOffSet){
+              return Padding(
+                padding:const EdgeInsets.all(20),
+                child: AspectRatio(
+                  aspectRatio: 1,
+                  child: Image.asset('flutterfire_300x.png'),
+                  ),
+              );
+            },
+          );
+        }
+        // return MainScreen(screenWidget: RouteHandler(route: "/login").getScreen());
       },
     );
   }
