@@ -44,7 +44,7 @@ class StudySessionSelectionScreen extends StatelessWidget{
       onPressed: (){
         Navigator.push(
           context,
-           MaterialPageRoute(builder: (context) => FlashcardStudyScreen()),
+           MaterialPageRoute(builder: (context) => FlashcardStudySessionScreen()),
         );
       },
     ),
