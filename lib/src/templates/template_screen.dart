@@ -5,7 +5,7 @@
 //
 
 // Always import this essential file
-import '../widgets/essential.dart'; // adjust path accordingly
+import '../assets/essential.dart'; // adjust path accordingly
 
 //
 // Example 1: Sample Screen Stack

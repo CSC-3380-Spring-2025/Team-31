@@ -4,7 +4,7 @@
 // This is a card
 //
 
-import './essential.dart';
+import '../assets/essential.dart';
 
 class FlashCard extends StatelessWidget{ 
   final String text; // front of card
@@ -13,7 +13,6 @@ class FlashCard extends StatelessWidget{
     super.key,
     required this.text
   });
-  
   
   @override
   Widget build(BuildContext context) {
@@ -26,12 +25,11 @@ class FlashCard extends StatelessWidget{
       child: Text(text)
     );
   }
-
 }
 
 class CardPreview extends StatelessWidget{
   final String title;
-  const CardPreview({required this.title});
+  const CardPreview({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +44,7 @@ class CardPreview extends StatelessWidget{
 }
 
 class CardFormatPreset extends StatelessWidget{
-  const CardFormatPreset();
+  const CardFormatPreset({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -56,11 +54,12 @@ class CardFormatPreset extends StatelessWidget{
       color: Colors.grey[400],
       margin: const EdgeInsets.all(4),
     );
-  }// TODO: implement build 
+  }
+  // TODO: implement build 
 }
 
 class RecentMadeButton extends StatelessWidget{
-  const RecentMadeButton();
+  const RecentMadeButton({super.key});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -73,7 +72,7 @@ class RecentMadeButton extends StatelessWidget{
 }
 
 class CourseButton extends StatelessWidget{
-  const CourseButton();
+  const CourseButton({super.key});
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(

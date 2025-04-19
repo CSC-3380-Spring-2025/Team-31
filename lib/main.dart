@@ -1,122 +1,146 @@
-// 
+//
 // main.dart
-// 
+//
 // This is the main entry point
 // for the application.
-// 
+//
 
-import 'src/widgets/essential.dart';
-import 'src/screens/home_screen.dart';
-import 'src/screens/create_set_screen.dart';
-import 'src/screens/settings_screen.dart';
+// System Imports
 import 'package:flutter/material.dart';
-import 'src/screens/camera_screen.dart';
-import 'src/screens/voice_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart' hide EmailAuthProvider;
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
+import 'package:firebase_ui_oauth_google/Firebase_ui_oauth_google.dart';
+import 'firebase_options.dart';
+// Widgets / Libraries
+import 'src/assets/essential.dart';
+import 'src/assets/database.dart';
+import 'src/assets/screens.dart';
+import 'src/widgets/route_handler.dart';
 
-void main() {
-	runApp(const MyApp());
+// Main Entry Function
+void main() async {
+  // Firebase Authentication Stuff
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  // Main App
+  runApp(const MyApp());
 }
 
-// Material App Framework
+// Main App Object
+// Material Config, Routing + Theme
 class MyApp extends StatelessWidget {
-	const MyApp({super.key});
-	
-	@override
-	Widget build(BuildContext context) {
-		return MaterialApp(
-			title: "Flashcard App",
-			initialRoute: '/',
-			routes: <String, WidgetBuilder>{
-				'/': (BuildContext context) => MainScreen(screenIndex: 0),
-				'/home': (BuildContext context) => MainScreen(screenIndex: 0),
-				'/create_set': (BuildContext context) => MainScreen(screenIndex: 1),
-				'/settings': (BuildContext context) => MainScreen(screenIndex: 2),
-        '/card_screen': (BuildContext context) => MainScreen(screenIndex: 3,),
-			},
-			theme: ThemeData(
-				brightness: Brightness.dark,
-				primaryColor: Colors.blueGrey,
-			)
-		);
-	}
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: "Flashcard App",
+      theme: ThemeData(
+        brightness: Brightness.dark,
+        primaryColor: Colors.blueGrey,
+      ),
+      home: const AuthGate(),
+      onGenerateRoute: (settings) {
+        final routeName = settings.name ?? '/home';
+        final screen = RouteHandler(route: routeName).getScreen();
+        return MaterialPageRoute(
+          builder: (context) => MainScreen(screenWidget: screen),
+          settings: settings,
+        );
+      },
+    );
+  }
+}
+
+// Authentication Handler
+class AuthGate extends StatelessWidget {
+  const AuthGate({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<User?>(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, snapshot) {
+        // Loading Indicator
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
+        }
+        // IF Logged In
+        if (snapshot.hasData) {
+          // Get User Object & Create Document
+          final user = snapshot.data!;
+          dbService.createUserDocument(user).catchError((e) {
+            print('Error creating user document: $e');
+          });
+          // Send to Home Screen
+          return MainScreen(screenWidget: RouteHandler(route: "/home").getScreen());
+        }
+        // IF Logged Out
+        else {
+          return SignInScreen(
+            //avenues for authentication set up through firebase for out program
+            providers: [
+              EmailAuthProvider(),
+              GoogleProvider(clientId: '34811750205-4rmsh2v96o4qisaakn6mi1c531f6qn3m.apps.googleusercontent.com'),
+            ],
+            headerBuilder: (context, constraints, shrinkOffset){
+              return Padding(
+                padding: const EdgeInsets.all(20),
+                child: AspectRatio(
+                  aspectRatio: 1,
+                  child: Image.asset('lib/src/assets/study_hall_icon.png')
+                )
+              );
+            },
+            footerBuilder: (context, action) {
+              return const Padding(
+                padding: EdgeInsets.only(top:16),
+                child: Text(
+                  'By signing in, you agree to our terms and conditions.', //would love to add some sarcasm here
+                  style: TextStyle(color: Colors.grey),
+                ),
+              );
+            },
+            sideBuilder:(context, shrinkOffSet){
+              return Padding(
+                padding:const EdgeInsets.all(20),
+                child: AspectRatio(
+                  aspectRatio: 1,
+                  child: Image.asset('lib/src/assets/study_hall_icon.png')
+                )
+              );
+            },
+          );
+        }
+      },
+    );
+  }
 }
 
 // Stateful widget for the app's main navigation container
 class MainScreen extends StatefulWidget {
-	final int screenIndex;
+  final Widget screenWidget;
 
-	const MainScreen({
+  const MainScreen({
     super.key, 
-    required this.screenIndex
+    required this.screenWidget
   });
 
-	@override
-	State<MainScreen> createState() => _MainStateScreen();
+  @override
+  State<MainScreen> createState() => _MainStateScreen();
 }
 
 // State manager for MainScreen, handling screen selection
 class _MainStateScreen extends State<MainScreen> {
-  // Active Page Index
-	late int _selectedIndex = 0;
-
-  // List of Screen Views (Bottom Nav Bar, in order)
-	static const List<Widget> _screens = [
-		HomeScreen(),
-    CreateSetScreen(),
-    SettingsScreen(),
-    
-	];
-
-  // Fetches screenIndex from MainScreen
-	@override
-	void initState() {
-		super.initState();
-		_selectedIndex = widget.screenIndex;
-	}
-
-  // Updates _selectedIndex onTap
-	void _onItemTapped(int index) {
-		setState(() {
-			_selectedIndex = index;
-		});
-	}
-
-  // OLD NAVIGATION SYSTEM
-	// @override
-	// Widget build(BuildContext context) {
-  //   // Main Application Scaffold
-	// 	return Scaffold(
-	// 		body: _screens[_selectedIndex],
-	// 		bottomNavigationBar: BottomNavigationBar(
-	// 			items: const [
-	// 				BottomNavigationBarItem(
-	// 					icon: Icon(Icons.home),
-	// 					label: "Home"
-	// 				),
-	// 				BottomNavigationBarItem(
-	// 					icon: Icon(Icons.add),
-	// 					label: "Create Set"
-	// 				),
-	// 				BottomNavigationBarItem(
-	// 					icon: Icon(Icons.settings),
-	// 					label: "Settings"
-	// 				),
-  //         BottomNavigationBarItem(
-  //           icon: Icon(Icons.settings),
-  //           label: "Cards")
-	// 			],
-	// 			currentIndex: _selectedIndex,
-	// 			onTap: _onItemTapped,
-	// 			selectedItemColor: Theme.of(context).primaryColor,
-	// 			unselectedItemColor: Colors.grey,
-	// 		),
-	// 	);
-	// }
-
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser;
+
     return Scaffold(
-      body: _screens[_selectedIndex],
+      body: widget.screenWidget,
       appBar: AppBar(title: const Text('Study Hall')),
       drawer: Drawer(
         child: ListView(
@@ -125,35 +149,41 @@ class _MainStateScreen extends State<MainScreen> {
             const SizedBox(
               height: 128,
               child: DrawerHeader(
-              decoration: BoxDecoration(color: Colors.green),
-              child: Text('Navigation')
+                decoration: BoxDecoration(color: Colors.green),
+                child: Text('Navigation'),
               ),
             ),
             ListTile(
               leading: const Icon(Icons.home),
               title: const Text('Home'),
               onTap: () {
-                _onItemTapped(0);
+                Navigator.pushNamed(context, '/home');
               },
             ),
             ListTile(
               leading: const Icon(Icons.add),
               title: const Text('Create Set'),
               onTap: () {
-                _onItemTapped(1);
+                Navigator.pushNamed(context, '/create_set');
               },
             ),
             ListTile(
               leading: const Icon(Icons.settings),
               title: const Text('Settings'),
               onTap: () {
-                _onItemTapped(2);
+                Navigator.pushNamed(context, '/settings');
               },
-            )
+            ),
+            ListTile(
+              leading: const Icon(Icons.person),
+              title: const Text('Account'),
+              onTap: () {
+                Navigator.pushNamed(context, '/login');
+              },
+            ),
           ],
-        )
+        ),
       ),
     );
-    
   }
 }

@@ -4,7 +4,7 @@
 // This is the empty screen file template.
 //
 
-import '../widgets/essential.dart';
+import '../assets/essential.dart';
 
 class TemplateEmptyScreen extends StatelessWidget {
   const TemplateEmptyScreen({super.key});

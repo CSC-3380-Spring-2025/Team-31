@@ -64,6 +64,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '34811750205',
     projectId: 'flashcard-app-54723',
     storageBucket: 'flashcard-app-54723.firebasestorage.app',
+    iosClientId: '34811750205-k21ssi40u9m9k6p3i84grjpr4rg6e4q7.apps.googleusercontent.com',
     iosBundleId: 'com.example.flutterApp',
   );
 
@@ -73,6 +74,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '34811750205',
     projectId: 'flashcard-app-54723',
     storageBucket: 'flashcard-app-54723.firebasestorage.app',
+    iosClientId: '34811750205-k21ssi40u9m9k6p3i84grjpr4rg6e4q7.apps.googleusercontent.com',
     iosBundleId: 'com.example.flutterApp',
   );
 
@@ -85,4 +87,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'flashcard-app-54723.firebasestorage.app',
     measurementId: 'G-VNGP6D4YBM',
   );
+
 }
