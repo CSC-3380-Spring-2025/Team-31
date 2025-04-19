@@ -26,29 +26,31 @@ import 'package:flashcard_app/src/widgets/card.dart';
 //   }
 // }
 
+
 class HorizontalScroll extends StatefulWidget{
 
   const HorizontalScroll({super.key});
 
   @override
-  State<HorizontalScroll> createState() => _HorizontalScrollState();
+  State<HorizontalScroll> createState() => HorizontalScrollState();
 }
 
-class _HorizontalScrollState extends State<HorizontalScroll>
+class HorizontalScrollState extends State<HorizontalScroll>
 {
-  List<Widget> sets = <Widget>[FlashCard(), FlashCard(), FlashCard()];
-
+ 
+  List<Widget> sets = <Widget>[HomeScreenSet(setName: "Set #1"), HomeScreenSet(setName: "Set #2"), HomeScreenSet(setName: "Set #3")];
+  
+  
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
+      return Container(
         margin: const EdgeInsets.symmetric(vertical: 20),
         height: 200,
         child: ListView(
           scrollDirection: Axis.horizontal,
           children: sets 
         )
-      )
-    );
+      );
+
   }
 }

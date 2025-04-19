@@ -10,13 +10,14 @@ import './essential.dart';
 import '../../main.dart';
 
 class FlashCard extends StatefulWidget{ 
-  // final String text; // front of card
+  final String setName; // Set Names
 
-  const FlashCard({super.key });
-  
+  const FlashCard({super.key}) : setName = "";
+ 
+
   @override
-  State<FlashCard> createState() => _FlashCardState();
-    
+  State<FlashCard> createState() => FlashCardState();
+
   // @override
   // Widget build(BuildContext context) {
     
@@ -32,29 +33,29 @@ class FlashCard extends StatefulWidget{
 
 }
 
-class _FlashCardState extends State<FlashCard>
+class FlashCardState extends State<FlashCard>
 {
-  final GlobalKey<MainStateScreen> MainKey = GlobalKey<MainStateScreen>();
-  // Placeholder set data
-  var contents = [["Set Name", "N/A"],["front placeholder", "back placeholder"],
-                  ["front placeholder 2", "back placeholder 2"]]; 
+  String text = "";
 
   bool selected = false; // if on home screen show Set Name
   int card = 1, side = 0;
-  void changeText()
-  {
-    setState(() { 
-      if(side == 0) { side+= 1;}
-      else {side-=1;}
-      });
-  }
+  // void changeText()
+  // {
+  //   setState(() { 
+  //     if(side == 0) { side+= 1;}
+  //     else {side-=1;}
+  //     });
+  // }
 
-  // idk fix it later
+  void changeText(String txt)
+  {
+    setState(() {
+      text = txt;
+    });
+  }
   // void changeScreen()
   // {
-  //   setState(() {
-  //     MainKey.currentState?.onItemTapped(3);
-  //   });
+  //  
   // }
 
   // void changeCard()
@@ -69,21 +70,47 @@ class _FlashCardState extends State<FlashCard>
   Widget build(BuildContext context)
   {
     return GestureDetector(
-      onTap: () { 
-        changeText();
-        },
+      // onTap: () { 
+      //   changeText('hello');
+      //   },
       child: Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(20)),
+        color: Colors.green
+      ),
       width: 350,
       height: 200,
       alignment: Alignment.center,
       margin: EdgeInsets.symmetric(horizontal: 10),
-      color: Colors.green,
-      child: Text(contents[card][side])
+      child: Text(text)
       )
     );
   }
 }
 
+class HomeScreenSet extends StatelessWidget{
+
+  final String setName;
+  const HomeScreenSet({super.key, required this.setName});
+
+  @override
+  Widget build(BuildContext context)
+  {
+    return GestureDetector(
+      child: Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(20)),
+        color: Colors.green
+      ),
+      width: 350,
+      height: 200,
+      alignment: Alignment.center,
+      margin: EdgeInsets.symmetric(horizontal: 10),
+      child: Text(setName)
+      )
+    );
+}
+}
 
 class CardPreview extends StatelessWidget{
   final String title;
