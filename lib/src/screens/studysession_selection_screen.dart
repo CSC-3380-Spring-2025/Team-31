@@ -6,6 +6,7 @@
 
 import '../assets/essential.dart';
 import '../widgets/card.dart';
+import '../screens/flashcard_studysession_screen.dart';
 
 class StudySessionSelectionScreen extends StatelessWidget{
   const StudySessionSelectionScreen({super.key});
@@ -60,16 +61,3 @@ class StudySessionSelectionScreen extends StatelessWidget{
     );
   }
 }
-
-class FlashcardStudySessionScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Flashcard Study')),
-      body: Center(
-        child: Text('Flashcard Study Screen'),
-      ),
-    );
-  }
-}
-       
