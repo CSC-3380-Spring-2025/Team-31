@@ -1,94 +1,102 @@
-// 
+//
 // main.dart
-// 
+//
 // This is the main entry point
 // for the application.
-// 
+//
 
-// System
+// System Imports
 import 'package:flutter/material.dart';
-create-screens
-
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'firebase_options.dart';
-// Screens
-import 'src/screens/camera_screen.dart';
-import 'src/screens/voice_screen.dart';
-import 'src/screens/login_screen.dart';
 // Widgets / Libraries
-import 'src/widgets/auth_gate.dart';
 import 'src/assets/essential.dart';
 import 'src/assets/screens.dart';
- main
+import 'src/widgets/route_handler.dart';
 
-void main() {
-	runApp(const MyApp());
+// Main Entry Function
+void main() async {
+  // Firebase Authentication Stuff
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  // Main App
+  runApp(const MyApp());
 }
 
 // Main App Object
-//
-// Material Config
-// Routing + Theme
+// Material Config, Routing + Theme
 class MyApp extends StatelessWidget {
-	const MyApp({super.key});
-	
-	@override
-	Widget build(BuildContext context) {
-		return MaterialApp(
-      // home: const AuthGate(),
-			title: "Flashcard App",
-			initialRoute: '/home',
-			routes: <String, WidgetBuilder>{
-				'/home': (BuildContext context) => MainScreen(screenIndex: 0),
-				'/create_set': (BuildContext context) => MainScreen(screenIndex: 1),
-				'/settings': (BuildContext context) => MainScreen(screenIndex: 2),
-        '/card_screen': (BuildContext context) => MainScreen(screenIndex: 0),
-        '/login': (BuildContext context) => MainScreen(screenIndex: 3),
-			},
-			theme: ThemeData(
-				brightness: Brightness.dark,
-				primaryColor: Colors.blueGrey,
-			)
-		);
-	}
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: "Flashcard App",
+      theme: ThemeData(
+        brightness: Brightness.dark,
+        primaryColor: Colors.blueGrey,
+      ),
+      home: const AuthGate(),
+      onGenerateRoute: (settings) {
+        final routeName = settings.name ?? '/home';
+        final screen = RouteHandler(route: routeName).getScreen();
+        return MaterialPageRoute(
+          builder: (context) => MainScreen(screenWidget: screen),
+          settings: settings,
+        );
+      },
+    );
+  }
+}
+
+// Authentication Handler
+class AuthGate extends StatelessWidget {
+  const AuthGate({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<User?>(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, snapshot) {
+        // Loading Indicator
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
+        }
+        // IF Logged In
+        if (snapshot.hasData) {
+          return MainScreen(screenWidget: RouteHandler(route: "/home").getScreen());
+        }
+        // IF Logged Out
+        return MainScreen(screenWidget: RouteHandler(route: "/login").getScreen());
+      },
+    );
+  }
 }
 
 // Stateful widget for the app's main navigation container
 class MainScreen extends StatefulWidget {
-	final int screenIndex;
+  final Widget screenWidget;
 
-	const MainScreen({
+  const MainScreen({
     super.key, 
-    required this.screenIndex
+    required this.screenWidget
   });
 
-	@override
-	State<MainScreen> createState() => _MainStateScreen();
+  @override
+  State<MainScreen> createState() => _MainStateScreen();
 }
 
 // State manager for MainScreen, handling screen selection
 class _MainStateScreen extends State<MainScreen> {
-  // Active Page Index
-	late int _selectedIndex = 0;
-
-  // List of Screen Views (Bottom Nav Bar, in order)
-	static const List<Widget> _screens = [
-		HomeScreen(),
-    CreateSetScreen(),
-    SettingsScreen(),
-    LoginScreen(),
-	];
-
-  // Fetches screenIndex from MainScreen
-	@override
-	void initState() {
-		super.initState();
-		_selectedIndex = widget.screenIndex;
-	}
-
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser;
+
     return Scaffold(
-      body: _screens[_selectedIndex],
+      body: widget.screenWidget,
       appBar: AppBar(title: const Text('Study Hall')),
       drawer: Drawer(
         child: ListView(
@@ -98,7 +106,7 @@ class _MainStateScreen extends State<MainScreen> {
               height: 128,
               child: DrawerHeader(
                 decoration: BoxDecoration(color: Colors.green),
-                child: Text('Navigation')
+                child: Text('Navigation'),
               ),
             ),
             ListTile(
@@ -112,7 +120,7 @@ class _MainStateScreen extends State<MainScreen> {
               leading: const Icon(Icons.add),
               title: const Text('Create Set'),
               onTap: () {
-                Navigator.pushNamed(context, '/create-set');
+                Navigator.pushNamed(context, '/create_set');
               },
             ),
             ListTile(
@@ -128,11 +136,10 @@ class _MainStateScreen extends State<MainScreen> {
               onTap: () {
                 Navigator.pushNamed(context, '/login');
               },
-            )
+            ),
           ],
-        )
+        ),
       ),
     );
-    
   }
 }
