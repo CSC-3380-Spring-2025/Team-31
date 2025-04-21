@@ -4,7 +4,6 @@
 // This is a card
 //
 
-import '../main.dart';
 import '../assets/essential.dart';
 
 import '../assets/essential.dart';
@@ -14,11 +13,6 @@ class FlashCard extends StatefulWidget{
   final String setName; // Set Names
 
   const FlashCard({super.key}) : setName = "";
- 
-  const FlashCard({
-    super.key,
-    required this.text
-  });
   
   @override
   State<FlashCard> createState() => FlashCardState();
@@ -72,35 +66,32 @@ class FlashCardState extends State<FlashCard>
 
   
   @override
-  Widget build(BuildContext context)
-  {
+  Widget build(BuildContext context) {
     return GestureDetector(
       // onTap: () { 
       //   changeText('hello');
       //   },
       child: Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(20)),
-        color: Colors.green
-      ),
-      width: 350,
-      height: 200,
-      alignment: Alignment.center,
-      margin: EdgeInsets.symmetric(horizontal: 10),
-      child: Text(text)
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(20)),
+          color: Colors.green
+        ),
+        width: 350,
+        height: 200,
+        alignment: Alignment.center,
+        margin: EdgeInsets.symmetric(horizontal: 10),
+        child: Text(text)
       )
     );
   }
 }
 
 class HomeScreenSet extends StatelessWidget{
-
   final String setName;
   const HomeScreenSet({super.key, required this.setName});
 
   @override
-  Widget build(BuildContext context)
-  {
+  Widget build(BuildContext context) {
     return GestureDetector(
       child: Container(
         decoration: BoxDecoration(
@@ -114,6 +105,7 @@ class HomeScreenSet extends StatelessWidget{
         child: Text(setName)
        )
     );
+  }
 }
 
 class CardPreview extends StatelessWidget{

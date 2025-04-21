@@ -5,11 +5,11 @@
 // when starting the app.
 // 
 
-import '../src/screens/card_screen.dart';
+import '../screens/card_screen.dart';
 import 'package:table_calendar/table_calendar.dart';
-import '../src/widgets/card.dart';
-import '../src/widgets/horizontal_scroll.dart';
-import '../src/widgets/statistics.dart';
+import '../widgets/card.dart';
+import '../widgets/horizontal_scroll.dart';
+import '../widgets/statistics.dart';
 import '../assets/essential.dart';
 import '../widgets/route_handler.dart';
 
@@ -26,8 +26,7 @@ class HomeScreen extends StatefulWidget{
   State<HomeScreen> createState() => HomeScreenState();
 }
 
-class HomeScreenState extends State<HomeScreen>
-{
+class HomeScreenState extends State<HomeScreen> {
   final GlobalKey<HorizontalScrollState> scrollState = GlobalKey<HorizontalScrollState>();
   final GlobalKey<StatsState> statsState = GlobalKey<StatsState>();
   //late String? statText;
@@ -60,18 +59,20 @@ class HomeScreenState extends State<HomeScreen>
         
       )
       );
-    
-  Widget build(BuildContext context) {
-    return CustomPageStack(
-      children: [
-        CustomPageHeader(
-          text: "Home Page"
-        ),
-        CustomButtonShelf(
-          label: "Quick Actions",
-        ),
-        CourseShelf()
-      ]
-    );
   }
+    
+  // Old Home Screen
+  // Widget build(BuildContext context) {
+  //   return CustomPageStack(
+  //     children: [
+  //       CustomPageHeader(
+  //         text: "Home Page"
+  //       ),
+  //       CustomButtonShelf(
+  //         label: "Quick Actions",
+  //       ),
+  //       CourseShelf()
+  //     ]
+  //   );
+  // }
 }
