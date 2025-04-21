@@ -4,14 +4,13 @@
 // Navbar Item Widget
 
 // Required Imports
-import 'package:study_hall/src/screens/quiz_screen.dart';
-
 import '../assets/essential.dart';
 // Screens
 import '../screens/home_screen.dart';
 import '../screens/create_set_screen.dart';
 import '../screens/settings_screen.dart';
 import '../screens/quiz_screen.dart';
+import '../screens/card_screen.dart';
 import '../screens/view_set_screen.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart'; //SignInScreen call is located here.
 
@@ -28,6 +27,7 @@ class RouteHandler {
     '/settings': const SettingsScreen(),
     '/login': const SignInScreen(),
     '/quiz': QuizScreen(),
+    //'/card': CardScreen(),
     '/view_set': ViewSetScreen(),
   };
 
