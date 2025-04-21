@@ -17,6 +17,7 @@ import '../assets/essential.dart';
 import '../widgets/custom_page_header.dart';
 import '../widgets/custom_button_shelf.dart';
 import '../widgets/course_shelf.dart';
+import '../widgets/button_grid.dart';
 
 // Primary Screen Layout
 class HomeScreen extends StatefulWidget{
@@ -38,7 +39,7 @@ class HomeScreenState extends State<HomeScreen> {
   {
     return Scaffold(
       appBar: AppBar(title: (Text("Select a Set"))) ,
-      body: Column(
+      body: CustomPageStack(
         children: [
           HorizontalScroll(key: scrollState),
           ElevatedButton(onPressed: () {
@@ -46,9 +47,17 @@ class HomeScreenState extends State<HomeScreen> {
                currentName = scrollState.currentState?.currentSet;
                Navigator.push(context, MaterialPageRoute(builder: (context) => CardScreen(setName: currentName.toString())));
             });
-            
           }, 
           child: Text("Select")),
+          ButtonGrid(
+            buttons: [
+              {
+                'icon': Icons.person, 
+                'label': 'Solo Study',
+                'route': '/flashcards'
+              },
+            ]
+          ),
           TableCalendar(
             calendarFormat: CalendarFormat.twoWeeks,
             focusedDay: DateTime.now(),

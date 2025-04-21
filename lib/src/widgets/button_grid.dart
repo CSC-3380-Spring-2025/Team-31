@@ -11,42 +11,13 @@
 import '../assets/essential.dart';
 
 // Wrapper for Grid of Buttons
-class ViewSetQuickActionButtonGrid extends StatelessWidget {
-  ViewSetQuickActionButtonGrid({super.key});
+class ButtonGrid extends StatelessWidget {
+  final List<Map<String, dynamic>> buttons;
 
-  // Array of Grid Buttons
-  final List<Map<String, dynamic>> buttons = [
-    {
-      'icon': Icons.book, 
-      'label': 'Flashcards',
-      'route': '/flashcards'
-    },
-    {
-      'icon': Icons.quiz, 
-      'label': 'Quiz Yourself',
-      'route': '/quiz'
-    },
-    {
-      'icon': Icons.edit, 
-      'label': 'Edit Set',
-      'route': '/edit_set'
-    },
-    {
-      'icon': Icons.people, 
-      'label': 'Group Study',
-      'route': '/group_study'
-    },
-    {
-      'icon': Icons.share, 
-      'label': 'Share Set',
-      'route': '/share_set'
-    },
-    {
-      'icon': Icons.delete, 
-      'label': 'Delete Set',
-      'route': '/delete_set'
-    },
-  ];
+  ButtonGrid({
+    super.key,
+    required this.buttons,
+  });
 
   // Build Grid of Buttons
   @override
@@ -58,7 +29,7 @@ class ViewSetQuickActionButtonGrid extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(24.0, 12.0, 24.0, 24.0), // 12.0 for SectionLabel
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      childAspectRatio: 1.75, // Button Aspect Ratio
+      childAspectRatio: 2, // Button Aspect Ratio
       children: buttons.map((button) {
         // Builds Each Grid Button
         return _GridButton(

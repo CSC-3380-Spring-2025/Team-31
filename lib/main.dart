@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "Flashcard App",
       theme: ThemeData(
-        brightness: Brightness.dark,
+        brightness: Brightness.light, // Changed to light mode
         primaryColor: Colors.blueGrey,
       ),
       home: const AuthGate(),
@@ -158,9 +158,9 @@ class _MainStateScreen extends State<MainScreen> {
             // Modify navbar items through: navbar_items.dart
             ...navItems.map((navItem) {
               // Remove unnecessary items if user logged out
-              if (navItem.requiresAuth && user == null) {
-                return const SizedBox.shrink();
-              }
+                if (navItem.requiresAuth && user == null) {
+                  return const SizedBox.shrink();
+                }
               // Each navbar item object
               return ListTile(
                 leading: Icon(navItem.icon),

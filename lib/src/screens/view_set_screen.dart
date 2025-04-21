@@ -8,7 +8,7 @@ import '../assets/essential.dart';
 import '../widgets/back_button.dart';
 import '../widgets/section_label.dart';
 import '../widgets/view_set_cards_preview.dart';
-import '../widgets/view_set_quick_action_grid.dart';
+import '../widgets/button_grid.dart';
 
 class ViewSetScreen extends StatelessWidget {
   const ViewSetScreen({super.key});
@@ -29,7 +29,40 @@ class ViewSetScreen extends StatelessWidget {
             ),
             // Quick Action Button Grid
             SectionLabel(text: "Quick Actions"),
-            ViewSetQuickActionButtonGrid()
+            ButtonGrid(
+              buttons: [
+                {
+                  'icon': Icons.book, 
+                  'label': 'Flashcards',
+                  'route': '/flashcards'
+                },
+                {
+                  'icon': Icons.quiz, 
+                  'label': 'Quiz Yourself',
+                  'route': '/quiz'
+                },
+                {
+                  'icon': Icons.edit, 
+                  'label': 'Edit Set',
+                  'route': '/edit_set'
+                },
+                {
+                  'icon': Icons.people, 
+                  'label': 'Group Study',
+                  'route': '/group_study'
+                },
+                {
+                  'icon': Icons.share, 
+                  'label': 'Share Set',
+                  'route': '/share_set'
+                },
+                {
+                  'icon': Icons.delete, 
+                  'label': 'Delete Set',
+                  'route': '/delete_set'
+                },
+              ]
+            )
           ],
         ),
       ),
