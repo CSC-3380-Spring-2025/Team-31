@@ -4,7 +4,6 @@
 // This is a simple framework card screen.
 //
 
-
 import '../assets/essential.dart';
 import '../widgets/card.dart';
 import 'dart:math';

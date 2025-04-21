@@ -4,7 +4,8 @@
 // This is a card
 //
 
-import 'package:study_hall/main.dart';
+import '../main.dart';
+import '../assets/essential.dart';
 
 import '../assets/essential.dart';
 
@@ -14,7 +15,11 @@ class FlashCard extends StatefulWidget{
 
   const FlashCard({super.key}) : setName = "";
  
-
+  const FlashCard({
+    super.key,
+    required this.text
+  });
+  
   @override
   State<FlashCard> createState() => FlashCardState();
 
@@ -98,18 +103,17 @@ class HomeScreenSet extends StatelessWidget{
   {
     return GestureDetector(
       child: Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(20)),
-        color: Colors.green
-      ),
-      width: 350,
-      height: 200,
-      alignment: Alignment.center,
-      margin: EdgeInsets.symmetric(horizontal: 10),
-      child: Text(setName)
-      )
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(20)),
+          color: Colors.green
+        ),
+        width: 350,
+        height: 200,
+        alignment: Alignment.center,
+        margin: EdgeInsets.symmetric(horizontal: 10),
+        child: Text(setName)
+       )
     );
-}
 }
 
 class CardPreview extends StatelessWidget{
@@ -140,6 +144,7 @@ class CardFormatPreset extends StatelessWidget{
       margin: const EdgeInsets.all(4),
     );
   }
+  // TODO: implement build 
 }
 
 class RecentMadeButton extends StatelessWidget{

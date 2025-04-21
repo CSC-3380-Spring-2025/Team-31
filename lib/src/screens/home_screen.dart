@@ -5,16 +5,18 @@
 // when starting the app.
 // 
 
-import 'package:study_hall/src/screens/card_screen.dart';
+import '../src/screens/card_screen.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:study_hall/src/widgets/card.dart';
-import 'package:study_hall/src/widgets/horizontal_scroll.dart';
-import 'package:study_hall/src/widgets/statistics.dart';
+import '../src/widgets/card.dart';
+import '../src/widgets/horizontal_scroll.dart';
+import '../src/widgets/statistics.dart';
 import '../assets/essential.dart';
 import '../widgets/route_handler.dart';
 
-
-
+import '../assets/essential.dart';
+import '../widgets/custom_page_header.dart';
+import '../widgets/custom_button_shelf.dart';
+import '../widgets/course_shelf.dart';
 
 // Primary Screen Layout
 class HomeScreen extends StatefulWidget{
@@ -59,5 +61,17 @@ class HomeScreenState extends State<HomeScreen>
       )
       );
     
+  Widget build(BuildContext context) {
+    return CustomPageStack(
+      children: [
+        CustomPageHeader(
+          text: "Home Page"
+        ),
+        CustomButtonShelf(
+          label: "Quick Actions",
+        ),
+        CourseShelf()
+      ]
+    );
   }
 }
