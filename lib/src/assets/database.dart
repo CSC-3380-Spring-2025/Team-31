@@ -7,6 +7,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 
 /// DatabaseService class to handle Firestore operations for user data.
 class DatabaseService {
@@ -18,19 +19,15 @@ class DatabaseService {
   DatabaseService({FirebaseFirestore? firestore})
     : _firestore = firestore ?? FirebaseFirestore.instance;
 
-  /// Creates a new user document in Firestore with the user's UID as the document ID.
-  /// If the document already exists, updates the last login timestamp.
-  /// Example usage:
-  /// ```dart
-  /// await dbService.createUserDocument(user);
-  /// ```
+  // Creates user document
   Future<void> createUserDocument(User user) async {
     try {
       final userDocRef = _firestore.collection(_usersCollection).doc(user.uid);
       final docSnapshot = await userDocRef.get();
+      final courseRef1 = _firestore.collection(_coursesCollection).doc('g1RBpIUrDYdpN0hcxy9k');
+      final courseRef2 = _firestore.collection(_coursesCollection).doc('0tcaeLn4WdfPvMwx7VXU');
 
       if (!docSnapshot.exists) {
-        // Create new document with basic user info
         await userDocRef.set({
           'uid': user.uid,
           'email': user.email ?? '',
@@ -39,13 +36,13 @@ class DatabaseService {
           'createdAt': FieldValue.serverTimestamp(),
           'lastLogin': FieldValue.serverTimestamp(),
           'updatedAt': FieldValue.serverTimestamp(),
-          'courses': [],
+          'courses': [courseRef1, courseRef2],
         });
       } else {
-        // Update last login timestamp
         await userDocRef.update({
           'lastLogin': FieldValue.serverTimestamp(),
           'updatedAt': FieldValue.serverTimestamp(),
+          'courses': [courseRef1, courseRef2],
         });
       }
     } on FirebaseException catch (e) {
@@ -54,8 +51,25 @@ class DatabaseService {
       throw Exception('Error creating/updating user document: $e');
     }
   }
+  // Updates user document
+  Future<void> updateUserData(String uid, Map<String, dynamic> data) async {
+    try {
+      data.remove('password');
+      await _firestore.collection(_usersCollection).doc(uid).set(
+        {
+          ...data,
+          'updatedAt': FieldValue.serverTimestamp(),
+        },
+        SetOptions(merge: true),
+      );
+    } on FirebaseException catch (e) {
+      throw Exception('Firestore error: ${e.message} (Code: ${e.code})');
+    } catch (e) {
+      throw Exception('Error updating user data: $e');
+    }
+  }
 
-  /// Creates a new card document in the cards collection and adds its reference to the specified course.
+  // Creates cards
   Future<String> createCard(String courseId, Map<String, dynamic> cardData) async {
     try {
       final cardDocRef = _firestore.collection(_cardsCollection).doc();
@@ -79,13 +93,14 @@ class DatabaseService {
     }
   }
 
-  /// Creates a new course document and adds its reference to the user's courses array.
+  // Creates course
   Future<String> createCourse(String userId, Map<String, dynamic> courseData) async {
     try {
       final courseDocRef = _firestore.collection(_coursesCollection).doc();
       await courseDocRef.set({
         ...courseData,
         'cards': [],
+        'sets': [], // Initialize sets array
         'createdAt': FieldValue.serverTimestamp(),
         'updatedAt': FieldValue.serverTimestamp(),
       });
@@ -104,40 +119,70 @@ class DatabaseService {
     }
   }
 
-  /// Fetches the list of courses for a user by resolving the references in their courses array.
+  // Gets user courses
   Future<List<Map<String, dynamic>>> getUserCourses(String userId) async {
-    final userDoc = await FirebaseFirestore.instance
-      .collection('users')
-      .doc(userId)
-      .get();
+    try {
+      final userDoc = await _firestore
+        .collection(_usersCollection)
+        .doc(userId)
+        .get();
 
-    if (!userDoc.exists) {
+      if (!userDoc.exists) {
+        return [];
+      }
+
+      final courseRefs = userDoc.data()?['courses'] as List<dynamic>? ?? [];
+      final courses = <Map<String, dynamic>>[];
+
+      for (final ref in courseRefs) {
+        final courseDoc = await (ref as DocumentReference).get();
+        if (courseDoc.exists) {
+          courses.add({
+            'id': courseDoc.id,
+            ...courseDoc.data() as Map<String, dynamic>,
+          });
+        }
+      }
+
+      return courses;
+    } catch (e) {
       return [];
     }
-
-    final courseRefs = userDoc.data()?['courses'] as List<dynamic>? ?? [];
-    final courses = <Map<String, dynamic>>[];
-
-    for (final ref in courseRefs) {
-      final courseDoc = await (ref as DocumentReference).get();
-      if (courseDoc.exists) {
-        courses.add({
-          'id': courseDoc.id,
-          ...courseDoc.data() as Map<String, dynamic>,
-        });
-      }
-    }
-
-    return courses;
   }
 
-  /// Fetches a user's data by their Firebase Auth user ID (UID).
-  /// Returns a Map of user data if found, or throws an exception if not.
-  /// Example usage in a screen:
-  /// ```dart
-  /// final userData = await dbService.getUserById('user_uid');
-  /// print(userData['username']);
-  /// ```
+  // Gets sets in course
+  Future<List<Map<String, dynamic>>> getSetsInCourse(String courseId) async {
+    try {
+      final courseDoc = await _firestore
+          .collection(_coursesCollection)
+          .doc(courseId)
+          .get();
+
+      if (!courseDoc.exists) {
+        return [];
+      }
+
+      final setRefs = courseDoc.data()?['sets'] as List<dynamic>? ?? [];
+      final sets = <Map<String, dynamic>>[];
+
+      for (final ref in setRefs) {
+        final setDoc = await (ref as DocumentReference).get();
+        if (setDoc.exists) {
+          sets.add({
+            'id': setDoc.id,
+            ...setDoc.data() as Map<String, dynamic>,
+          });
+        }
+      }
+
+      debugPrint('Fetched Sets: $sets');
+      return sets;
+    } catch (e) {
+      return [];
+    }
+  }
+
+  // Gets user object by userID
   Future<Map<String, dynamic>> getUserById(String uid) async {
     try {
       final docSnapshot =
@@ -152,32 +197,6 @@ class DatabaseService {
       throw Exception('Firestore error: ${e.message} (Code: ${e.code})');
     } catch (e) {
       throw Exception('Error fetching user data: $e');
-    }
-  }
-
-  /// Updates a user's data in Firestore by their Firebase Auth user ID (UID).
-  /// Takes a Map of fields to update (e.g., {'username': 'new_name', 'email': 'new@email.com'}).
-  /// Creates a new document if the user doesn't exist.
-  /// Example usage in a screen:
-  /// ```dart
-  /// await dbService.updateUserData('user_uid', {'username': 'new_username'});
-  /// ```
-  Future<void> updateUserData(String uid, Map<String, dynamic> data) async {
-    try {
-      // Remove sensitive fields if accidentally included
-      data.remove('password');
-
-      await _firestore.collection(_usersCollection).doc(uid).set(
-        {
-          ...data,
-          'updatedAt': FieldValue.serverTimestamp(),
-        },
-        SetOptions(merge: true), // Merge to avoid overwriting unrelated fields
-      );
-    } on FirebaseException catch (e) {
-      throw Exception('Firestore error: ${e.message} (Code: ${e.code})');
-    } catch (e) {
-      throw Exception('Error updating user data: $e');
     }
   }
 }

@@ -10,12 +10,13 @@ import 'package:study_hall/src/widgets/section_label.dart';
 import 'package:table_calendar/table_calendar.dart';
 // Asset Imports
 import '../assets/essential.dart';
+import '../assets/database.dart';
 // Screen Imports
 import '../screens/card_screen.dart';
 // Widget Imports
 import '../widgets/button_grid.dart';
 import '../widgets/course_selector.dart';
-import '../widgets/button_horizontal_scroll.dart';
+import '../widgets/course_set_scroll.dart';
 import '../widgets/horizontal_scroll.dart';
 import '../widgets/route_handler.dart';
 import '../widgets/statistics.dart';
@@ -28,76 +29,61 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen> {
-  final GlobalKey<HorizontalScrollState> scrollState =
-      GlobalKey<HorizontalScrollState>();
+  final GlobalKey<HorizontalScrollState> scrollState = GlobalKey<HorizontalScrollState>();
   final GlobalKey<StatsState> statsState = GlobalKey<StatsState>();
-  //late String? statText;
-  late String? currentName;
-  // Access users sets from database
+  final ValueNotifier<String?> selectedCourseId = ValueNotifier<String?>(null);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomPageStack(
         children: [
-          CourseSelector(),
-          SectionLabel(text: "Your Sets"),
-          // ButtonHorizontalScroll(buttons: courseSets),
-          // Horizontal Scroll for Sets
-          // HorizontalScroll(key: scrollState),
-          // ElevatedButton(
-          //   onPressed: () {
-          //     setState(() {
-          //       currentName = scrollState.currentState?.currentSet;
-          //       Navigator.push(
-          //         context,
-          //         MaterialPageRoute(
-          //           builder:
-          //               (context) =>
-          //                   CardScreen(setName: currentName.toString()),
-          //         ),
-          //       );
-          //     });
-          //   },
-          //   child: Text("Select"),
-          // ),
-          // Quick Action Button Grid
-          SectionLabel(text: "Quick Actions"),
+          // Course Selector
+          CourseSelector(selectedCourseId: selectedCourseId),
+          
+          // Set Display Section
+          const SectionLabel(text: "Your Sets"),
+          CourseSetScroll(selectedCourseId: selectedCourseId),
+          
+          // Quick Action Section
+          const SectionLabel(text: "Quick Actions"),
           ButtonGrid(
             buttons: [
               {
-                'icon': Icons.person,
-                'label': 'Solo Study',
-                'route': '/flashcards',
+                'icon': Icons.play_arrow,
+                'label': 'Do Something',
+                'route': '/',
+              },
+              {
+                'icon': Icons.play_arrow,
+                'label': 'Do Something',
+                'route': '/',
+              },
+              {
+                'icon': Icons.play_arrow,
+                'label': 'Do Something',
+                'route': '/',
+              },
+              {
+                'icon': Icons.play_arrow,
+                'label': 'Do Something',
+                'route': '/',
               },
             ],
           ),
-          // Calendar
+          
+          // Calendar Section
           TableCalendar(
             calendarFormat: CalendarFormat.twoWeeks,
             focusedDay: DateTime.now(),
             firstDay: DateTime(2025, 1, 1),
-            lastDay: DateTime(2025, 5, 5),
+            lastDay: DateTime(2025, 12, 31),
           ),
-          // Course Statistics
+          
+          // Statistics Section
           Statistics(key: statsState),
         ],
       ),
     );
   }
-
-  // Old Home Screen
-  // Widget build(BuildContext context) {
-  //   return CustomPageStack(
-  //     children: [
-  //       CustomPageHeader(
-  //         text: "Home Page"
-  //       ),
-  //       CustomButtonShelf(
-  //         label: "Quick Actions",
-  //       ),
-  //       CourseShelf()
-  //     ]
-  //   );
-  // }
 }
