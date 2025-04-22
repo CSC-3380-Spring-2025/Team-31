@@ -88,23 +88,7 @@ class _MainStateScreen extends State<MainScreen> {
                 child: Text('Navigation'),
               ),
             ),
-            // Begin: Do Not Change!
-            // Modify navbar items through: navbar_items.dart
-            ...navItems.map((navItem) {
-              // Remove unnecessary items if user logged out
-                if (navItem.requiresAuth && user == null) {
-                  return const SizedBox.shrink();
-                }
-              // Each navbar item object
-              return ListTile(
-                leading: Icon(navItem.icon),
-                title: Text(navItem.title),
-                onTap: () {
-                  Navigator.pushNamed(context, navItem.route);
-                },
-              );
-            }).toList(),
-            // End: Do Not Change!
+            ...NavItem.getNavbarElements(context, user),
           ],
         ),
       ),

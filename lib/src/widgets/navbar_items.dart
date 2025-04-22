@@ -11,20 +11,6 @@ import '../screens/create_set_screen.dart';
 import '../screens/settings_screen.dart';
 import '../screens/login_screen.dart';
 
-class NavItem {
-  final String title;
-  final IconData icon;
-  final String route;
-  final bool requiresAuth;
-
-  NavItem({
-    required this.title,
-    required this.icon,
-    required this.route,
-    this.requiresAuth = true,
-  });
-}
-
 // Define navigation items
 final List<NavItem> navItems = [
   NavItem(
@@ -55,3 +41,35 @@ final List<NavItem> navItems = [
     requiresAuth: false,
   ),
 ];
+
+// Nav Item Class
+class NavItem {
+  final String title;
+  final IconData icon;
+  final String route;
+  final bool requiresAuth;
+
+  NavItem({
+    required this.title,
+    required this.icon,
+    required this.route,
+    this.requiresAuth = true,
+  });
+
+  static List<Widget> getNavbarElements(BuildContext context, dynamic user) {
+    return navItems.map((navItem) {
+      // Remove unnecessary items if user logged out
+      if (navItem.requiresAuth && user == null) {
+        return const SizedBox.shrink();
+      }
+      // Each navbar item object
+      return ListTile(
+        leading: Icon(navItem.icon),
+        title: Text(navItem.title),
+        onTap: () {
+          Navigator.pushNamed(context, navItem.route);
+        },
+      );
+    }).toList();
+  }
+}
