@@ -1,26 +1,24 @@
-// 
+//
 // home_screen.dart
-// 
+//
 // This is the landing page for all users
 // when starting the app.
-// 
+//
 
-import '../screens/card_screen.dart';
+// External Libraries
 import 'package:table_calendar/table_calendar.dart';
-import '../widgets/card.dart';
-import '../widgets/horizontal_scroll.dart';
-import '../widgets/statistics.dart';
+// Asset Imports
 import '../assets/essential.dart';
-import '../widgets/route_handler.dart';
-
-import '../assets/essential.dart';
-import '../widgets/custom_page_header.dart';
-import '../widgets/custom_button_shelf.dart';
-import '../widgets/course_shelf.dart';
+// Screen Imports
+import '../screens/card_screen.dart';
+// Widget Imports
 import '../widgets/button_grid.dart';
+import '../widgets/course_selector.dart';
+import '../widgets/horizontal_scroll.dart';
+import '../widgets/route_handler.dart';
+import '../widgets/statistics.dart';
 
-// Primary Screen Layout
-class HomeScreen extends StatefulWidget{
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
@@ -28,47 +26,61 @@ class HomeScreen extends StatefulWidget{
 }
 
 class HomeScreenState extends State<HomeScreen> {
-  final GlobalKey<HorizontalScrollState> scrollState = GlobalKey<HorizontalScrollState>();
+  final GlobalKey<HorizontalScrollState> scrollState =
+      GlobalKey<HorizontalScrollState>();
   final GlobalKey<StatsState> statsState = GlobalKey<StatsState>();
   //late String? statText;
   late String? currentName;
   // Access users sets from database
 
   @override
-  Widget build(BuildContext context)
-  {
+  Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: (Text("Select a Set"))) ,
       body: CustomPageStack(
         children: [
+          CourseSelector(),
+          // Horizontal Scroll for Sets
           HorizontalScroll(key: scrollState),
-          ElevatedButton(onPressed: () {
-            setState(() {
-               currentName = scrollState.currentState?.currentSet;
-               Navigator.push(context, MaterialPageRoute(builder: (context) => CardScreen(setName: currentName.toString())));
-            });
-          }, 
-          child: Text("Select")),
+          ElevatedButton(
+            onPressed: () {
+              setState(() {
+                currentName = scrollState.currentState?.currentSet;
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder:
+                        (context) =>
+                            CardScreen(setName: currentName.toString()),
+                  ),
+                );
+              });
+            },
+            child: Text("Select"),
+          ),
+          // Quick Action Button Grid
           ButtonGrid(
             buttons: [
               {
-                'icon': Icons.person, 
+                'icon': Icons.person,
                 'label': 'Solo Study',
-                'route': '/flashcards'
+                'route': '/flashcards',
               },
-            ]
+            ],
           ),
+          // Calendar
           TableCalendar(
             calendarFormat: CalendarFormat.twoWeeks,
             focusedDay: DateTime.now(),
-             firstDay: DateTime(2025, 1, 1), 
-             lastDay: DateTime(2025, 5, 5)),
+            firstDay: DateTime(2025, 1, 1),
+            lastDay: DateTime(2025, 5, 5),
+          ),
+          // Course Statistics
           Statistics(key: statsState),
         ],
-              )
-      );
+      ),
+    );
   }
-    
+
   // Old Home Screen
   // Widget build(BuildContext context) {
   //   return CustomPageStack(
