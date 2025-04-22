@@ -65,8 +65,7 @@ class HomeScreenState extends State<HomeScreen> {
              lastDay: DateTime(2025, 5, 5)),
           Statistics(key: statsState),
         ],
-        
-      )
+              )
       );
   }
     
