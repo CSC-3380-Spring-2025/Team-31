@@ -6,6 +6,7 @@
 
 import '../assets/essential.dart';
 import '../widgets/custom_page_header.dart';
+import '../assets/ai-model.dart';
 
 // Primary Screen Layout
 class SettingsScreen extends StatelessWidget {
@@ -13,12 +14,17 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomPageStack(
-      children: [
-        CustomPageHeader(
-          text: "Settings Page"
-        ),
-      ]
+    return FutureBuilder<String>(
+      future: getGeminiResponse("what is 4+2?"),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return CircularProgressIndicator();
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          return Text('Response: ${snapshot.data}');
+        }
+      },
     );
   }
 }
