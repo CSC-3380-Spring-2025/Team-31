@@ -73,6 +73,7 @@ class _MainStateScreen extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser;
+    final userId = user?.uid ?? '';
 
     return Scaffold(
       body: widget.screenWidget,

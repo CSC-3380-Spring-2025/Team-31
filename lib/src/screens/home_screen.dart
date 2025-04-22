@@ -6,6 +6,7 @@
 //
 
 // External Libraries
+import 'package:study_hall/src/widgets/section_label.dart';
 import 'package:table_calendar/table_calendar.dart';
 // Asset Imports
 import '../assets/essential.dart';
@@ -14,6 +15,7 @@ import '../screens/card_screen.dart';
 // Widget Imports
 import '../widgets/button_grid.dart';
 import '../widgets/course_selector.dart';
+import '../widgets/button_horizontal_scroll.dart';
 import '../widgets/horizontal_scroll.dart';
 import '../widgets/route_handler.dart';
 import '../widgets/statistics.dart';
@@ -39,25 +41,28 @@ class HomeScreenState extends State<HomeScreen> {
       body: CustomPageStack(
         children: [
           CourseSelector(),
+          SectionLabel(text: "Your Sets"),
+          // ButtonHorizontalScroll(buttons: courseSets),
           // Horizontal Scroll for Sets
-          HorizontalScroll(key: scrollState),
-          ElevatedButton(
-            onPressed: () {
-              setState(() {
-                currentName = scrollState.currentState?.currentSet;
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder:
-                        (context) =>
-                            CardScreen(setName: currentName.toString()),
-                  ),
-                );
-              });
-            },
-            child: Text("Select"),
-          ),
+          // HorizontalScroll(key: scrollState),
+          // ElevatedButton(
+          //   onPressed: () {
+          //     setState(() {
+          //       currentName = scrollState.currentState?.currentSet;
+          //       Navigator.push(
+          //         context,
+          //         MaterialPageRoute(
+          //           builder:
+          //               (context) =>
+          //                   CardScreen(setName: currentName.toString()),
+          //         ),
+          //       );
+          //     });
+          //   },
+          //   child: Text("Select"),
+          // ),
           // Quick Action Button Grid
+          SectionLabel(text: "Quick Actions"),
           ButtonGrid(
             buttons: [
               {

@@ -106,31 +106,29 @@ class DatabaseService {
 
   /// Fetches the list of courses for a user by resolving the references in their courses array.
   Future<List<Map<String, dynamic>>> getUserCourses(String userId) async {
-    try {
-      final userDoc = await _firestore.collection(_usersCollection).doc(userId).get();
-      if (!userDoc.exists || userDoc.data() == null) {
-        throw Exception('User with UID "$userId" not found');
-      }
+    final userDoc = await FirebaseFirestore.instance
+      .collection('users')
+      .doc(userId)
+      .get();
 
-      final courseRefs = userDoc.data()!['courses'] as List<dynamic>? ?? [];
-      final courses = <Map<String, dynamic>>[];
-
-      for (final ref in courseRefs) {
-        final courseDoc = await ref.get();
-        if (courseDoc.exists && courseDoc.data() != null) {
-          courses.add({
-            'id': courseDoc.id,
-            ...courseDoc.data()!,
-          });
-        }
-      }
-
-      return courses;
-    } on FirebaseException catch (e) {
-      throw Exception('Firestore error: ${e.message} (Code: ${e.code})');
-    } catch (e) {
-      throw Exception('Error fetching user courses: $e');
+    if (!userDoc.exists) {
+      return [];
     }
+
+    final courseRefs = userDoc.data()?['courses'] as List<dynamic>? ?? [];
+    final courses = <Map<String, dynamic>>[];
+
+    for (final ref in courseRefs) {
+      final courseDoc = await (ref as DocumentReference).get();
+      if (courseDoc.exists) {
+        courses.add({
+          'id': courseDoc.id,
+          ...courseDoc.data() as Map<String, dynamic>,
+        });
+      }
+    }
+
+    return courses;
   }
 
   /// Fetches a user's data by their Firebase Auth user ID (UID).
