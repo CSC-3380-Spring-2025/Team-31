@@ -4,6 +4,7 @@
 // Navbar Item Widget
 
 // Required Imports
+import '../../main.dart';
 import '../assets/essential.dart';
 // Screens
 import '../screens/home_screen.dart';
@@ -33,6 +34,10 @@ class RouteHandler {
 
   Widget getScreen() {
     return _routeToScreen[route] ?? const NotFoundScreen();
+  }
+
+  static void openRoute(String route) {
+    MainScreen(screenWidget: RouteHandler(route: route).getScreen());
   }
 }
 
