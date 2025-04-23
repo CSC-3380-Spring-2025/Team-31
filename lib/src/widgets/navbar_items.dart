@@ -40,6 +40,12 @@ final List<NavItem> navItems = [
     route: '/view_set',
     requiresAuth: false,
   ),
+  NavItem(
+    title: 'Create Card',
+    icon: Icons.camera,
+    route: '/camera',
+    requiresAuth: false,
+  )
 ];
 
 // Nav Item Class

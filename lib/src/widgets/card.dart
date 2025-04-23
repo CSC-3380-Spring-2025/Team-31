@@ -5,46 +5,27 @@
 //
 
 import '../assets/essential.dart';
-
 import '../assets/essential.dart';
 
 
-class FlashCard extends StatefulWidget{ 
+class FlashCard extends StatefulWidget{
   final String setName; // Set Names
 
-  const FlashCard({super.key}) : setName = "";
-  
+
+  FlashCard({super.key}) : setName = "";
+
   @override
   State<FlashCard> createState() => FlashCardState();
-
-  // @override
-  // Widget build(BuildContext context) {
-    
-  //   return Container(
-  //     width: 350,
-  //     height: 200,
-  //     alignment: Alignment.center,
-  //     // margin: EdgeInsets.symmetric(horizontal: 10),
-  //     color: Colors.green,
-  //     child: Text(text)
-  //   );
-  // }
-
 }
 
 class FlashCardState extends State<FlashCard>
 {
-  String text = "";
+  List<String> frontBulletPoints=[];
+  List<String> backBulletPoints=[];
 
+  String text = "";
   bool selected = false; // if on home screen show Set Name
   int card = 1, side = 0;
-  // void changeText()
-  // {
-  //   setState(() { 
-  //     if(side == 0) { side+= 1;}
-  //     else {side-=1;}
-  //     });
-  // }
 
   void changeText(String txt)
   {
@@ -52,19 +33,39 @@ class FlashCardState extends State<FlashCard>
       text = txt;
     });
   }
-  // void changeScreen()
-  // {
-  //  
-  // }
+  void addFrontBullet(String bullet) {
+    setState((){
+      frontBulletPoints.add(bullet);
+    });
+  }
+  void addBackBullet(String bullet) {
+    setState((){
+      backBulletPoints.add(bullet);
+    });
+  }
+  void removeFrontBullet(List<String> bulletPoints, int index){
+    setState(() {
+      bulletPoints.removeAt(index);
+    });
+  }
+  void removeBackBullet(List<String> bulletPoints, int index){
+    setState(() {
+      bulletPoints.removeAt(index);
+    });
+  }
+  List<String> getFrontBulletPoints() => frontBulletPoints;
+  List<String> getBackBulletPoints() => backBulletPoints;
 
-  // void changeCard()
-  // {
-  //   setState(() {
-  //     card+=1;
-  //   });
-  // }
-
-  
+  void clearBack() {
+    setState((){
+      backBulletPoints.clear();
+    });
+  }
+  void clearFront() {
+    setState((){
+      frontBulletPoints.clear();
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -111,18 +112,29 @@ class HomeScreenSet extends StatelessWidget{
   }
 }
 
-class CardPreview extends StatelessWidget{
+class CardPreview extends StatelessWidget {
   final String title;
-  const CardPreview({super.key, required this.title});
+  final List<String> bulletPoints;
+  CardPreview({super.key, required this.title, required this.bulletPoints});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 150,
-      height: 100,
+      width: MediaQuery.of(context).size.width * .4,
+      height: MediaQuery.of(context).size.height *.25,
       margin: const EdgeInsets.all(8),
       color: Colors.grey[300],
-      child: Center(child: Text(title)),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(title),
+          Expanded(
+            child: ListView(
+              children: bulletPoints.map((bullet) => Text("- $bullet")).toList(),
+            )
+          )
+        ]
+      ),
     );
   }
 }
