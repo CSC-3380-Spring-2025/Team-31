@@ -92,13 +92,16 @@ class HomeScreenSet extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final cardWidth = screenWidth * 0.9;
+
     return GestureDetector(
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(20)),
           color: Colors.green
         ),
-        width: 350,
+        width: cardWidth,
         height: 200,
         alignment: Alignment.center,
         margin: EdgeInsets.symmetric(horizontal: 10),

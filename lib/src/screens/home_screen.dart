@@ -17,6 +17,7 @@ import '../screens/card_screen.dart';
 import '../widgets/button_grid.dart';
 import '../widgets/course_selector.dart';
 import '../widgets/course_set_scroll.dart';
+import '../widgets/custom_calendar.dart';
 import '../widgets/horizontal_scroll.dart';
 import '../widgets/route_handler.dart';
 import '../widgets/statistics.dart';
@@ -73,12 +74,7 @@ class HomeScreenState extends State<HomeScreen> {
           ),
           
           // Calendar Section
-          TableCalendar(
-            calendarFormat: CalendarFormat.twoWeeks,
-            focusedDay: DateTime.now(),
-            firstDay: DateTime(2025, 1, 1),
-            lastDay: DateTime(2025, 12, 31),
-          ),
+          CustomCalendar(),
           
           // Statistics Section
           Statistics(key: statsState),
@@ -86,4 +82,19 @@ class HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+    
+  // Old Home Screen
+  // Widget build(BuildContext context) {
+  //   return CustomPageStack(
+  //     children: [
+  //       CustomPageHeader(
+  //         text: "Home Page"
+  //       ),
+  //       CustomButtonShelf(
+  //         label: "Quick Actions",
+  //       ),
+  //       CourseShelf()
+  //     ]
+  //   );
+  // }
 }
