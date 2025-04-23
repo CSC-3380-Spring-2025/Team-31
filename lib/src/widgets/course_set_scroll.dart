@@ -92,16 +92,16 @@ class _SetButton extends StatelessWidget {
             Text(
               title,
               style: const TextStyle(
-                fontSize: 20.0, 
-                fontWeight: FontWeight.w600,
+                fontSize: 16.0, 
+                fontWeight: FontWeight.w500,
                 color: Colors.white
               ),
             ),
             Text(
               section,
               style: const TextStyle(
-                fontSize: 16.0,
-                fontWeight: FontWeight.w400, 
+                fontSize: 12.0,
+                fontWeight: FontWeight.w300, 
                 color: Colors.white
               ),
             ),

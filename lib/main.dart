@@ -8,7 +8,6 @@
 // System Imports
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide EmailAuthProvider;
-import 'package:flutter/material.dart';
 import 'firebase_options.dart';
 // Asset Imports
 import 'src/assets/essential.dart';
@@ -36,8 +35,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Flashcard App",
-      themeMode: ThemeMode.system, // Follow system light/dark mode
-      theme: AppTheme.getTheme(context), // Use dynamic theme
+      themeMode: ThemeMode.system,
+      theme: AppTheme.getTheme(context),
       home: const AuthGate(),
       onGenerateRoute: (settings) {
         final routeName = settings.name ?? '/home';

@@ -53,7 +53,7 @@ class HomeScreenState extends State<HomeScreen> {
               {
                 'icon': Icons.add,
                 'label': 'Create Set',
-                'route': '/',
+                'route': '/create_set',
               },
               {
                 'icon': Icons.edit,
@@ -82,19 +82,4 @@ class HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-    
-  // Old Home Screen
-  // Widget build(BuildContext context) {
-  //   return CustomPageStack(
-  //     children: [
-  //       CustomPageHeader(
-  //         text: "Home Page"
-  //       ),
-  //       CustomButtonShelf(
-  //         label: "Quick Actions",
-  //       ),
-  //       CourseShelf()
-  //     ]
-  //   );
-  // }
 }
