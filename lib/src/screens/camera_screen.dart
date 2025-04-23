@@ -58,8 +58,8 @@ class _CameraScreenState extends State<CameraScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              CardPreview(title: 'Preview front of card'),
-              CardPreview(title: 'Preview back of card'),
+              CardPreview(title: 'Preview front of card', bulletPoints: ['first','second'], ),
+              CardPreview(title: 'Preview back of card', bulletPoints:['first','second','third']),
             ],
           ),
           const SizedBox(height: 16),
