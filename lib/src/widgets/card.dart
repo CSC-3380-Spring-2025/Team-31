@@ -43,6 +43,16 @@ class FlashCardState extends State<FlashCard>
       backBulletPoints.add(bullet);
     });
   }
+  void removeFrontBullet(List<String> bulletPoints, int index){
+    setState(() {
+      bulletPoints.removeAt(index);
+    });
+  }
+  void removeBackBullet(List<String> bulletPoints, int index){
+    setState(() {
+      bulletPoints.removeAt(index);
+    });
+  }
   List<String> getFrontBulletPoints() => frontBulletPoints;
   List<String> getBackBulletPoints() => backBulletPoints;
 
