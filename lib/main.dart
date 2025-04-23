@@ -8,6 +8,7 @@
 // System Imports
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide EmailAuthProvider;
+import 'package:flutter/material.dart';
 import 'firebase_options.dart';
 // Asset Imports
 import 'src/assets/essential.dart';
@@ -35,10 +36,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Flashcard App",
-      theme: ThemeData(
-        brightness: Brightness.light, // Changed to light mode
-        primaryColor: Colors.blueGrey,
-      ),
+      themeMode: ThemeMode.system, // Follow system light/dark mode
+      theme: AppTheme.getTheme(context), // Use dynamic theme
       home: const AuthGate(),
       onGenerateRoute: (settings) {
         final routeName = settings.name ?? '/home';
@@ -52,16 +51,13 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// Authentication Handler
-
-
 // Stateful widget for the app's main navigation container
 class MainScreen extends StatefulWidget {
   final Widget screenWidget;
 
   const MainScreen({
-    super.key, 
-    required this.screenWidget
+    super.key,
+    required this.screenWidget,
   });
 
   @override
@@ -77,16 +73,30 @@ class _MainStateScreen extends State<MainScreen> {
 
     return Scaffold(
       body: widget.screenWidget,
-      appBar: AppBar(title: const Text('Study Hall')),
+      appBar: AppBar(
+        title: Text(
+          'Study Hall',
+          style: TextStyle(color: AppTheme.getColor('text', context)),
+        ),
+        backgroundColor: AppTheme.getColor('primary', context),
+      ),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            const SizedBox(
+            SizedBox(
               height: 128,
               child: DrawerHeader(
-                decoration: BoxDecoration(color: Colors.green),
-                child: Text('Navigation'),
+                decoration: BoxDecoration(
+                  color: AppTheme.getColor('primary', context),
+                ),
+                child: Text(
+                  'Navigation',
+                  style: TextStyle(
+                    color: AppTheme.getColor('text', context),
+                    fontSize: 24,
+                  ),
+                ),
               ),
             ),
             ...NavItem.getNavbarElements(context, user),
