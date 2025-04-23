@@ -19,26 +19,25 @@ final List<NavItem> navItems = [
     route: '/home',
   ),
   NavItem(
-    title: 'Create Set',
+    title: 'Create Course',
     icon: Icons.add,
-    route: '/create_set',
+    route: '/create_course',
   ),
   NavItem(
-    title: 'View Set',
-    icon: Icons.book,
-    route: '/view_set',
-    requiresAuth: false,
-  ),
-  NavItem(
-    title: 'Create Card',
+    title: 'Scan Card',
     icon: Icons.camera,
     route: '/camera',
     requiresAuth: false,
   ),
   NavItem(
+    title: 'Accounr',
+    icon: Icons.person,
+    route: '/',
+  ),
+  NavItem(
     title: 'Settings',
     icon: Icons.settings,
-    route: '/settings',
+    route: '/',
   ),
 ];
 
