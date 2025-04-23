@@ -13,6 +13,7 @@ import '../screens/settings_screen.dart';
 import '../screens/quiz_screen.dart';
 import '../screens/card_screen.dart';
 import '../screens/view_set_screen.dart';
+import '../screens/camera_screen.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart'; //SignInScreen call is located here.
 
 class RouteHandler {
@@ -30,6 +31,7 @@ class RouteHandler {
     '/quiz': QuizScreen(),
     //'/card': CardScreen(),
     '/view_set': ViewSetScreen(),
+    '/camera': CameraScreen(),
   };
 
   Widget getScreen() {

@@ -5,14 +5,15 @@
 //
 
 import '../assets/essential.dart';
-
 import '../assets/essential.dart';
 
 
 class FlashCard extends StatefulWidget{ 
   final String setName; // Set Names
+  List<String> frontBulletPoints=[];
+  List<String> backBulletPoints=[];
 
-  const FlashCard({super.key}) : setName = "";
+  FlashCard({super.key}) : setName = "";
   
   @override
   State<FlashCard> createState() => FlashCardState();
@@ -110,16 +111,18 @@ class HomeScreenSet extends StatelessWidget{
 
 class CardPreview extends StatelessWidget{
   final String title;
-  const CardPreview({super.key, required this.title});
+  CardPreview({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 150,
-      height: 100,
+      width: MediaQuery.of(context).size.width * .4,
+      height: MediaQuery.of(context).size.height *.25,
       margin: const EdgeInsets.all(8),
       color: Colors.grey[300],
-      child: Center(child: Text(title)),
+      child: Center(
+        child: Text(title),
+      ),
     );
   }
 }

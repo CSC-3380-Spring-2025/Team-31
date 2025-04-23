@@ -4,29 +4,60 @@
 
 import '../widgets/card.dart';
 import '../assets/essential.dart';
+import 'package:flutter/material.dart';
+import '../widgets/image_to_text.dart';
 
-class CameraScreen extends StatelessWidget{
-  const CameraScreen({super.key});
+
+class CameraScreen extends StatefulWidget {
+  CameraScreen({super.key});
+
+  @override
+  State<CameraScreen> createState() => _CameraScreenState();
+}
+class _CameraScreenState extends State<CameraScreen> {
+  @override
+  String? _scannedText;
+
+  Future<void> _handleCameraScan() async{
+    final text = await ImageToText.instance.pullTextFromCamera();
+    if (text!= null){
+      setState((){
+        _scannedText = text;
+      });
+    }
+  }
+  @override
+  void dispose(){
+    ImageToText.instance.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final cardPreviewWidth = screenWidth * .3;
     return Scaffold(
       appBar: AppBar(title: const Text('Camera Input')),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Chip(label: Text("Camera")),
+                InputChip(
+                    label: Text("Camera"),
+                    onPressed: _handleCameraScan,
+                    avatar: Icon(Icons.camera_alt),
+                ),
+                Chip(label: Text("Image")),
                 Chip(label: Text("√ Voice")),
               ],
             ),
           const SizedBox(height: 16),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: const[
+            children: [
               CardPreview(title: 'Preview front of card'),
               CardPreview(title: 'Preview back of card'),
             ],

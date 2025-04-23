@@ -9,10 +9,16 @@ import 'package:image_picker/image_picker.dart';
 
 //class to pull text from an image from two possible sources: image file and camera image
 class ImageToText {
+  ImageToText._internal(){
+    //set the text recognizer to recognize latin script
+    final textRecognizer = TextRecognizer(script: TextRecognitionScript.latin);
+  }
+  //singleton instance
+  static final ImageToText instance = ImageToText._internal();
   //create an image picker
   final ImagePicker _pickImage = ImagePicker();
   //set the text recognizer to recognize latin script
-  final textRecognizer = TextRecognizer(script: TextRecognitionScript.latin);
+  late final TextRecognizer textRecognizer;
   //method returns a future string or null from a selected image.
   Future<String?> pullTextFromImage() async{
     //creates the XFIle object to wait for the selection of image from a gallery or provides null if cancelled out
@@ -26,7 +32,6 @@ class ImageToText {
       final InputImage inputImage = InputImage.fromFilePath(pickerImage.path);
       //sets the recognized text to wait for the textrecognizer to process the image.
       final RecognizedText scannedText = await textRecognizer.processImage(inputImage);
-      await textRecognizer.close();
       //returns the scanned text
       return scannedText.text;
   }
@@ -40,7 +45,10 @@ class ImageToText {
     }
     final InputImage inputImage = InputImage.fromFilePath(pickerImage.path);
     final RecognizedText scannedText = await textRecognizer.processImage(inputImage);
-    await textRecognizer.close();
     return scannedText.text;
+    }
+    //
+    void dispose(){
+    textRecognizer.close();
     }
   }

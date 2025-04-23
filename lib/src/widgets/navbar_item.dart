@@ -1,4 +1,4 @@
-//
+
 // navbar_item.dart
 // 
 // Navbar Item Widget
@@ -10,7 +10,8 @@ import '../screens/home_screen.dart';
 import '../screens/create_set_screen.dart';
 import '../screens/settings_screen.dart';
 import '../screens/login_screen.dart';
-
+import '../screens/camera_screen.dart';
+/*
 class NavItem {
   final String title;
   final IconData icon;
@@ -54,4 +55,13 @@ final List<NavItem> navItems = [
     screen: const LoginScreen(),
     requiresAuth: false,
   ),
+  NavItem(
+    title: 'Create Card with Camera',
+    icon: Icons.person,
+    route: '/camera',
+    screen: const CameraScreen(),
+    requiresAuth: false,
+  ),
 ];
+
+ */
