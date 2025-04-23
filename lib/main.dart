@@ -17,6 +17,7 @@ import 'src/assets/essential.dart';
 import 'src/assets/database.dart';
 import 'src/assets/screens.dart';
 import 'src/widgets/route_handler.dart';
+import 'src/widgets/navbar_items.dart';
 
 // Main Entry Function
 void main() async {
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "Flashcard App",
       theme: ThemeData(
-        brightness: Brightness.dark,
+        brightness: Brightness.light, // Changed to light mode
         primaryColor: Colors.blueGrey,
       ),
       home: const AuthGate(),
@@ -153,34 +154,23 @@ class _MainStateScreen extends State<MainScreen> {
                 child: Text('Navigation'),
               ),
             ),
-            ListTile(
-              leading: const Icon(Icons.home),
-              title: const Text('Home'),
-              onTap: () {
-                Navigator.pushNamed(context, '/home');
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.add),
-              title: const Text('Create Set'),
-              onTap: () {
-                Navigator.pushNamed(context, '/create_set');
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.settings),
-              title: const Text('Settings'),
-              onTap: () {
-                Navigator.pushNamed(context, '/settings');
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.person),
-              title: const Text('Account'),
-              onTap: () {
-                Navigator.pushNamed(context, '/login');
-              },
-            ),
+            // Begin: Do Not Change!
+            // Modify navbar items through: navbar_items.dart
+            ...navItems.map((navItem) {
+              // Remove unnecessary items if user logged out
+                if (navItem.requiresAuth && user == null) {
+                  return const SizedBox.shrink();
+                }
+              // Each navbar item object
+              return ListTile(
+                leading: Icon(navItem.icon),
+                title: Text(navItem.title),
+                onTap: () {
+                  Navigator.pushNamed(context, navItem.route);
+                },
+              );
+            }).toList(),
+            // End: Do Not Change!
           ],
         ),
       ),

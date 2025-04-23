@@ -6,23 +6,106 @@
 
 import '../assets/essential.dart';
 
-class FlashCard extends StatelessWidget{ 
-  final String text; // front of card
+import '../assets/essential.dart';
 
-  const FlashCard({
-    super.key,
-    required this.text
-  });
+
+class FlashCard extends StatefulWidget{ 
+  final String setName; // Set Names
+
+  const FlashCard({super.key}) : setName = "";
+  
+  @override
+  State<FlashCard> createState() => FlashCardState();
+
+  // @override
+  // Widget build(BuildContext context) {
+    
+  //   return Container(
+  //     width: 350,
+  //     height: 200,
+  //     alignment: Alignment.center,
+  //     // margin: EdgeInsets.symmetric(horizontal: 10),
+  //     color: Colors.green,
+  //     child: Text(text)
+  //   );
+  // }
+
+}
+
+class FlashCardState extends State<FlashCard>
+{
+  String text = "";
+
+  bool selected = false; // if on home screen show Set Name
+  int card = 1, side = 0;
+  // void changeText()
+  // {
+  //   setState(() { 
+  //     if(side == 0) { side+= 1;}
+  //     else {side-=1;}
+  //     });
+  // }
+
+  void changeText(String txt)
+  {
+    setState(() {
+      text = txt;
+    });
+  }
+  // void changeScreen()
+  // {
+  //  
+  // }
+
+  // void changeCard()
+  // {
+  //   setState(() {
+  //     card+=1;
+  //   });
+  // }
+
   
   @override
   Widget build(BuildContext context) {
-    
-    return Container(
-      width: 400,
-      height: 200,
-      alignment: Alignment.center,
-      color: Colors.green,
-      child: Text(text)
+    return GestureDetector(
+      // onTap: () { 
+      //   changeText('hello');
+      //   },
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(20)),
+          color: Colors.green
+        ),
+        width: 350,
+        height: 200,
+        alignment: Alignment.center,
+        margin: EdgeInsets.symmetric(horizontal: 10),
+        child: Text(text)
+      )
+    );
+  }
+}
+
+class HomeScreenSet extends StatelessWidget{
+  final String setName;
+  const HomeScreenSet({super.key, required this.setName});
+
+  @override
+  Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final cardWidth = screenWidth * 0.9;
+    return GestureDetector(
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(20)),
+          color: Colors.green
+        ),
+        width: cardWidth,
+        height: 200,
+        alignment: Alignment.center,
+        margin: EdgeInsets.symmetric(horizontal: 10),
+        child: Text(setName)
+       )
     );
   }
 }
