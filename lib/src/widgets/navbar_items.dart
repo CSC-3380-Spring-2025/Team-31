@@ -7,7 +7,7 @@
 import '../assets/essential.dart';
 // Screens
 import '../screens/home_screen.dart';
-import '../screens/create_set_screen.dart';
+import '../screens/create_course_screen.dart';
 import '../screens/settings_screen.dart';
 import '../screens/login_screen.dart';
 
@@ -24,17 +24,6 @@ final List<NavItem> navItems = [
     route: '/create_set',
   ),
   NavItem(
-    title: 'Settings',
-    icon: Icons.settings,
-    route: '/settings',
-  ),
-  NavItem(
-    title: 'Login',
-    icon: Icons.person,
-    route: '/login',
-    requiresAuth: false,
-  ),
-  NavItem(
     title: 'View Set',
     icon: Icons.book,
     route: '/view_set',
@@ -45,7 +34,12 @@ final List<NavItem> navItems = [
     icon: Icons.camera,
     route: '/camera',
     requiresAuth: false,
-  )
+  ),
+  NavItem(
+    title: 'Settings',
+    icon: Icons.settings,
+    route: '/settings',
+  ),
 ];
 
 // Nav Item Class

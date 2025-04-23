@@ -75,7 +75,7 @@ class _MainStateScreen extends State<MainScreen> {
       appBar: AppBar(
         title: Text(
           'Study Hall',
-          style: TextStyle(color: AppTheme.getColor('text', context)),
+          style: TextStyle(color: AppTheme.getColor('background', context)),
         ),
         backgroundColor: AppTheme.getColor('primary', context),
       ),

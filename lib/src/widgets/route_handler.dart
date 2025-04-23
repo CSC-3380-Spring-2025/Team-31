@@ -8,7 +8,7 @@ import '../../main.dart';
 import '../assets/essential.dart';
 // Screens
 import '../screens/home_screen.dart';
-import '../screens/create_set_screen.dart';
+import '../screens/create_course_screen.dart';
 import '../screens/settings_screen.dart';
 import '../screens/quiz_screen.dart';
 import '../screens/card_screen.dart';
@@ -25,7 +25,7 @@ class RouteHandler {
 
   static final Map<String, Widget> _routeToScreen = {
     '/home': const HomeScreen(),
-    '/create_set': const CreateSetScreen(),
+    '/create_course': const CreateCourseScreen(),
     '/settings': const SettingsScreen(),
     '/login': const SignInScreen(),
     '/quiz': QuizScreen(),

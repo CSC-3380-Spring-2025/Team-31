@@ -53,7 +53,7 @@ class HomeScreenState extends State<HomeScreen> {
               {
                 'icon': Icons.add,
                 'label': 'Create Set',
-                'route': '/create_set',
+                'route': '/',
               },
               {
                 'icon': Icons.edit,
