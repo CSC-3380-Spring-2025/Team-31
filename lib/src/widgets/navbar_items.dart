@@ -30,7 +30,7 @@ final List<NavItem> navItems = [
     requiresAuth: false,
   ),
   NavItem(
-    title: 'Accounr',
+    title: 'Account',
     icon: Icons.person,
     route: '/',
   ),
