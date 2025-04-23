@@ -94,6 +94,7 @@ class HomeScreenSet extends StatelessWidget{
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final cardWidth = screenWidth * 0.9;
+
     return GestureDetector(
       child: Container(
         decoration: BoxDecoration(

@@ -45,5 +45,10 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+    <string>Camera access needed to scan picture for text</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Photo library access needed to scan text from image</string>
+
 </dict>
 </plist>
