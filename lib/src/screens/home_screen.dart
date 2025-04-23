@@ -51,23 +51,23 @@ class HomeScreenState extends State<HomeScreen> {
           ButtonGrid(
             buttons: [
               {
-                'icon': Icons.play_arrow,
-                'label': 'Do Something',
+                'icon': Icons.add,
+                'label': 'Create Set',
                 'route': '/',
               },
               {
-                'icon': Icons.play_arrow,
-                'label': 'Do Something',
+                'icon': Icons.edit,
+                'label': 'Manage Course',
                 'route': '/',
               },
               {
-                'icon': Icons.play_arrow,
-                'label': 'Do Something',
+                'icon': Icons.book,
+                'label': 'Study Session',
                 'route': '/',
               },
               {
-                'icon': Icons.play_arrow,
-                'label': 'Do Something',
+                'icon': Icons.share,
+                'label': 'Share Course',
                 'route': '/',
               },
             ],
