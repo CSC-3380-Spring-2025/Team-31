@@ -2,6 +2,8 @@
 // camera_screen.dart
 //
 
+import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
+
 import '../widgets/card.dart';
 import '../assets/essential.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +25,7 @@ class _CameraScreenState extends State<CameraScreen> {
   int frontIndex = 0;
   int backIndex = 0;
   TextEditingController _textController = TextEditingController();
+
   final GlobalKey<_CameraScreenState> _cameraScreenKey = GlobalKey<
       _CameraScreenState>();
   final GlobalKey<FlashCardState> _flashCardKey = GlobalKey<FlashCardState>();
@@ -168,8 +171,8 @@ class _CameraScreenState extends State<CameraScreen> {
                         ?.getBackBulletPoints() ?? []),
               ],
             ),
-            /*Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text("Scanned Text (Select and Add):"),
                    const SizedBox(height:8),
@@ -184,7 +187,7 @@ class _CameraScreenState extends State<CameraScreen> {
                 ),
                 const SizedBox(height:8),
               ],
-            ),*/
+              ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [

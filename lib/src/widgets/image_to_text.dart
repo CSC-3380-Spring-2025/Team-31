@@ -4,6 +4,7 @@ photo library. Most users will likely use the camera and build one card at a tim
 
 the methods in this class can be called by create_card and edit_card screens.
  */
+import 'package:flutter/cupertino.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -18,7 +19,7 @@ class ImageToText {
   //create an image picker
   final ImagePicker _pickImage = ImagePicker();
   //set the text recognizer to recognize latin script
-  late final TextRecognizer textRecognizer;
+  late final textRecognizer = TextRecognizer();
   //method returns a future string or null from a selected image.
   Future<String?> pullTextFromImage() async{
     //creates the XFIle object to wait for the selection of image from a gallery or provides null if cancelled out
@@ -26,12 +27,15 @@ class ImageToText {
           source: ImageSource.gallery);
       //if not image selected, pickerImage is null so return null
       if (pickerImage == null) {
+        debugPrint('pickerImage null');
         return null;
       }
       //sets the inputImage to the image associated with the image at the path selcted from the ImagePicker
       final InputImage inputImage = InputImage.fromFilePath(pickerImage.path);
       //sets the recognized text to wait for the textrecognizer to process the image.
+      debugPrint('about to await TextRecognizer in image_to_text');
       final RecognizedText scannedText = await textRecognizer.processImage(inputImage);
+      debugPrint('line after await TextRecoginiser');
       //returns the scanned text
       return scannedText.text;
   }
