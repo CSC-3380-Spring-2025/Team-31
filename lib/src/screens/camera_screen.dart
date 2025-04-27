@@ -10,9 +10,6 @@ import 'package:flutter/material.dart';
 import '../widgets/image_to_text.dart';
 import 'package:flutter/foundation.dart';
 
-
-
-
 class CameraScreen extends StatefulWidget {
   const CameraScreen({super.key});
 
@@ -240,9 +237,11 @@ class _CameraScreenState extends State<CameraScreen> {
                 InputChip(
                   label: Text('Back'),
                   onPressed: () {
-                    if (_cameraScreenKey.currentState?.backIndex != null) {
+                    debugPrint('add to back pressed');
+                    /*if (_cameraScreenKey.currentState?.backIndex != null) {*/
                       _addToBack(newCard);
-                    }
+                      debugPrint(newCard.backBulletPoints.toString());
+                    /*}*/
                   },
                   avatar: Icon(Icons.add),
                 ),
