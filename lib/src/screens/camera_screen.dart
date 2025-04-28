@@ -2,8 +2,6 @@
 // camera_screen.dart
 //
 
-import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
-
 import '../widgets/card.dart';
 import '../assets/essential.dart';
 import 'package:flutter/material.dart';
@@ -152,20 +150,20 @@ class _CameraScreenState extends State<CameraScreen> {
       icon = Icon(Icons.camera_alt);
     }
     return Scaffold(
-      appBar: AppBar(title: const Text('Camera Input')),
+      appBar: AppBar(
+        title: const Text('Camera Input'),
+        centerTitle: true, //(small improvement: center title)
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start, // (small improvement:  more natural alignment)
           children: [
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                InputChip(
-                  label: Text(cameraLabel),
-                  onPressed: _handleCameraScan,
-                  avatar: icon,
-                ),
-                Chip(label: Text("√ Voice")),
+                Chip(label: Text("Camera")),
+                Chip(label: Text("Voice Input")), //(small improvement: clearer label)
               ],
             ),
             const SizedBox(height: 16),
@@ -276,16 +274,8 @@ class _CameraScreenState extends State<CameraScreen> {
                 ),
               ],
             ),
-            const SizedBox(height: 16),
-            Wrap(
-              spacing: 8,
-              runSpacing: 8,
-              children: List.generate(
-                4,
-                    (index) => const CardFormatPreset(),
-              ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 32),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const[
@@ -295,8 +285,8 @@ class _CameraScreenState extends State<CameraScreen> {
               ],
             ),
           ],
-        ),
+          ),
       ),
-    );
-  }
+        );
+     }
 }

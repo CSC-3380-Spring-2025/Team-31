@@ -6,7 +6,7 @@
 //
 
 export '../screens/home_screen.dart';
-export '../screens/create_set_screen.dart';
+export '../screens/create_course_screen.dart';
 export '../screens/settings_screen.dart';
 
 // Placeholder

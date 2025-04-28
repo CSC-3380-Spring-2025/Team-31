@@ -60,11 +60,9 @@ class HorizontalScrollState extends State<HorizontalScroll>
 
   void setCurrentSet()
   {
-    
-    for(int i = 0; i <= sets.length; i++)
-    {
-      if (scrollController.offset >= 340 * i)
-      {
+    final cardWidth = MediaQuery.of(context).size.width * 0.9;
+    for(int i = 0; i <= sets.length; i++) {
+      if (scrollController.offset >= cardWidth * i) {
         setState(() {
           currentSet = setNames[i];
         });
