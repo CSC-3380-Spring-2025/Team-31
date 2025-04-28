@@ -8,15 +8,13 @@ import 'package:flutter/material.dart';
 import '../widgets/image_to_text.dart';
 import 'package:flutter/foundation.dart';
 
-
-
-
 class CameraScreen extends StatefulWidget {
   const CameraScreen({super.key});
 
   @override
   State<CameraScreen> createState() => _CameraScreenState();
 }
+
 class _CameraScreenState extends State<CameraScreen> {
   @override
   String? _scannedText;
@@ -24,8 +22,8 @@ class _CameraScreenState extends State<CameraScreen> {
   int backIndex = 0;
   final TextEditingController _textController = TextEditingController();
 
-  final GlobalKey<_CameraScreenState> _cameraScreenKey = GlobalKey<
-      _CameraScreenState>();
+  final GlobalKey<_CameraScreenState> _cameraScreenKey =
+      GlobalKey<_CameraScreenState>();
   //final GlobalKey<FlashCardState> _flashCardKey = GlobalKey<FlashCardState>();
 
   Future<void> _handleCameraScan() async {
@@ -47,87 +45,101 @@ class _CameraScreenState extends State<CameraScreen> {
 
   void _addToFront(FlashCard card) {
     final selection = _textController.selection;
-    if (selection.start != -1 && selection.end != -1){
-      final selectedText = _textController.text.substring(selection.start, selection.end);
+    if (selection.start != -1 && selection.end != -1) {
+      final selectedText = _textController.text.substring(
+        selection.start,
+        selection.end,
+      );
       if (selectedText.trim().isNotEmpty) {
         card.addFrontBullet(selectedText.trim());
         //_flashCardKey.currentState!.addFrontBullet(selectedText.trim());
       }
     }
   }
+
   void _addToBack(FlashCard card) {
     final selection = _textController.selection;
-    if (selection.start != -1 && selection.end != -1){
-      final selectedText = _textController.text.substring(selection.start, selection.end);
+    if (selection.start != -1 && selection.end != -1) {
+      final selectedText = _textController.text.substring(
+        selection.start,
+        selection.end,
+      );
       if (selectedText.trim().isNotEmpty) {
         card.addBackBullet(selectedText.trim());
-       // _flashCardKey.currentState!.addBackBullet(selectedText.trim());
+        // _flashCardKey.currentState!.addBackBullet(selectedText.trim());
       }
     }
-
   }
 
   void _removeFromBack(int index, FlashCard card) {
-    if (/*_flashCardKey.currentState*/card.backBulletPoints != []) {
+    if ( /*_flashCardKey.currentState*/ card.backBulletPoints != []) {
       card.removeBackBullet(card.backBulletPoints, index);
-     // _flashCardKey.currentState?.removeBackBullet(
-     //     _flashCardKey.currentState!.backBulletPoints, index);
+      // _flashCardKey.currentState?.removeBackBullet(
+      //     _flashCardKey.currentState!.backBulletPoints, index);
     }
   }
+
   void _removeFromFront(int index, FlashCard card) {
-    if (/*_flashCardKey.currentState*/card.frontBulletPoints != []) {
+    if ( /*_flashCardKey.currentState*/ card.frontBulletPoints != []) {
       card.removeFrontBullet(card.frontBulletPoints, index);
-     // _flashCardKey.currentState?.removeFrontBullet(
+      // _flashCardKey.currentState?.removeFrontBullet(
       //    _flashCardKey.currentState!.frontBulletPoints, index);
     }
   }
 
   void _moveBulletPointSelector(
-      String frontOrBack,
-      String upOrDown,
-      FlashCard card)
-  {
+    String frontOrBack,
+    String upOrDown,
+    FlashCard card,
+  ) {
     if (frontOrBack == 'front') {
       if (upOrDown == 'up') {
         if (_cameraScreenKey.currentState!.frontIndex == 0) {
-          if (/*_flashCardKey.currentState?.frontBulletPoints*/card.frontBulletPoints != []) {
-            _cameraScreenKey.currentState!.frontIndex = card.frontBulletPoints.length-1;
-                //_flashCardKey.currentState!.frontBulletPoints.length - 1;
+          if ( /*_flashCardKey.currentState?.frontBulletPoints*/ card
+                  .frontBulletPoints !=
+              []) {
+            _cameraScreenKey.currentState!.frontIndex =
+                card.frontBulletPoints.length - 1;
+            //_flashCardKey.currentState!.frontBulletPoints.length - 1;
           }
-        }
-        else {
+        } else {
           _cameraScreenKey.currentState!.frontIndex--;
         }
-      }
-      else if (upOrDown == 'down') {
-        if (/*_flashCardKey.currentState?.frontBulletPoints*/card.frontBulletPoints != []) {
-          if (_cameraScreenKey.currentState!.frontIndex == card.frontBulletPoints.length-1){
-              //_flashCardKey.currentState!.frontBulletPoints.length - 1) {
+      } else if (upOrDown == 'down') {
+        if ( /*_flashCardKey.currentState?.frontBulletPoints*/ card
+                .frontBulletPoints !=
+            []) {
+          if (_cameraScreenKey.currentState!.frontIndex ==
+              card.frontBulletPoints.length - 1) {
+            //_flashCardKey.currentState!.frontBulletPoints.length - 1) {
             _cameraScreenKey.currentState!.frontIndex = 0;
-          }
-          else {
+          } else {
             frontIndex++;
           }
         }
       }
-    }
-    else if (frontOrBack == 'back') {
+    } else if (frontOrBack == 'back') {
       if (upOrDown == 'up') {
         if (_cameraScreenKey.currentState?.backIndex == 0) {
-          if (/*_flashCardKey.currentState?.backBulletPoints*/card.backBulletPoints != []) {
-            backIndex = card.backBulletPoints.length-1;/*_flashCardKey.currentState!.backBulletPoints.length - 1;*/
+          if ( /*_flashCardKey.currentState?.backBulletPoints*/ card
+                  .backBulletPoints !=
+              []) {
+            backIndex =
+                card.backBulletPoints.length -
+                1; /*_flashCardKey.currentState!.backBulletPoints.length - 1;*/
           }
-        }
-        else {
+        } else {
           _cameraScreenKey.currentState!.backIndex--;
         }
-      }
-      else if (upOrDown == 'down') {
-        if (/*_flashCardKey.currentState?.backBulletPoints*/card.backBulletPoints != []) {
-          if (_cameraScreenKey.currentState!.backIndex == card.backBulletPoints.length-1)/*_flashCardKey.currentState!.backBulletPoints.length - 1) */{
+      } else if (upOrDown == 'down') {
+        if ( /*_flashCardKey.currentState?.backBulletPoints*/ card
+                .backBulletPoints !=
+            []) {
+          if (_cameraScreenKey.currentState!.backIndex ==
+              card.backBulletPoints.length -
+                  1) /*_flashCardKey.currentState!.backBulletPoints.length - 1) */ {
             _cameraScreenKey.currentState!.backIndex = 0;
-          }
-          else {
+          } else {
             _cameraScreenKey.currentState!.backIndex++;
           }
         }
@@ -144,8 +156,7 @@ class _CameraScreenState extends State<CameraScreen> {
     if (kIsWeb) {
       cameraLabel = 'Image';
       icon = Icon(Icons.image);
-    }
-    else {
+    } else {
       cameraLabel = 'Camera';
       icon = Icon(Icons.camera_alt);
     }
@@ -157,50 +168,63 @@ class _CameraScreenState extends State<CameraScreen> {
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start, // (small improvement:  more natural alignment)
+          crossAxisAlignment:
+              CrossAxisAlignment
+                  .start, // (small improvement:  more natural alignment)
           children: [
             const Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Chip(label: Text("Camera")),
-                Chip(label: Text("Voice Input")), //(small improvement: clearer label)
+                Chip(
+                  label: Text("Voice Input"),
+                ), //(small improvement: clearer label)
               ],
             ),
             const SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                CardPreview(title: 'Preview front of card',
+                CardPreview(
+                  title: 'Preview front of card',
                   bulletPoints: /*_flashCardKey.currentState
-                      ?.getFrontBulletPoints()*/newCard.frontBulletPoints /*?? []*/),
-                CardPreview(title: 'Preview back of card',
-                    bulletPoints: /*_flashCardKey.currentState
-                        ?.getBackBulletPoints()*/newCard.backBulletPoints /*?? []*/),
+                      ?.getFrontBulletPoints()*/
+                      newCard.frontBulletPoints /*?? []*/,
+                ),
+                CardPreview(
+                  title: 'Preview back of card',
+                  bulletPoints: /*_flashCardKey.currentState
+                        ?.getBackBulletPoints()*/
+                      newCard.backBulletPoints /*?? []*/,
+                ),
               ],
             ),
-              Column(
+            Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text("Scanned Text (Select and Add):"),
-                   const SizedBox(height:8),
-                   TextField(
+                const SizedBox(height: 8),
+                TextField(
                   controller: _textController,
-                  readOnly:false,
-                  maxLines:null,
+                  readOnly: false,
+                  maxLines: null,
                   showCursor: true,
                   decoration: InputDecoration(
                     hintText: 'Scanned text will appear here...',
                   ),
                 ),
-                const SizedBox(height:8),
+                const SizedBox(height: 8),
               ],
-              ),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 InputChip(
                   label: Text('Front'),
-                  onPressed: () {debugPrint('front pressed');/*if (_cameraScreenKey.currentState?.frontIndex != null) {*/
+                  onPressed: () {
+                    debugPrint(
+                      'front pressed',
+                    ); /*if (_cameraScreenKey.currentState?.frontIndex != null) {*/
                     _addToFront(newCard);
                     debugPrint(newCard.frontBulletPoints.toString());
                     /*}*/
@@ -210,9 +234,13 @@ class _CameraScreenState extends State<CameraScreen> {
                 InputChip(
                   label: Text('Front'),
                   onPressed: () {
-                    if (/*_flashCardKey.currentState?.frontBulletPoints*/newCard.frontBulletPoints != []) {
+                    if ( /*_flashCardKey.currentState?.frontBulletPoints*/ newCard
+                            .frontBulletPoints !=
+                        []) {
                       _removeFromFront(
-                          _cameraScreenKey.currentState!.frontIndex, newCard);
+                        _cameraScreenKey.currentState!.frontIndex,
+                        newCard,
+                      );
                     }
                   },
                   avatar: Icon(Icons.remove),
@@ -247,9 +275,13 @@ class _CameraScreenState extends State<CameraScreen> {
                 InputChip(
                   label: Text('Back'),
                   onPressed: () {
-                    if (/*_flashCardKey.currentState?.backBulletPoints*/newCard.backBulletPoints != []) {
+                    if ( /*_flashCardKey.currentState?.backBulletPoints*/ newCard
+                            .backBulletPoints !=
+                        []) {
                       _removeFromBack(
-                          _cameraScreenKey.currentState!.backIndex, newCard);
+                        _cameraScreenKey.currentState!.backIndex,
+                        newCard,
+                      );
                     }
                   },
                   avatar: Icon(Icons.remove),
@@ -274,19 +306,18 @@ class _CameraScreenState extends State<CameraScreen> {
                 ),
               ],
             ),
-            ),
             const SizedBox(height: 32),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const[
+              children: const [
                 RecentMadeButton(),
                 CircleAvatar(radius: 30, backgroundColor: Colors.grey),
                 CourseButton(),
               ],
             ),
           ],
-          ),
+        ),
       ),
-        );
-     }
+    );
+  }
 }
