@@ -25,6 +25,7 @@ class _CameraScreenState extends State<CameraScreen> {
 
   final GlobalKey<_CameraScreenState> _cameraScreenKey = GlobalKey<
       _CameraScreenState>();
+
   //final GlobalKey<FlashCardState> _flashCardKey = GlobalKey<FlashCardState>();
 
   Future<void> _handleCameraScan() async {
@@ -50,6 +51,7 @@ class _CameraScreenState extends State<CameraScreen> {
       final selectedText = _textController.text.substring(selection.start, selection.end);
       if (selectedText.trim().isNotEmpty) {
         card.addFrontBullet(selectedText.trim());
+        //setState(){card.addFrontBullet(selectedText.trim());
         //_flashCardKey.currentState!.addFrontBullet(selectedText.trim());
       }
     }
@@ -63,7 +65,6 @@ class _CameraScreenState extends State<CameraScreen> {
        // _flashCardKey.currentState!.addBackBullet(selectedText.trim());
       }
     }
-
   }
 
   void _removeFromBack(int index, FlashCard card) {
@@ -133,13 +134,14 @@ class _CameraScreenState extends State<CameraScreen> {
       }
     }
   }
-
+  FlashCard newCard = FlashCard();
   @override
   Widget build(BuildContext context) {
     //variables for the InputChip. On mobile devices, User will likely take pictures. on pc's they will likely scan text from screenshots
     String cameraLabel;
     Icon icon;
-    FlashCard newCard = FlashCard();
+
+
     if (kIsWeb) {
       cameraLabel = 'Image';
       icon = Icon(Icons.image);
@@ -201,7 +203,9 @@ class _CameraScreenState extends State<CameraScreen> {
                   label: Text('Front'),
                   onPressed: () {debugPrint('front pressed');/*if (_cameraScreenKey.currentState?.frontIndex != null) {*/
                     _addToFront(newCard);
+                    CardPreview(title: newCard.toString(), bulletPoints: newCard.frontBulletPoints);
                     debugPrint(newCard.frontBulletPoints.toString());
+                    didUpdateWidget(CameraScreen());
                     /*}*/
                   },
                   avatar: Icon(Icons.add),

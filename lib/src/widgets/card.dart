@@ -11,7 +11,8 @@ class FlashCard extends StatefulWidget {
   final String setName; // Set Names
   List<String> frontBulletPoints = [];
   List<String> backBulletPoints = [];
-
+  List<Object> frontNonTextElements=[];
+  List<Object> backNonTextElements=[];
   @override
   State<FlashCard> createState() => FlashCardState();
 
@@ -107,10 +108,9 @@ class FlashCardState extends State<FlashCard> {
   }
   class CardPreview extends StatelessWidget {
     final String title;
-    final List<String> bulletPoints;
+    List<String> bulletPoints;
 
     CardPreview({super.key, required this.title, required this.bulletPoints});
-
     @override
     Widget build(BuildContext context) {
       return Container(
@@ -151,7 +151,7 @@ class FlashCardState extends State<FlashCard> {
         margin: const EdgeInsets.all(4),
       );
     }
-  // TODO: implement build 
+  // TODO: implement build
   }
   class RecentMadeButton extends StatelessWidget {
     const RecentMadeButton({super.key});
