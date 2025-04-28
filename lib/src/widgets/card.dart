@@ -109,6 +109,8 @@ class FlashCardState extends State<FlashCard> {
   class CardPreview extends StatelessWidget {
     final String title;
     List<String> bulletPoints;
+    //List<String> frontBulletPoints=[];
+    //List<String> backBulletPoints=[];
 
     CardPreview({super.key, required this.title, required this.bulletPoints});
     @override
@@ -139,7 +141,7 @@ class FlashCardState extends State<FlashCard> {
       );
     }
   }
-  class CardFormatPreset extends StatelessWidget {
+  /*class CardFormatPreset extends StatelessWidget {
     const CardFormatPreset({super.key});
 
     @override
@@ -165,7 +167,7 @@ class FlashCardState extends State<FlashCard> {
         child: const Center(child: Text('Recent')),
       );
     }
-  }
+  }*/
 class CourseButton extends StatelessWidget {
   const CourseButton({super.key});
 
