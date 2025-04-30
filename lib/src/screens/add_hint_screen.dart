@@ -1,5 +1,10 @@
+//
+// add_hint_screen.dart
+//
+
+
 import 'package:flutter/material.dart';
-import 'package:study_hall/src/screens/flashcard_card_screen.dart';
+import './flashcard_screen.dart';
 
 class AddHintScreen extends StatelessWidget{
   const AddHintScreen({super.key});

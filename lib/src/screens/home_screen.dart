@@ -37,7 +37,8 @@ class HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomPageStack(
+      body: ListView(
+        scrollDirection: Axis.vertical,
         children: [
           // Course Selector
           CourseSelector(selectedCourseId: selectedCourseId),

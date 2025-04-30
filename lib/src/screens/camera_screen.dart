@@ -17,6 +17,7 @@ class CameraScreen extends StatefulWidget {
   @override
   State<CameraScreen> createState() => _CameraScreenState();
 }
+
 class _CameraScreenState extends State<CameraScreen> {
   @override
   String? _scannedText;
@@ -47,8 +48,11 @@ class _CameraScreenState extends State<CameraScreen> {
 //method to add highlighted bullet point to front bullet point list and update listener
   void _addToFront(FlashCard card) {
     final selection = _textController.selection;
-    if (selection.start != -1 && selection.end != -1){
-      final selectedText = _textController.text.substring(selection.start, selection.end);
+    if (selection.start != -1 && selection.end != -1) {
+      final selectedText = _textController.text.substring(
+        selection.start,
+        selection.end,
+      );
       if (selectedText.trim().isNotEmpty) {
         card.addFrontBullet(selectedText.trim());
         frontBulletPointsNotifier.value=card.frontBulletPoints.toList();
@@ -168,8 +172,7 @@ class _CameraScreenState extends State<CameraScreen> {
     if (kIsWeb) {
       cameraLabel = 'Image';
       icon = Icon(Icons.image);
-    }
-    else {
+    } else {
       cameraLabel = 'Camera';
       icon = Icon(Icons.camera_alt);
     }
@@ -181,7 +184,9 @@ class _CameraScreenState extends State<CameraScreen> {
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start, // (small improvement:  more natural alignment)
+          crossAxisAlignment:
+              CrossAxisAlignment
+                  .start, // (small improvement:  more natural alignment)
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -209,23 +214,23 @@ class _CameraScreenState extends State<CameraScreen> {
                     cpIndex: indexBackNotifier),
               ],
             ),
-              Column(
+            Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text("Scanned Text (Select and Add):"),
-                   const SizedBox(height:8),
-                   TextField(
+                const SizedBox(height: 8),
+                TextField(
                   controller: _textController,
-                  readOnly:false,
-                  maxLines:null,
+                  readOnly: false,
+                  maxLines: null,
                   showCursor: true,
                   decoration: InputDecoration(
                     hintText: 'Scanned text will appear here...',
                   ),
                 ),
-                const SizedBox(height:8),
+                const SizedBox(height: 8),
               ],
-              ),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -284,7 +289,9 @@ class _CameraScreenState extends State<CameraScreen> {
                   onPressed: () {
                     if (newCard.backBulletPoints != []) {
                       _removeFromBack(
-                          _cameraScreenKey.currentState!.backIndex, newCard);
+                        _cameraScreenKey.currentState!.backIndex,
+                        newCard,
+                      );
                     }
                   },
                   avatar: Icon(Icons.remove),
@@ -312,15 +319,15 @@ class _CameraScreenState extends State<CameraScreen> {
             const SizedBox(height: 32),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const[
+              children: const [
                 RecentMadeButton(),
                 CircleAvatar(radius: 30, backgroundColor: Colors.grey),
                 CourseButton(),
               ],
             ),
           ],
-          ),
+        ),
       ),
-        );
-     }
+    );
+  }
 }
