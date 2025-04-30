@@ -9,7 +9,6 @@ import '../assets/essential.dart';
 import '../screens/home_screen.dart';
 import '../screens/create_set_screen.dart';
 import '../screens/settings_screen.dart';
-import '../screens/login_screen.dart';
 
 // Define navigation items
 final List<NavItem> navItems = [
@@ -45,7 +44,7 @@ final List<NavItem> navItems = [
     icon: Icons.camera,
     route: '/camera',
     requiresAuth: false,
-  )
+  ),
 ];
 
 // Nav Item Class

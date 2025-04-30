@@ -1,5 +1,5 @@
 //
-// navbar_item.dart
+// navbar_items.dart
 // 
 // Navbar Item Widget
 

@@ -4,6 +4,7 @@
 // This is a card
 //
 
+import 'package:flutter/foundation.dart';
 import '../assets/essential.dart';
 
 class FlashCard extends StatefulWidget {
@@ -11,39 +12,38 @@ class FlashCard extends StatefulWidget {
   final String setName; // Set Names
   List<String> frontBulletPoints = [];
   List<String> backBulletPoints = [];
-  List<Object> frontNonTextElements=[];
-  List<Object> backNonTextElements=[];
+  List<Object> frontNonTextElements = [];
+  List<Object> backNonTextElements = [];
+
   @override
   State<FlashCard> createState() => FlashCardState();
-
+//method to add a bullet point to front
   void addFrontBullet(String bullet) {
     frontBulletPoints.add(bullet);
   }
-
+//method to add a bullet point to back
   void addBackBullet(String bullet) {
     backBulletPoints.add(bullet);
   }
-
+//method to remove a bullet point from front at specified index
   void removeFrontBullet(List<String> bulletPoints, int index) {
     bulletPoints.removeAt(index);
   }
-
+//method to remove a bullet point from back at a specified index
   void removeBackBullet(List<String> bulletPoints, int index) {
     bulletPoints.removeAt(index);
   }
-
+//method to clear all bullet points from the back
   void clearBack() {
     backBulletPoints.clear();
   }
-
+//method to clear all bullet points from the front
   void clearFront() {
     frontBulletPoints.clear();
   }
 }
-class FlashCardState extends State<FlashCard> {
 
-  //List<String> frontBulletPoints=[];
-  //List<String> backBulletPoints=[];
+class FlashCardState extends State<FlashCard> {
 
   String text = "";
   bool selected = false; // if on home screen show Set Name
@@ -52,11 +52,9 @@ class FlashCardState extends State<FlashCard> {
   void changeText(String txt) {
     setState(() {
       text = txt;
+      debugPrint('flashCardState activated');
     });
-    //List<String> getFrontBulletPoints() => frontBulletPoints;
-   // List<String> getBackBulletPoints() => backBulletPoints;
-
-
+  }
     @override
     Widget build(BuildContext context) {
       return GestureDetector(
@@ -78,12 +76,6 @@ class FlashCardState extends State<FlashCard> {
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
-  }
-}
   class HomeScreenSet extends StatelessWidget {
     final String setName;
 
@@ -106,13 +98,15 @@ class FlashCardState extends State<FlashCard> {
       );
     }
   }
+  //Card Preview class stores necessary information and build instructions to generate a card preview on a screen.
   class CardPreview extends StatelessWidget {
     final String title;
-    List<String> bulletPoints;
-    //List<String> frontBulletPoints=[];
-    //List<String> backBulletPoints=[];
+    //listeners so values can be updated by notifiers and properly rendered
+    final ValueListenable<List<String>> cpBulletPoints;
+    final ValueListenable<int> cpIndex;
 
-    CardPreview({super.key, required this.title, required this.bulletPoints});
+    CardPreview({super.key, required this.title, required this.cpBulletPoints, required this.cpIndex});
+
     @override
     Widget build(BuildContext context) {
       return Container(
@@ -131,9 +125,15 @@ class FlashCardState extends State<FlashCard> {
             children: [
               Text(title),
               Expanded(
-                  child: ListView(
-                    children: bulletPoints.map((bullet) => Text("- $bullet"))
-                        .toList(),
+                  child: ValueListenableBuilder<List<String>?>(
+                      valueListenable: cpBulletPoints,
+                      builder: (context, bullets, child) {
+                        final items = bullets ?? <String>[];
+                        return ListView(
+                          children: items.map((bullet) => Text("- $bullet"))
+                              .toList(),
+                        );
+                      }
                   )
               )
             ]
@@ -141,20 +141,7 @@ class FlashCardState extends State<FlashCard> {
       );
     }
   }
-  /*class CardFormatPreset extends StatelessWidget {
-    const CardFormatPreset({super.key});
 
-    @override
-    Widget build(BuildContext context) {
-      return Container(
-        width: 70,
-        height: 70,
-        color: Colors.grey[400],
-        margin: const EdgeInsets.all(4),
-      );
-    }
-  // TODO: implement build
-  }
   class RecentMadeButton extends StatelessWidget {
     const RecentMadeButton({super.key});
 
@@ -167,7 +154,7 @@ class FlashCardState extends State<FlashCard> {
         child: const Center(child: Text('Recent')),
       );
     }
-  }*/
+  }
 class CourseButton extends StatelessWidget {
   const CourseButton({super.key});
 
@@ -178,4 +165,42 @@ class CourseButton extends StatelessWidget {
       child: const Text("Course"),
     );
   }
+}
+class Set extends StatefulWidget {
+  Set({super.key}) : courseName = "";
+  String courseName='';
+  String setName='';
+  List<FlashCard> cardList=[];
+  @override
+  State<Set> createState() => SetState();
+
+ /* void changeSetName(String newName){
+    setState((){
+      setName = newName;
+    });
+  }
+  void changeCourseName (String newName){
+    setState(() {
+      courseName = newName;
+    });
+  }
+  void addCard(FlashCard card){
+    setState(() {
+      cardList.add(card);
+    });*/
+  }
+//}
+
+class SetState extends State<Set>{
+  @override
+  void initState(){
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    throw UnimplementedError();
+  }
+
 }
