@@ -222,12 +222,19 @@ class _CameraScreenState extends State<CameraScreen> {
                 InputChip(
                   label: Text('Front'),
                   onPressed: () {
-                    debugPrint(
-                      'front pressed',
-                    ); /*if (_cameraScreenKey.currentState?.frontIndex != null) {*/
-                    _addToFront(newCard);
-                    debugPrint(newCard.frontBulletPoints.toString());
-                    /*}*/
+                    if (_cameraScreenKey.currentState?.frontIndex != null) {
+                      _addToFront();
+                    }
+                    else {
+                      showDialog(
+                        context: context, 
+                        builder: (context)
+                        {
+                          return AlertDialog(
+                            title: Center(child: Text("Fill in the Text Box")),
+                          );
+                        });
+                    }
                   },
                   avatar: Icon(Icons.add),
                 ),

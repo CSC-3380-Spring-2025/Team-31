@@ -45,6 +45,7 @@ class CustomCalendarState extends State<CustomCalendar>
     setState(() {
       _selectedDay = selectedDay;
       _focusedDay = focusedDay;
+      _selectedEvents.value = _getEventsForDay(selectedDay);
     });
     }
   }
@@ -66,17 +67,19 @@ class CustomCalendarState extends State<CustomCalendar>
       onDaySelected: _onDaySelected,
       eventLoader: _getEventsForDay,
     ),
-    // ValueListenableBuilder(valueListenable: _selectedEvents, builder: (context, value, _) {
-    //   return ListView.builder( itemBuilder: (context, index) {
-    //     return Container(
-    //       margin: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-    //       decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
-    //       child: ListTile(
-    //         onTap: () => print(""), 
-    //         title: Text('$value[index]}'))
-    //     );
-    //   });
-    // }), Currently not working
+    ValueListenableBuilder<List<Event>>(valueListenable: _selectedEvents, builder: (context, value, _) {
+      return ListView.builder(
+        itemCount: value.length,
+        shrinkWrap: true,
+        itemBuilder: (context, index) {
+          return Container (
+            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+            decoration: BoxDecoration(border: Border.all(), borderRadius: BorderRadius.circular(12)),
+            child: ListTile (title: Text(value[index].title) ));
+        },
+      );
+      
+    }),
     SizedBox(
       height: 20,
       width: 20,
