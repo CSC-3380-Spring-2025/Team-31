@@ -103,13 +103,7 @@ class CourseSelectorState extends State<CourseSelector> {
       return;
     }
 
-    try {
-      await dbService.createCourse(userId, {
-        'title': 'New Course',
-        'sets': []
-      });
-      await _fetchCourses();
-    } catch (e) {}
+    Navigator.of(context).pushNamed('/create_course');
   }
 }
 

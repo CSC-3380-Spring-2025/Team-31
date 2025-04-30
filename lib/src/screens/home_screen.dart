@@ -17,6 +17,7 @@ import '../screens/card_screen.dart';
 import '../widgets/button_grid.dart';
 import '../widgets/course_selector.dart';
 import '../widgets/course_set_scroll.dart';
+import '../widgets/custom_calendar.dart';
 import '../widgets/horizontal_scroll.dart';
 import '../widgets/route_handler.dart';
 import '../widgets/statistics.dart';
@@ -50,35 +51,30 @@ class HomeScreenState extends State<HomeScreen> {
           ButtonGrid(
             buttons: [
               {
-                'icon': Icons.play_arrow,
-                'label': 'Do Something',
+                'icon': Icons.add,
+                'label': 'Create Set',
                 'route': '/',
               },
               {
-                'icon': Icons.play_arrow,
-                'label': 'Do Something',
+                'icon': Icons.edit,
+                'label': 'Manage Course',
                 'route': '/',
               },
               {
-                'icon': Icons.play_arrow,
-                'label': 'Do Something',
+                'icon': Icons.book,
+                'label': 'Study Session',
                 'route': '/',
               },
               {
-                'icon': Icons.play_arrow,
-                'label': 'Do Something',
+                'icon': Icons.share,
+                'label': 'Share Course',
                 'route': '/',
               },
             ],
           ),
           
           // Calendar Section
-          TableCalendar(
-            calendarFormat: CalendarFormat.twoWeeks,
-            focusedDay: DateTime.now(),
-            firstDay: DateTime(2025, 1, 1),
-            lastDay: DateTime(2025, 12, 31),
-          ),
+          CustomCalendar(),
           
           // Statistics Section
           Statistics(key: statsState),

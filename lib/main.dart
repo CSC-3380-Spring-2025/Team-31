@@ -35,10 +35,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Flashcard App",
-      theme: ThemeData(
-        brightness: Brightness.light, // Changed to light mode
-        primaryColor: Colors.blueGrey,
-      ),
+      themeMode: ThemeMode.system,
+      theme: AppTheme.getTheme(context),
       home: const AuthGate(),
       onGenerateRoute: (settings) {
         final routeName = settings.name ?? '/home';
@@ -52,16 +50,13 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// Authentication Handler
-
-
 // Stateful widget for the app's main navigation container
 class MainScreen extends StatefulWidget {
   final Widget screenWidget;
 
   const MainScreen({
-    super.key, 
-    required this.screenWidget
+    super.key,
+    required this.screenWidget,
   });
 
   @override
@@ -77,16 +72,30 @@ class _MainStateScreen extends State<MainScreen> {
 
     return Scaffold(
       body: widget.screenWidget,
-      appBar: AppBar(title: const Text('Study Hall')),
+      appBar: AppBar(
+        title: Text(
+          'Study Hall',
+          style: TextStyle(color: AppTheme.getColor('background', context)),
+        ),
+        backgroundColor: AppTheme.getColor('primary', context),
+      ),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            const SizedBox(
+            SizedBox(
               height: 128,
               child: DrawerHeader(
-                decoration: BoxDecoration(color: Colors.green),
-                child: Text('Navigation'),
+                decoration: BoxDecoration(
+                  color: AppTheme.getColor('primary', context),
+                ),
+                child: Text(
+                  'Navigation',
+                  style: TextStyle(
+                    color: AppTheme.getColor('text', context),
+                    fontSize: 24,
+                  ),
+                ),
               ),
             ),
             ...NavItem.getNavbarElements(context, user),

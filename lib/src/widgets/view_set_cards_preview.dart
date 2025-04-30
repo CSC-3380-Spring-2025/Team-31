@@ -1,5 +1,5 @@
 //
-// view_set_cards_preview.dart
+// view_setwidget.cards.length_preview.dart
 //
 // This widget is the horizontal
 // scroll preview of cards of a
@@ -11,7 +11,12 @@
 import '../assets/essential.dart';
 
 class ViewSetPreviewScroll extends StatefulWidget {
-  const ViewSetPreviewScroll({super.key});
+  final List<Map<String, String>> cards;
+
+  const ViewSetPreviewScroll({
+    super.key,
+    required this.cards
+  });
 
   @override
   CardPreviewScrollState createState() => CardPreviewScrollState();
@@ -19,11 +24,6 @@ class ViewSetPreviewScroll extends StatefulWidget {
 
 class CardPreviewScrollState extends State<ViewSetPreviewScroll> {
   late PageController _pageController;
-  final List<Map<String, String>> _cards = [
-    {'front': 'This is the front of card 1', 'back': 'This is the back of card 1'},
-    {'front': 'This is the front of card 2', 'back': 'This is the back of card 2'},
-    {'front': 'This is the front of card 3', 'back': 'This is the back of card 3'},
-  ];
   List<bool> _isFront = [];
   int _currentPage = 0;
 
@@ -31,7 +31,7 @@ class CardPreviewScrollState extends State<ViewSetPreviewScroll> {
   void initState() {
     super.initState();
     _pageController = PageController();
-    _isFront = List.generate(_cards.length, (_) => true);
+    _isFront = List.generate(widget.cards.length, (_) => true);
   }
 
   @override
@@ -54,7 +54,7 @@ class CardPreviewScrollState extends State<ViewSetPreviewScroll> {
   }
 
   void _goToNextCard() {
-    if (_currentPage < _cards.length - 1) {
+    if (_currentPage < widget.cards.length - 1) {
       setState(() {
         _currentPage++;
       });
@@ -80,14 +80,14 @@ class CardPreviewScrollState extends State<ViewSetPreviewScroll> {
         children: [
           PageView.builder(
             controller: _pageController,
-            itemCount: _cards.length,
+            itemCount: widget.cards.length,
             onPageChanged: (index) {
               setState(() {
                 _currentPage = index;
               });
             },
             itemBuilder: (context, index) {
-              final card = _cards[index];
+              final card = widget.cards[index];
               return CardWidget(
                 frontText: card['front']!,
                 backText: card['back']!,

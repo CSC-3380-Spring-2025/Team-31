@@ -2,6 +2,7 @@
 // camera_screen.dart
 //
 
+import 'package:flutter/cupertino.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 
 import '../widgets/card.dart';
@@ -23,7 +24,7 @@ class _CameraScreenState extends State<CameraScreen> {
   int backIndex = -1;
   //text editing controller to help select text from scanned image, voice, or manual entry
   final TextEditingController _textController = TextEditingController();
-//
+
   final GlobalKey<_CameraScreenState> _cameraScreenKey = GlobalKey<
       _CameraScreenState>();
   //takes image from camera on mobile devices, enters it into text variable, then updates text scanner and text controller while setting state
@@ -173,10 +174,14 @@ class _CameraScreenState extends State<CameraScreen> {
       icon = Icon(Icons.camera_alt);
     }
     return Scaffold(
-      appBar: AppBar(title: const Text('Camera Input')),
+      appBar: AppBar(
+        title: const Text('Camera Input'),
+        centerTitle: true, //(small improvement: center title)
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start, // (small improvement:  more natural alignment)
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -304,16 +309,7 @@ class _CameraScreenState extends State<CameraScreen> {
                 ),
               ],
             ),
-           /* const SizedBox(height: 16),
-            Wrap(
-              spacing: 8,
-              runSpacing: 8,
-              children: List.generate(
-                4,
-                    (index) => const CardFormatPreset(),
-              ),
-            ),*/
-            const SizedBox(height: 20),
+            const SizedBox(height: 32),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const[
@@ -323,8 +319,8 @@ class _CameraScreenState extends State<CameraScreen> {
               ],
             ),
           ],
-        ),
+          ),
       ),
-    );
-  }
+        );
+     }
 }
