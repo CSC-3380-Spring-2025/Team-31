@@ -15,7 +15,10 @@ class CreateCardTemplateScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("New Flashcard")),
+      appBar: AppBar(
+        title: const Text("New Flashcard"),
+        centerTitle: true, //(small: makes AppBar title centered)
+      ),
       body: Padding(
         padding:const EdgeInsets.all(16.0),
         child: ListView(
@@ -23,25 +26,37 @@ class CreateCardTemplateScreen extends StatelessWidget {
             Card(
               child: ListTile(
                 title: const Text('Front'),
-                subtitle: const TextField(
-                  decoration: InputDecoration.collapsed(hintText: 'Cliock to edit front'),
+                subtitle: const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 8.0),
+                  child: TextField(
+                  decoration: InputDecoration.collapsed(hintText: 'Click to edit front'),
                   maxLines: null,
                 ),
               ),
                 ),
+            ),
+            const SizedBox(height: 16),
                 Card(
                  child: ListTile(
                 title: const Text('Back'),
-                subtitle: const TextField(
+                subtitle: const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 8.0),
+                  child: TextField(
                   decoration: InputDecoration.collapsed(hintText: 'Click to edit back'),
                   maxLines: null,
                 ),
               ),
                 ),
-                const SizedBox(height: 20),
+            ),
+                const SizedBox(height: 24),
+                const Text(
+                  'Add Elements',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 12),
                 Wrap(
-                  spacing: 10,
-                  runSpacing: 10,
+                  spacing: 12,
+                  runSpacing: 12,
                   children: [
                     ElevatedButton.icon(
                       onPressed: (){},
@@ -72,8 +87,12 @@ class CreateCardTemplateScreen extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         items: const[
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+             label: 'Home',
+          ),
         ],
       ),
     );
