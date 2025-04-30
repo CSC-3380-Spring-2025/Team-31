@@ -9,7 +9,6 @@ import '../assets/essential.dart';
 import '../screens/home_screen.dart';
 import '../screens/create_course_screen.dart';
 import '../screens/settings_screen.dart';
-import '../screens/login_screen.dart';
 
 // Define navigation items
 final List<NavItem> navItems = [

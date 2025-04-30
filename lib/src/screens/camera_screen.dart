@@ -2,6 +2,9 @@
 // camera_screen.dart
 //
 
+import 'package:flutter/cupertino.dart';
+import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
+
 import '../widgets/card.dart';
 import '../assets/essential.dart';
 import 'package:flutter/material.dart';
@@ -18,14 +21,14 @@ class CameraScreen extends StatefulWidget {
 class _CameraScreenState extends State<CameraScreen> {
   @override
   String? _scannedText;
-  int frontIndex = 0;
-  int backIndex = 0;
+  int frontIndex = -1;
+  int backIndex = -1;
+  //text editing controller to help select text from scanned image, voice, or manual entry
   final TextEditingController _textController = TextEditingController();
 
-  final GlobalKey<_CameraScreenState> _cameraScreenKey =
-      GlobalKey<_CameraScreenState>();
-  //final GlobalKey<FlashCardState> _flashCardKey = GlobalKey<FlashCardState>();
-
+  final GlobalKey<_CameraScreenState> _cameraScreenKey = GlobalKey<
+      _CameraScreenState>();
+  //takes image from camera on mobile devices, enters it into text variable, then updates text scanner and text controller while setting state
   Future<void> _handleCameraScan() async {
     final text = await ImageToText.instance.pullTextFromCamera();
     if (text != null) {
@@ -35,14 +38,14 @@ class _CameraScreenState extends State<CameraScreen> {
       });
     }
   }
-
+//disposes text controller and image to text once no longer needed
   @override
   void dispose() {
     _textController.dispose();
     ImageToText.instance.dispose();
     super.dispose();
   }
-
+//method to add highlighted bullet point to front bullet point list and update listener
   void _addToFront(FlashCard card) {
     final selection = _textController.selection;
     if (selection.start != -1 && selection.end != -1) {
@@ -52,107 +55,120 @@ class _CameraScreenState extends State<CameraScreen> {
       );
       if (selectedText.trim().isNotEmpty) {
         card.addFrontBullet(selectedText.trim());
-        //_flashCardKey.currentState!.addFrontBullet(selectedText.trim());
+        frontBulletPointsNotifier.value=card.frontBulletPoints.toList();
       }
     }
   }
-
+  //method to add highlighted bullet point to back bullet point list and update listener
   void _addToBack(FlashCard card) {
     final selection = _textController.selection;
     if (selection.start != -1 && selection.end != -1) {
       final selectedText = _textController.text.substring(
-        selection.start,
-        selection.end,
-      );
-      if (selectedText.trim().isNotEmpty) {
+          selection.start, selection.end);
+      if (selectedText
+          .trim()
+          .isNotEmpty) {
         card.addBackBullet(selectedText.trim());
-        // _flashCardKey.currentState!.addBackBullet(selectedText.trim());
+        backBulletPointsNotifier.value = card.backBulletPoints.toList();
       }
     }
   }
-
+  //method to remove bullet point at a set index from back bullet point list and update listener
   void _removeFromBack(int index, FlashCard card) {
-    if ( /*_flashCardKey.currentState*/ card.backBulletPoints != []) {
+    if (card.backBulletPoints != [] && index != -1) {
       card.removeBackBullet(card.backBulletPoints, index);
-      // _flashCardKey.currentState?.removeBackBullet(
-      //     _flashCardKey.currentState!.backBulletPoints, index);
+      backBulletPointsNotifier.value = card.backBulletPoints.toList();
     }
   }
-
+  //method to remove bullet point at a set index from front bullet point list and update listener
   void _removeFromFront(int index, FlashCard card) {
-    if ( /*_flashCardKey.currentState*/ card.frontBulletPoints != []) {
+    if (card.frontBulletPoints != [] && index !=-1 ) {
       card.removeFrontBullet(card.frontBulletPoints, index);
-      // _flashCardKey.currentState?.removeFrontBullet(
-      //    _flashCardKey.currentState!.frontBulletPoints, index);
+      frontBulletPointsNotifier.value = card.frontBulletPoints.toList();
     }
   }
-
+// method to move bullet point selector for the card preview on camera_screen. needs to know which card preview(frontOrBack), which direction(upOrDown), and which card's data
   void _moveBulletPointSelector(
-    String frontOrBack,
-    String upOrDown,
-    FlashCard card,
-  ) {
+      String frontOrBack,
+      String upOrDown,
+      FlashCard card) {
     if (frontOrBack == 'front') {
       if (upOrDown == 'up') {
-        if (_cameraScreenKey.currentState!.frontIndex == 0) {
-          if ( /*_flashCardKey.currentState?.frontBulletPoints*/ card
-                  .frontBulletPoints !=
-              []) {
+        if (_cameraScreenKey.currentState!.frontIndex == -1) {
+          if (card.frontBulletPoints != []) {
             _cameraScreenKey.currentState!.frontIndex =
                 card.frontBulletPoints.length - 1;
-            //_flashCardKey.currentState!.frontBulletPoints.length - 1;
+            frontIndex = _cameraScreenKey.currentState!.frontIndex;
           }
-        } else {
-          _cameraScreenKey.currentState!.frontIndex--;
         }
-      } else if (upOrDown == 'down') {
-        if ( /*_flashCardKey.currentState?.frontBulletPoints*/ card
-                .frontBulletPoints !=
-            []) {
+        else if (_cameraScreenKey.currentState!.frontIndex == 0 &&
+            card.frontBulletPoints.length - 1 == 0) {
+          frontIndex = 0;
+        }
+        else {
+          _cameraScreenKey.currentState!.frontIndex--;
+          frontIndex = _cameraScreenKey.currentState!.frontIndex;
+        }
+      }
+      else if (upOrDown == 'down') {
+        if (card.frontBulletPoints != []) {
           if (_cameraScreenKey.currentState!.frontIndex ==
               card.frontBulletPoints.length - 1) {
-            //_flashCardKey.currentState!.frontBulletPoints.length - 1) {
             _cameraScreenKey.currentState!.frontIndex = 0;
-          } else {
+            frontIndex = _cameraScreenKey.currentState!.frontIndex;
+          }
+          else {
             frontIndex++;
+            frontIndex = _cameraScreenKey.currentState!.frontIndex;
           }
         }
       }
-    } else if (frontOrBack == 'back') {
+      debugPrint('frontIndex= '+frontIndex.toString()+ 'cameraScreenKey.front index = '+_cameraScreenKey.currentState!.frontIndex.toString());
+    }
+    else if (frontOrBack == 'back') {
       if (upOrDown == 'up') {
-        if (_cameraScreenKey.currentState?.backIndex == 0) {
-          if ( /*_flashCardKey.currentState?.backBulletPoints*/ card
-                  .backBulletPoints !=
-              []) {
-            backIndex =
-                card.backBulletPoints.length -
-                1; /*_flashCardKey.currentState!.backBulletPoints.length - 1;*/
+        if (_cameraScreenKey.currentState?.backIndex == -1) {
+          if (_cameraScreenKey.currentState?.backIndex == 0) {
+            if (card.backBulletPoints != []) {
+              backIndex = card.backBulletPoints.length - 1;
+              frontIndex = _cameraScreenKey.currentState!.backIndex;
+            }
           }
-        } else {
-          _cameraScreenKey.currentState!.backIndex--;
+          else {
+            _cameraScreenKey.currentState!.backIndex--;
+            backIndex = _cameraScreenKey.currentState!.backIndex;
+          }
         }
-      } else if (upOrDown == 'down') {
-        if ( /*_flashCardKey.currentState?.backBulletPoints*/ card
-                .backBulletPoints !=
-            []) {
-          if (_cameraScreenKey.currentState!.backIndex ==
-              card.backBulletPoints.length -
-                  1) /*_flashCardKey.currentState!.backBulletPoints.length - 1) */ {
-            _cameraScreenKey.currentState!.backIndex = 0;
-          } else {
-            _cameraScreenKey.currentState!.backIndex++;
+        else if (upOrDown == 'down') {
+          if (card.backBulletPoints != []) {
+            if (_cameraScreenKey.currentState!.backIndex ==
+                card.backBulletPoints.length - 1) {
+              _cameraScreenKey.currentState!.backIndex = 0;
+              backIndex = _cameraScreenKey.currentState!.backIndex;
+            }
+            else {
+              _cameraScreenKey.currentState!.backIndex++;
+              backIndex = _cameraScreenKey.currentState!.backIndex;
+            }
           }
         }
       }
     }
+    debugPrint('backIndex= '+backIndex.toString()+ 'cameraScreenKey.back index = '+_cameraScreenKey.currentState!.backIndex.toString());
   }
+
+  FlashCard newCard = FlashCard();
+  final ValueNotifier<List<String>> frontBulletPointsNotifier = ValueNotifier(<String>[]);
+  final ValueNotifier<List<String>> backBulletPointsNotifier = ValueNotifier(<String>[]);
+  final ValueNotifier<int> indexFrontNotifier = ValueNotifier(0);
+  final ValueNotifier<int> indexBackNotifier = ValueNotifier(0);
 
   @override
   Widget build(BuildContext context) {
     //variables for the InputChip. On mobile devices, User will likely take pictures. on pc's they will likely scan text from screenshots
     String cameraLabel;
     Icon icon;
-    FlashCard newCard = FlashCard();
+
     if (kIsWeb) {
       cameraLabel = 'Image';
       icon = Icon(Icons.image);
@@ -172,13 +188,15 @@ class _CameraScreenState extends State<CameraScreen> {
               CrossAxisAlignment
                   .start, // (small improvement:  more natural alignment)
           children: [
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Chip(label: Text("Camera")),
-                Chip(
-                  label: Text("Voice Input"),
-                ), //(small improvement: clearer label)
+                InputChip(
+                  label: Text(cameraLabel),
+                  onPressed: _handleCameraScan,
+                  avatar: icon,
+                ),
+                Chip(label: Text("√ Voice")),
               ],
             ),
             const SizedBox(height: 16),
@@ -187,16 +205,13 @@ class _CameraScreenState extends State<CameraScreen> {
               children: [
                 CardPreview(
                   title: 'Preview front of card',
-                  bulletPoints: /*_flashCardKey.currentState
-                      ?.getFrontBulletPoints()*/
-                      newCard.frontBulletPoints /*?? []*/,
-                ),
+                  cpBulletPoints: frontBulletPointsNotifier,
+                  cpIndex: indexFrontNotifier),
+
                 CardPreview(
-                  title: 'Preview back of card',
-                  bulletPoints: /*_flashCardKey.currentState
-                        ?.getBackBulletPoints()*/
-                      newCard.backBulletPoints /*?? []*/,
-                ),
+                    title: 'Preview back of card',
+                    cpBulletPoints: backBulletPointsNotifier,
+                    cpIndex: indexBackNotifier),
               ],
             ),
             Column(
@@ -222,32 +237,23 @@ class _CameraScreenState extends State<CameraScreen> {
                 InputChip(
                   label: Text('Front'),
                   onPressed: () {
-                    if (_cameraScreenKey.currentState?.frontIndex != null) {
-                      _addToFront();
-                    }
-                    else {
-                      showDialog(
-                        context: context, 
-                        builder: (context)
-                        {
-                          return AlertDialog(
-                            title: Center(child: Text("Fill in the Text Box")),
-                          );
-                        });
-                    }
+                    _addToFront(newCard);
+                    frontIndex =-1;
+                    CardPreview(title: newCard.toString(),
+                        cpBulletPoints: frontBulletPointsNotifier,
+                        cpIndex: indexFrontNotifier);
+                   // didUpdateWidget(CameraScreen());
+                    /*}*/
                   },
                   avatar: Icon(Icons.add),
                 ),
                 InputChip(
                   label: Text('Front'),
                   onPressed: () {
-                    if ( /*_flashCardKey.currentState?.frontBulletPoints*/ newCard
-                            .frontBulletPoints !=
-                        []) {
+                    if (newCard.frontBulletPoints != []) {
                       _removeFromFront(
-                        _cameraScreenKey.currentState!.frontIndex,
-                        newCard,
-                      );
+                          _cameraScreenKey.currentState!.frontIndex, newCard);
+                      frontIndex=-1;
                     }
                   },
                   avatar: Icon(Icons.remove),
@@ -273,18 +279,15 @@ class _CameraScreenState extends State<CameraScreen> {
                 InputChip(
                   label: Text('Back'),
                   onPressed: () {
-                    if (_cameraScreenKey.currentState?.backIndex != null) {
+                    debugPrint('add to back pressed');
                       _addToBack(newCard);
-                    }
                   },
                   avatar: Icon(Icons.add),
                 ),
                 InputChip(
                   label: Text('Back'),
                   onPressed: () {
-                    if ( /*_flashCardKey.currentState?.backBulletPoints*/ newCard
-                            .backBulletPoints !=
-                        []) {
+                    if (newCard.backBulletPoints != []) {
                       _removeFromBack(
                         _cameraScreenKey.currentState!.backIndex,
                         newCard,

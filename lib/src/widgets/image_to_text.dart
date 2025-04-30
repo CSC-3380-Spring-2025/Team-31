@@ -32,10 +32,10 @@ class ImageToText {
       }
       //sets the inputImage to the image associated with the image at the path selcted from the ImagePicker
       final InputImage inputImage = InputImage.fromFilePath(pickerImage.path);
-      //sets the recognized text to wait for the textrecognizer to process the image.
+      //sets the recognized text to wait for the textRecognizer to process the image.
       debugPrint('about to await TextRecognizer in image_to_text');
       final RecognizedText scannedText = await textRecognizer.processImage(inputImage);
-      debugPrint('line after await TextRecoginiser');
+      debugPrint('line after await TextRecognizer');
       //returns the scanned text
       return scannedText.text;
   }
