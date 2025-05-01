@@ -12,6 +12,7 @@ class FlashCard extends StatefulWidget {
   final String setName; // Set Names
   List<String> frontBulletPoints = [];
   List<String> backBulletPoints = [];
+  //array lists for future addition of images, videos, or other style entries
   List<Object> frontNonTextElements = [];
   List<Object> backNonTextElements = [];
 
@@ -124,19 +125,50 @@ class FlashCardState extends State<FlashCard> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(title),
-              Expanded(
-                  child: ValueListenableBuilder<List<String>?>(
-                      valueListenable: cpBulletPoints,
-                      builder: (context, bullets, child) {
-                        final items = bullets ?? <String>[];
-                        return ListView(
-                          children: items.map((bullet) => Text("- $bullet"))
-                              .toList(),
+          Expanded(
+            // ValueListenable so that the bulletPoints render when changes made to the list
+              child: ValueListenableBuilder<List<String>?>(
+                  valueListenable: cpBulletPoints,
+                  builder: (context, bullets, child) {
+                    final items = bullets ?? <String>[];
+
+                    return ListView(
+                      //takes bullet points and maps them to an index
+                      children: items.asMap().entries.map((entry)
+                      {
+                        int index = entry.key;
+                        String bullet = entry.value;
+                        //ValueListenable so boolean is tied to index and highlighted text changes as index changes
+                        return ValueListenableBuilder<int>(
+                          valueListenable: cpIndex,
+                          builder: (context, currentIndex, child)
+                          {
+                            //makes the boolean true for the String with the map index that matches in the passed currentIndex
+                            bool isHighlighted = index == currentIndex;
+                            return Container(
+                              //sets highlight color based on the bool value
+                              color: isHighlighted ? Colors.cyanAccent : Colors
+                                .transparent,
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 4, horizontal: 8),
+                              child: Text("- $bullet",
+                                style: TextStyle(
+                                  fontWeight: isHighlighted
+                                    ? FontWeight.bold
+                                    : FontWeight.normal,
+                                  color: isHighlighted ? Colors.black12 : Colors
+                                    .grey,
+                              ),
+                            ),
+                          );
+                        },
                         );
-                      }
-                  )
+                    }).toList(),
+                    );
+                  }
               )
-            ]
+          )
+          ]
         ),
       );
     }

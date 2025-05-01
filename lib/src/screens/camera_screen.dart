@@ -51,7 +51,6 @@ class _CameraScreenState extends State<CameraScreen> {
 //method to add highlighted input text as bullet point to front bullet point list and update listener
   void _addToFront(FlashCard card) {
     final selection = _textController.selection;
-    debugPrint('indexFront= ' + frontIndex.toString());
     if (selection.start != -1 && selection.end != -1) {
       final selectedText = _textController.text.substring(
         selection.start,
@@ -60,7 +59,7 @@ class _CameraScreenState extends State<CameraScreen> {
       if (selectedText.trim().isNotEmpty) {
         card.addFrontBullet(selectedText.trim());
         frontBulletPointsNotifier.value = card.frontBulletPoints.toList();
-        frontIndex = 0;
+        frontIndex = -1;
         indexFrontNotifier.value = frontIndex;
       }
     }
@@ -70,12 +69,14 @@ class _CameraScreenState extends State<CameraScreen> {
     final selection = _textController.selection;
     if (selection.start != -1 && selection.end != -1) {
       final selectedText = _textController.text.substring(
-          selection.start, selection.end);
-      if (selectedText
-          .trim()
-          .isNotEmpty) {
+          selection.start,
+          selection.end,
+      );
+      if (selectedText.trim().isNotEmpty) {
         card.addBackBullet(selectedText.trim());
         backBulletPointsNotifier.value = card.backBulletPoints.toList();
+        backIndex=-1;
+        indexBackNotifier.value = backIndex;
       }
     }
   }
@@ -84,6 +85,8 @@ class _CameraScreenState extends State<CameraScreen> {
     if (card.backBulletPoints.isNotEmpty && index != -1) {
       card.removeBackBullet(card.backBulletPoints, index);
       backBulletPointsNotifier.value = card.backBulletPoints.toList();
+      backIndex = -1;
+      indexBackNotifier.value = backIndex;
     }
   }
   //method to remove bullet point at a set index from front bullet point list and update listener
@@ -91,6 +94,8 @@ class _CameraScreenState extends State<CameraScreen> {
     if (card.frontBulletPoints.isNotEmpty && index !=-1 ) {
       card.removeFrontBullet(card.frontBulletPoints, index);
       frontBulletPointsNotifier.value = card.frontBulletPoints.toList();
+      frontIndex = -1;
+      indexFrontNotifier.value = frontIndex;
     }
   }
 // method to move bullet point selector for the card preview on camera_screen. needs to know which card preview(frontOrBack), which direction(upOrDown), and which card's data
@@ -264,21 +269,19 @@ class _CameraScreenState extends State<CameraScreen> {
                   onPressed: () {
                       _removeFromFront(frontIndex, newCard);
                       frontIndex=-1;
+                      indexFrontNotifier.value = frontIndex;
                   },
                   avatar: Icon(Icons.remove),
                 ),
                 //front bullet index up
                 InputChip(
                   label: Text('Bullet'),
-                  onPressed: () {debugPrint('front bullet up frontIndex= '+frontIndex.toString() +_scannedText.toString());
-                    if (newCard.frontBulletPoints != null) {
+                  onPressed: () {
                       _moveBulletPointSelector('front', 'up', newCard);
-                    }
-                    debugPrint('front bullet up frontIndex= '+frontIndex.toString());
                   },
                   avatar: Icon(Icons.arrow_upward),
                 ),
-                //bullet index down
+                //front bullet index down
                 InputChip(
                   label: Text('Bullet'),
                   onPressed: () {debugPrint('front bullet index down'+ frontIndex.toString());
@@ -286,6 +289,7 @@ class _CameraScreenState extends State<CameraScreen> {
                   },
                   avatar: Icon(Icons.arrow_downward),
                 ),
+                //Add selected text as bullet to back of card preview
                 InputChip(
                   label: Text('Back'),
                   onPressed: () {
@@ -294,6 +298,7 @@ class _CameraScreenState extends State<CameraScreen> {
                   },
                   avatar: Icon(Icons.add),
                 ),
+                //remove bullet at selected index from back of card
                 InputChip(
                   label: Text('Back'),
                   onPressed: () {
@@ -306,6 +311,7 @@ class _CameraScreenState extends State<CameraScreen> {
                   },
                   avatar: Icon(Icons.remove),
                 ),
+                //move bullet point selected index up one. wraps around to the bottom when out of range upwards
                 InputChip(
                   label: Text('Bullet'),
                   onPressed: () {
@@ -313,6 +319,7 @@ class _CameraScreenState extends State<CameraScreen> {
                   },
                   avatar: Icon(Icons.arrow_upward),
                 ),
+                //move bullet point selected index down one. wraps around to the top when out of range downwards
                 InputChip(
                   label: Text('Bullet'),
                   onPressed: () {
