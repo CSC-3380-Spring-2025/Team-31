@@ -23,8 +23,8 @@ final List<NavItem> navItems = [
     route: '/create_course',
   ),
   NavItem(
-    title: 'Scan Card',
-    icon: Icons.camera,
+    title: 'Create Card',
+    icon: Icons.create_outlined,
     route: '/camera',
     requiresAuth: false,
   ),
