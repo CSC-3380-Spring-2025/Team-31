@@ -1,15 +1,7 @@
-//
-// quiz_screen.dart
-//
-// This is the screen where
-// the user will be prompted
-// with a question and multiple
-// choice options.
-//
-
 import '../assets/essential.dart';
 import '../widgets/back_button.dart';
 import 'dart:math';
+import 'dart:async';
 
 class QuizScreen extends StatefulWidget {
   const QuizScreen({super.key});
@@ -26,6 +18,9 @@ class _QuizScreenState extends State<QuizScreen> {
   String? selectedAnswer;
   Color? feedbackColor;
   bool isCorrectAnswered = false;
+  int attemptCount = 0; // Track number of attempts per question
+  Timer? _timer; // Timer for time-based scoring
+  int _secondsElapsed = 0; // Time elapsed for current question
 
   @override
   void initState() {
@@ -135,7 +130,18 @@ class _QuizScreenState extends State<QuizScreen> {
             'Pulmonary veins carry oxygenated blood from the lungs to the left atrium.',
       },
     ]..shuffle(Random());
+    _startTimer();
     _generateAnswerOptions();
+  }
+
+  void _startTimer() {
+    _secondsElapsed = 0;
+    _timer?.cancel();
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      setState(() {
+        _secondsElapsed++;
+      });
+    });
   }
 
   void _generateAnswerOptions() {
@@ -163,6 +169,8 @@ class _QuizScreenState extends State<QuizScreen> {
       answerOptions = [correctAnswer, ...wrongAnswers]..shuffle(random);
       selectedAnswer = null;
       feedbackColor = null;
+      attemptCount = 0; // Reset attempts for new question
+      _startTimer(); // Start timer for new question
     });
   }
 
@@ -171,9 +179,20 @@ class _QuizScreenState extends State<QuizScreen> {
     setState(() {
       selectedAnswer = selected;
       feedbackColor = selected == correctAnswer ? Colors.green : Colors.red;
+      attemptCount++;
+
       if (selected == correctAnswer && !isCorrectAnswered) {
-        score += 100;
+        // Calculate time-based score (max 100 points, reduced by time taken)
+        int timePenalty = (_secondsElapsed / 2).floor(); // Small influence: 1 point per 2 seconds
+        int baseScore = (100 - timePenalty).clamp(0, 100);
+
+        // Apply attempt-based penalty
+        int attemptPenalty = (attemptCount - 1) * 25; // 25 points per wrong attempt
+        int finalScore = (baseScore - attemptPenalty).clamp(0, 100);
+
+        score += finalScore;
         isCorrectAnswered = true;
+        _timer?.cancel(); // Stop the timer on correct answer
       }
     });
 
@@ -188,6 +207,7 @@ class _QuizScreenState extends State<QuizScreen> {
           });
         } else {
           // End of quiz
+          _timer?.cancel();
           showDialog(
             context: context,
             builder:
@@ -218,6 +238,12 @@ class _QuizScreenState extends State<QuizScreen> {
         }
       });
     }
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
   }
 
   @override
