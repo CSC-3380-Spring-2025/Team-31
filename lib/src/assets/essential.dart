@@ -18,6 +18,65 @@ export '../widgets/custom_page_stacks.dart';
 export '../widgets/route_handler.dart';
 export 'package:shared_preferences/shared_preferences.dart';
 
+// Spacing/Padding constants
+const defaultPadding = EdgeInsets.all(24.0); // Standard 24-point padding
+const closePadding = EdgeInsets.all(12.0); // Closer 12-point padding for cohesive layouts
+const defaultSpacing = 24.0; // Standard 24-point spacing
+const closeSpacing = 12.0; // Closer 12-point spacing for tighter layouts
+
+// Text styles
+const headlineTextStyle = TextStyle(
+  fontSize: 24.0,
+  fontWeight: FontWeight.bold,
+  letterSpacing: 0.5,
+);
+const bodyTextStyle = TextStyle(
+  fontSize: 16.0,
+  fontWeight: FontWeight.normal,
+);
+const captionTextStyle = TextStyle(
+  fontSize: 12.0,
+  fontWeight: FontWeight.w400,
+  color: Colors.grey,
+);
+
+// Animation durations
+const shortAnimationDuration = Duration(milliseconds: 200); // Fast animations (e.g., button press)
+const mediumAnimationDuration = Duration(milliseconds: 400); // Standard animations (e.g., page transitions)
+const longAnimationDuration = Duration(milliseconds: 800); // Slow animations (e.g., fades)
+
+// Border radius constants
+const defaultBorderRadius = BorderRadius.all(Radius.circular(12.0)); // Standard for buttons, cards
+const smallBorderRadius = BorderRadius.all(Radius.circular(8.0)); // Smaller for compact widgets
+const largeBorderRadius = BorderRadius.all(Radius.circular(20.0)); // Larger for modals, dialogs
+
+// Elevation levels
+const lowElevation = 2.0; // Subtle shadows (e.g., buttons)
+const mediumElevation = 4.0; // Standard shadows (e.g., cards)
+const highElevation = 8.0; // Prominent shadows (e.g., dialogs)
+
+class AppUtils {
+  // Calculate responsive width based on screen size
+  static double getResponsiveWidth(BuildContext context, double percentage) {
+    return MediaQuery.of(context).size.width * percentage;
+  }
+
+  // Calculate responsive height based on screen size
+  static double getResponsiveHeight(BuildContext context, double percentage) {
+    return MediaQuery.of(context).size.height * percentage;
+  }
+
+  // Check if the device is in dark mode
+  static bool isDarkMode(BuildContext context) {
+    return MediaQuery.of(context).platformBrightness == Brightness.dark;
+  }
+}
+
+// App-wide constants
+class AppConstants {
+  static const String appName = 'Study Hall';
+}
+
 class AppTheme {
   // Map of seed colors with [light, dark] arrays
   static const themeColors = {
