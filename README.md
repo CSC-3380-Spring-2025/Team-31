@@ -75,4 +75,5 @@ All widget files should be located in `lib/src/widgets/`
 **Class Names:**: UpperCamelCase (e.g. `class CustomNavButton extends StatelessWidget {`)
 **Template Files:**: 
 - See `lib/src/templates/template_widget.dart` for commented template + examples
-- See `lib/src/templates/template_empty_widget.dart` for empty template
+- See `lib/src/templates/template_empty_widget.dart` for empty templateUpdated by Ziron.
+Updated by Ziron.
