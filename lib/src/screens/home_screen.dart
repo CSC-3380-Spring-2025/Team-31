@@ -21,6 +21,7 @@ import '../widgets/custom_calendar.dart';
 import '../widgets/horizontal_scroll.dart';
 import '../widgets/route_handler.dart';
 import '../widgets/statistics.dart';
+import 'about_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -73,7 +74,15 @@ class HomeScreenState extends State<HomeScreen> {
               },
             ],
           ),
-          
+        ElevatedButton(
+          onPressed: (){
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const AboutScreen()),
+            );
+          },
+          child: const Text('About App'),
+        ),  
           // Calendar Section
           CustomCalendar(),
           

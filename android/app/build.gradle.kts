@@ -9,7 +9,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.flutter_app"
+    namespace = "com.studyhall.flashcards"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = "27.0.12077973"
 
