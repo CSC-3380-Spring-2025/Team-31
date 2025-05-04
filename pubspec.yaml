@@ -24,6 +24,7 @@ dependencies:
   image_picker: ^1.0.4
   shared_preferences: ^2.3.0
   google_mlkit_commons: ^0.5.0
+  flutter_tts: ^4.2.2
 
 dev_dependencies:
   flutter_test:
