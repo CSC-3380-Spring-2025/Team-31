@@ -24,6 +24,32 @@ Styles Guide(s): [https://github.com/orgs/CSC-3380-Spring-2025/projects/25]
 - - - **widgets/**: Custom widgets to be imported
 
 ___
+## Project File Structure
+- **android/, ios/, macos/, windows/, linux/, web/**: Platform-specific code and configurations.
+- **build/**: Contains build outputs (usually hidden or ignored).
+- **lib/**: Core Dart/Flutter source code.
+- - **main.dart**: Main entry point file for application.
+- - **src/**
+- - - **screens/**: Screen layouts for different pages
+- - - **widgets/**: Custom widgets to be imported
+
+---
+
+## Flutter Setup (Mac)
+
+1. Install Flutter from [flutter.dev](https://flutter.dev).
+2. Run `flutter doctor` to check dependencies.
+3. Use `flutter pub get` to install required packages.
+4. For iOS, ensure you have Xcode installed and use `flutter run` to launch the app.
+
+---
+
+# Code Design Standards
+This section outlines the code design standards for our Flutter project...
+
+
+# Code Design Standards
+This section outlines the code design standards for our Flutter project...
 
 # Code Design Standards
 This section outlines the code design standards for our Flutter project, focusing on the organization and structure of the core Dart files within the main `lib/` directory. These guidlines are intended to ensure consistent code standards, modularlity, and maintainability across the entire codebase.
