@@ -74,15 +74,15 @@ class HomeScreenState extends State<HomeScreen> {
               },
             ],
           ),
-        ElevatedButton(
-          onPressed: (){
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const AboutScreen()),
-            );
-          },
-          child: const Text('About App'),
-        ),  
+        // ElevatedButton(
+        //   onPressed: (){
+        //     Navigator.push(
+        //       context,
+        //       MaterialPageRoute(builder: (context) => const AboutScreen()),
+        //     );
+        //   },
+        //   child: const Text('About App'),
+        // ),  
           // Calendar Section
           CustomCalendar(),
           
