@@ -24,6 +24,7 @@ Styles Guide(s): [https://github.com/orgs/CSC-3380-Spring-2025/projects/25]
 - - - **widgets/**: Custom widgets to be imported
 
 ___
+
 ## Project File Structure
 - **android/, ios/, macos/, windows/, linux/, web/**: Platform-specific code and configurations.
 - **build/**: Contains build outputs (usually hidden or ignored).
@@ -101,5 +102,4 @@ All widget files should be located in `lib/src/widgets/`
 **Class Names:**: UpperCamelCase (e.g. `class CustomNavButton extends StatelessWidget {`)
 **Template Files:**: 
 - See `lib/src/templates/template_widget.dart` for commented template + examples
-- See `lib/src/templates/template_empty_widget.dart` for empty templateUpdated by Ziron.
-Updated by Ziron.
+- See `lib/src/templates/template_empty_widget.dart` for empty template
