@@ -198,9 +198,9 @@ class _CameraScreenState extends State<CameraScreen> {
         title: const Text('Camera Input'),
         centerTitle: true, //(small improvement: center title)
       ),
-      body: SingleChildScrollView(
+      body: ListView(
         padding: const EdgeInsets.all(16),
-        child: Column(
+        children: [Column(
           crossAxisAlignment:
               CrossAxisAlignment
                   .start, // (small improvement:  more natural alignment)
@@ -249,8 +249,9 @@ class _CameraScreenState extends State<CameraScreen> {
                 const SizedBox(height: 8),
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+            Container(height: 100, width: 1000,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
               children: [
                 //add to front
                 InputChip(
@@ -328,7 +329,7 @@ class _CameraScreenState extends State<CameraScreen> {
                   avatar: Icon(Icons.arrow_downward),
                 ),
               ],
-            ),
+            ),), 
             const SizedBox(height: 32),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -339,7 +340,7 @@ class _CameraScreenState extends State<CameraScreen> {
               ],
             ),
           ],
-        ),
+        )],
       ),
     );
   }
