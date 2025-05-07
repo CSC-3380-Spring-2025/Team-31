@@ -24,7 +24,7 @@ Styles Guide(s): [https://github.com/orgs/CSC-3380-Spring-2025/projects/25]
 - - - **widgets/**: Custom widgets to be imported
 
 ___
-
+tgfhyv
 ## Project File Structure
 - **android/, ios/, macos/, windows/, linux/, web/**: Platform-specific code and configurations.
 - **build/**: Contains build outputs (usually hidden or ignored).
@@ -37,7 +37,6 @@ ___
 ---
 
 ## Flutter Setup (Mac)
-
 1. Install Flutter from [flutter.dev](https://flutter.dev).
 2. Run `flutter doctor` to check dependencies.
 3. Use `flutter pub get` to install required packages.
@@ -57,15 +56,6 @@ In order to access an important feature of the app (Image to text). running the 
 7. Clicking the android device should open the emulator ![Code_eDAgGUmJty](https://github.com/user-attachments/assets/1bb0b61a-f778-41cc-87df-afa3a578ccf4)
 8. Now using `flutter run` should launch the app inside of the android emulator
    
----
-
-# Code Design Standards
-This section outlines the code design standards for our Flutter project...
-
-
-# Code Design Standards
-This section outlines the code design standards for our Flutter project...
-
 # Code Design Standards
 This section outlines the code design standards for our Flutter project, focusing on the organization and structure of the core Dart files within the main `lib/` directory. These guidlines are intended to ensure consistent code standards, modularlity, and maintainability across the entire codebase.
 

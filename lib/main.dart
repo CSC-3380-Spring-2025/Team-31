@@ -1,7 +1,6 @@
 //
 // main.dart
-// // This comment was added by Ziron as part of pull request #2
-
+//
 // This is the main entry point
 // for the application.
 //

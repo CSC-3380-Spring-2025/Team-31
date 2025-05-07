@@ -7,6 +7,7 @@ import '../widgets/back_button.dart';
 import '../widgets/view_set_cards_preview.dart';
 import '../widgets/button_grid.dart';
 import '../widgets/card_list.dart';
+import '../widgets/tts.dart';
 
 class FlashcardScreen extends StatelessWidget {
   final List<Map<String, String>> cards = [
@@ -114,6 +115,8 @@ class FlashcardScreen extends StatelessWidget {
 
   FlashcardScreen({super.key});
 
+  //create index for card changes
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -122,9 +125,12 @@ class FlashcardScreen extends StatelessWidget {
           children: [
             ReturnButton(),
             SizedBox(height: 600, child: ViewSetPreviewScroll(cards: cards)),
+             Tts(text: cards[0]['front'].toString()),
           ],
         ),
       ),
     );
   }
 }
+
+//cards[0]['front'].toString() access card text
