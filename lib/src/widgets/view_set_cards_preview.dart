@@ -5,8 +5,6 @@
 // scroll preview of cards of a
 // set.
 //
-// Buggy! Not Functional!
-//
 
 import '../assets/essential.dart';
 

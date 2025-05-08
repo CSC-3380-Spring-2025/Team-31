@@ -2,6 +2,7 @@
 // navbar_item.dart
 // 
 // Navbar Item Widget
+//
 
 // Required Imports
 import '../assets/essential.dart';

@@ -1,7 +1,9 @@
 //
 // route_handler.dart
 // 
-// consolidated route redirection widget
+// This is the fundamental routing
+// system of our app
+//
 
 // Required Imports
 import '../../main.dart';

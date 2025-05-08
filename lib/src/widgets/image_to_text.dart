@@ -1,10 +1,13 @@
 //
 // image_to_text.dart
-/*One of our features is to pull text from an image. on the phone, this can be done from the camera itself, or from the
-photo library. Most users will likely use the camera and build one card at a time.
+// One of our features is to pull 
+// text from an image. on the phone, 
+// this can be done from the camera itself, 
+// or from the photo library. Most users will 
+// likely use the camera and build one card at a time. 
+// the methods in this class can be called by 
+// create_card and edit_card screens.
 
-the methods in this class can be called by create_card and edit_card screens.
- */
 import 'package:flutter/cupertino.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'package:image_picker/image_picker.dart';

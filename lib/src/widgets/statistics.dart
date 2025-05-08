@@ -1,10 +1,11 @@
 //
-//statistics.dart
+// statistics.dart
 //
-//home for the statistics methods to be used throughout the app
-import 'package:study_hall/main.dart';
+// home for the statistics methods 
+// to be used throughout the app
+//
 
-
+import '../../main.dart';
 import '../assets/essential.dart';
 import 'package:graphic/graphic.dart';
 
