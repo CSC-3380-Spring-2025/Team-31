@@ -1,7 +1,7 @@
 //
-// navbar_items.dart
+// route_handler.dart
 // 
-// Navbar Item Widget
+// consolidated route redirection widget
 
 // Required Imports
 import '../../main.dart';

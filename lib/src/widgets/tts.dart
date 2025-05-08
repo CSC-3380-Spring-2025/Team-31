@@ -1,3 +1,7 @@
+//
+//tts.dart
+//
+// text tp speech widget. to be used for entering text via microphone on card creation screen
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../assets/essential.dart';

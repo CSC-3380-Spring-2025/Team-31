@@ -1,5 +1,6 @@
-/*One of our features is to pull text from an image. On a computer, this can be done from
-a screenshot or an image sent from a phone. on the phone, this can be done from the camera itself, or from the
+//
+// image_to_text.dart
+/*One of our features is to pull text from an image. on the phone, this can be done from the camera itself, or from the
 photo library. Most users will likely use the camera and build one card at a time.
 
 the methods in this class can be called by create_card and edit_card screens.

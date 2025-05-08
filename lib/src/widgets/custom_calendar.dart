@@ -1,3 +1,7 @@
+//
+//custom_calendar.dart
+//
+//widget to add a 2 week calendar
 import 'package:table_calendar/table_calendar.dart';
 import '../assets/essential.dart';
 

@@ -1,6 +1,7 @@
 //
 // flashcard_screen.dart
 //
+//hard coded screen to demonstrate what scrolling through cards will be like.
 
 import '../assets/essential.dart';
 import '../widgets/back_button.dart';

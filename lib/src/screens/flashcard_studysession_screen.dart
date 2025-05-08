@@ -1,3 +1,7 @@
+//
+//flashcard_studysession_screen.dart
+//
+//this is the screen for individual study sessions
 import '../assets/essential.dart';
 import 'package:flutter/cupertino.dart';
 
