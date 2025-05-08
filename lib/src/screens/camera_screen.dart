@@ -1,6 +1,10 @@
 //
 // camera_screen.dart
 //
+// This is the screen where users can
+// use their camera to quickly create
+// cards fro sets
+//
 
 import 'package:flutter/cupertino.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';

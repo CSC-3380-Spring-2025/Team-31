@@ -1,7 +1,7 @@
 // 
 // settings_screen.dart
 // 
-// This is the settings page. (Placeholder)
+// This is the settings page.
 // 
 
 import '../assets/essential.dart';

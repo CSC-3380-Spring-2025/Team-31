@@ -2,7 +2,7 @@
 // create_set_screen.dart
 //
 // This is the page where users
-// will create new sets.
+// will create new courses.
 //
 
 import '../assets/essential.dart';

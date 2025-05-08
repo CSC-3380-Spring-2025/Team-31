@@ -1,3 +1,9 @@
+//
+// custom_calendar.dart
+//
+// This is the custom calendar widget
+//
+
 import 'package:table_calendar/table_calendar.dart';
 import '../assets/essential.dart';
 

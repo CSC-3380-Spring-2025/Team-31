@@ -1,6 +1,8 @@
 //
 // add_hint_screen.dart
 //
+// The add hint screen
+//
 
 
 import 'package:flutter/material.dart';

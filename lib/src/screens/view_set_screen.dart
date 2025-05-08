@@ -1,7 +1,10 @@
 //
 // view_set_screen.dart
 //
-// This is the empty screen file template.
+// This is the landing page for
+// when users click on a set to
+// view, here they will see details
+// of the selected set.
 //
 
 import '../assets/essential.dart';

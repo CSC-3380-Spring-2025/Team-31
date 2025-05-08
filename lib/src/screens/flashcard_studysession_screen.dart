@@ -1,3 +1,11 @@
+//
+// flashcard_studysession_screen.dart
+//
+// This is where users can create
+// flashcard study sessions
+//
+
+
 import '../assets/essential.dart';
 import 'package:flutter/cupertino.dart';
 

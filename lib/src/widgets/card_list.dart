@@ -1,6 +1,9 @@
 //
 // card_list.dart
 //
+// This is the card
+// list widget
+//
 
 import '../assets/essential.dart';
 

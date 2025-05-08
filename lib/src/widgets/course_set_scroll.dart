@@ -1,6 +1,9 @@
 //
 // course_set_scroll.dart
 //
+// This is the horizontal scroll
+// of sets when a user selects a course
+//
 
 import '../assets/essential.dart';
 import '../assets/database.dart';

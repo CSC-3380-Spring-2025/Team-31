@@ -1,6 +1,10 @@
 //
 // flashcard_screen.dart
 //
+// This is the full screen
+// view of the flashcards set
+// scroll widget with front/back flip
+//
 
 import '../assets/essential.dart';
 import '../widgets/back_button.dart';
