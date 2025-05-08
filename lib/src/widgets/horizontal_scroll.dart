@@ -4,7 +4,6 @@
 // This is the horizontal scroll widget
 //
 
-
 import 'package:study_hall/src/assets/essential.dart';
 import 'package:study_hall/src/widgets/card.dart';
 

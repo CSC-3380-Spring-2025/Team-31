@@ -119,7 +119,6 @@ class FlashcardScreen extends StatelessWidget {
 
   FlashcardScreen({super.key});
 
-  //create index for card changes
 
   @override
   Widget build(BuildContext context) {
@@ -129,7 +128,6 @@ class FlashcardScreen extends StatelessWidget {
           children: [
             ReturnButton(),
             SizedBox(height: 600, child: ViewSetPreviewScroll(cards: cards)),
-             Tts(text: cards[0]['front'].toString()),
           ],
         ),
       ),

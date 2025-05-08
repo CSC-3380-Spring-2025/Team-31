@@ -11,7 +11,7 @@ Inspired by Quizlet, this multi-platform flashcard app lets you create and custo
 ## Important Links
 Project Website: [https://flashcard-app-54723.web.app/]
 Kanban Board: [https://github.com/orgs/CSC-3380-Spring-2025/projects/25]\
-Designs: [link]\
+Designs: [https://www.figma.com/board/1UcBSVzb8Ms1O1QZZwnHhm/Study-Hall-FigJam?node-id=0-1&t=40h0na3VVPT4vWIm-1 ]
 Styles Guide(s): [https://github.com/orgs/CSC-3380-Spring-2025/projects/25]
 
 ## Project File Structure
