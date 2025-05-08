@@ -36,6 +36,3 @@ flutter:
   uses-material-design: true
   assets:
     - lib/src/assets/study_hall_icon.png
-
-dependency_overrides:
-  speech_to_text: 5.7.0
