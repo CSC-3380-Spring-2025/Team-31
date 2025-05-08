@@ -249,9 +249,14 @@ class _CameraScreenState extends State<CameraScreen> {
                 const SizedBox(height: 8),
               ],
             ),
-            Container(height: 100, width: 1000,
-            child: ListView(
+            Container(
+              height: 100,
+              width: double.infinity,
+              alignment: Alignment.center,
+              child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
+                child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 //add to front
                 InputChip(
@@ -329,7 +334,9 @@ class _CameraScreenState extends State<CameraScreen> {
                   avatar: Icon(Icons.arrow_downward),
                 ),
               ],
-            ),), 
+            ),
+              ),
+            ),
             const SizedBox(height: 32),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
