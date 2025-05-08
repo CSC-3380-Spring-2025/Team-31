@@ -1,4 +1,7 @@
-
+//
+//horizontal_scroll.dart
+//
+//widget to create a horizontal scroll container
 import 'package:study_hall/src/assets/essential.dart';
 import 'package:study_hall/src/widgets/card.dart';
 

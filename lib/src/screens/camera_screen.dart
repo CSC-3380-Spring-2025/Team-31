@@ -1,6 +1,7 @@
 //
 // camera_screen.dart
 //
+//Main screen for creation of cards.
 
 import 'package:flutter/cupertino.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';

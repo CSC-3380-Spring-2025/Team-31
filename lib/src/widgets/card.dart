@@ -1,7 +1,7 @@
 // 
 // card.dart
 // 
-// This is a card
+// This is a card. also has code for card preview
 //
 
 import 'package:flutter/foundation.dart';

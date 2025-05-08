@@ -1,6 +1,7 @@
 //
 // add_hint_screen.dart
 //
+//screen for adding hint for flashcards.
 
 
 import 'package:flutter/material.dart';
